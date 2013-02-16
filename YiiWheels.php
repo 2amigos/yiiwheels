@@ -25,9 +25,9 @@ class YiiWheels extends CApplicationComponent
 	public $assetsCss = array();
 
 	/**
-	 * @var TbApi $_core
+	 * @var TbApi $_api
 	 */
-	protected $_core;
+	protected $_api;
 
 	/**
 	 * @var string holds the published assets
@@ -41,13 +41,11 @@ class YiiWheels extends CApplicationComponent
 	 */
 	public function init()
 	{
-		$this->_core = Yii::app()->getComponent('bootstrap');
+		$this->_api = Yii::app()->getComponent('bootstrap');
 
-		if (null === $this->_core)
+		if (null === $this->_api)
 			throw new CException(Yii::t('zii', '"YiiWheels" must work in conjunction with "YiiStrap".'));
 
-		/* set path of alias */
-		Yii::setPathOfAlias('yiiwheels', dirname(__FILE__));
 		/* ensure all widgets - plugins are accessible to the library */
 		Yii::import('bootstrap.widgets.*');
 		/* ensure common behavior is also accessible to the library */
@@ -56,6 +54,7 @@ class YiiWheels extends CApplicationComponent
 		/* register css assets */
 		foreach ($this->assetsCss as $css)
 			$this->registerAssetCss($css);
+
 		/* register js assets */
 		foreach($this->assetsJs as $js)
 			$this->registerAssetJs($js);
@@ -65,9 +64,9 @@ class YiiWheels extends CApplicationComponent
 	 * Returns the core library (yiistrap) component
 	 * @return TbApi
 	 */
-	public function getCore()
+	public function getApi()
 	{
-		return $this->_core;
+		return $this->_api;
 	}
 
 	/**
@@ -82,7 +81,7 @@ class YiiWheels extends CApplicationComponent
 			return $this->_assetsUrl;
 		else
 		{
-			$forceCopyAssets = $this->getCore()->forceCopyAssets;
+			$forceCopyAssets = $this->getApi()->forceCopyAssets;
 			$path = Yii::getPathOfAlias('yiiwheels');
 			$assetsUrl = Yii::app()->assetManager->publish($path . DIRECTORY_SEPARATOR . 'assets', false, -1, $forceCopyAssets);
 
@@ -109,5 +108,7 @@ class YiiWheels extends CApplicationComponent
 	public function registerAssetCss($cssFile, $media = '')
 	{
 		Yii::app()->getClientScript()->registerCssFile($this->getAssetsUrl() . "/css/{$cssFile}", $media);
+	}
+}lientScript()->registerCssFile($this->getAssetsUrl() . "/css/{$cssFile}", $media);
 	}
 }
