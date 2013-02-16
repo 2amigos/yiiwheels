@@ -12,17 +12,36 @@ class YwPlugin extends CBehavior
 {
 	protected $_assetsUrl;
 
+	protected static $_api;
+
+	/**
+	 * Returns
+	 * @param $path
+	 * @return mixed
+	 */
 	public function getAssetsUrl($path)
 	{
 		if (isset($this->_assetsUrl))
 			return $this->_assetsUrl;
 		else
 		{
-			$forceCopyAssets = Yii::app()->getComponent('yiiwheels')->getCore()->forceCopyAssets;
+			$forceCopyAssets = $this->getApi()->forceCopyAssets;
 
 			$assetsUrl = Yii::app()->assetManager->publish($path, false, -1, $forceCopyAssets);
 
 			return $this->_assetsUrl = $assetsUrl;
 		}
+	}
+
+	/**
+	 * @return TbApi
+	 */
+	public function getApi()
+	{
+		if(self::$_api === null)
+		{
+			self::$_api = Yii::app()->getComponent('yiiwheels')->getApi();
+		}
+		return self::$_api;
 	}
 }
