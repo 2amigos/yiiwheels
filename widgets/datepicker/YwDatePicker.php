@@ -8,8 +8,6 @@
  * @package YiiWheels.widgets
  * @uses YiiStrap.YwHtml
  */
-Yii::import('yiiwheels.behaviors.YwPlugin');
-
 class YwDatePicker extends CInputWidget
 {
 	/**
@@ -27,7 +25,7 @@ class YwDatePicker extends CInputWidget
 	 */
 	public function init()
 	{
-		$this->attachBehavior('ywplugin', new YwPlugin());
+		$this->attachBehavior('ywplugin', array('class'=>'yiiwheels.behaviors.YwPlugin'));
 
 		$this->htmlOptions = YwHtml::defaultOption('autocomplete', 'off', $this->htmlOptions);
 		$this->htmlOptions = YwHtml::addClassName('grd-white', $this->htmlOptions);
@@ -79,8 +77,6 @@ class YwDatePicker extends CInputWidget
 		/* publish assets dir */
 		$path = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'assets';
 		$assetsUrl = $this->getAssetsUrl($path);
-
-
 
 		/* @var $cs CClientScript */
 		$cs = Yii::app()->getClientScript();

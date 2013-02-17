@@ -109,6 +109,4 @@ class YiiWheels extends CApplicationComponent
 	{
 		Yii::app()->getClientScript()->registerCssFile($this->getAssetsUrl() . "/css/{$cssFile}", $media);
 	}
-}lientScript()->registerCssFile($this->getAssetsUrl() . "/css/{$cssFile}", $media);
-	}
 }

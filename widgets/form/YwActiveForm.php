@@ -24,6 +24,18 @@ class YwActiveForm extends TbActiveForm
 	}
 
 	/**
+	 * Renders a timepicker field
+	 * @param $model
+	 * @param $attribute
+	 * @param array $htmlOptions
+	 * @return string
+	 */
+	public function timePickerField($model, $attribute, $htmlOptions = array())
+	{
+		return $this->row(YwHtml::INPUT_TIMEPICKER, $model, $attribute, array(), $htmlOptions);
+	}
+
+	/**
 	 * Renders a typeahead field
 	 * @param $model
 	 * @param $attribute
@@ -34,6 +46,19 @@ class YwActiveForm extends TbActiveForm
 	{
 		return $this->row(YwHtml::INPUT_TYPEAHEAD, $model, $attribute, array(), $htmlOptions);
 	}
+
+	/**
+	 * Renders a typeahead field
+	 * @param $model
+	 * @param $attribute
+	 * @param array $htmlOptions
+	 * @return string
+	 */
+	public function select2Field($model, $attribute, $htmlOptions = array())
+	{
+		return $this->row(YwHtml::INPUT_SELECT2, $model, $attribute, array(), $htmlOptions);
+	}
+
 
 	/**
 	 * Helper method to display different input types for the different complain bootstrap forms wrapped with their
