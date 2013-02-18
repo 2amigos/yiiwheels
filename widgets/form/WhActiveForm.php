@@ -1,19 +1,19 @@
 <?php
 /**
- * YwTimePicker widget class
+ * WhTimePicker widget class
  *
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
  * @copyright Copyright &copy; 2amigos.us 2013-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets
  * @uses YiiStrap.widgets.TbActiveForm
- * @uses YiiWheels.helpers.YwHtml
+ * @uses YiiWheels.helpers.WhHtml
  */
 
 Yii::import('bootstrap.widgets.TbActiveForm');
-Yii::import('yiiwheels.helpers.YwHtml');
+Yii::import('yiiwheels.helpers.WhHtml');
 
-class YwActiveForm extends TbActiveForm
+class WhActiveForm extends TbActiveForm
 {
 	/**
 	 * Renders a datepicker field
@@ -24,7 +24,7 @@ class YwActiveForm extends TbActiveForm
 	 */
 	public function datePickerField($model, $attribute, $htmlOptions = array())
 	{
-		return $this->row(YwHtml::INPUT_DATEPICKER, $model, $attribute, array(), $htmlOptions);
+		return $this->row(WhHtml::INPUT_DATEPICKER, $model, $attribute, array(), $htmlOptions);
 	}
 
 	/**
@@ -36,7 +36,7 @@ class YwActiveForm extends TbActiveForm
 	 */
 	public function timePickerField($model, $attribute, $htmlOptions = array())
 	{
-		return $this->row(YwHtml::INPUT_TIMEPICKER, $model, $attribute, array(), $htmlOptions);
+		return $this->row(WhHtml::INPUT_TIMEPICKER, $model, $attribute, array(), $htmlOptions);
 	}
 
 	/**
@@ -48,7 +48,7 @@ class YwActiveForm extends TbActiveForm
 	 */
 	public function typeAheadField($model, $attribute, $htmlOptions = array())
 	{
-		return $this->row(YwHtml::INPUT_TYPEAHEAD, $model, $attribute, array(), $htmlOptions);
+		return $this->row(WhHtml::INPUT_TYPEAHEAD, $model, $attribute, array(), $htmlOptions);
 	}
 
 	/**
@@ -60,7 +60,7 @@ class YwActiveForm extends TbActiveForm
 	 */
 	public function select2Field($model, $attribute, $htmlOptions = array())
 	{
-		return $this->row(YwHtml::INPUT_SELECT2, $model, $attribute, array(), $htmlOptions);
+		return $this->row(WhHtml::INPUT_SELECT2, $model, $attribute, array(), $htmlOptions);
 	}
 
 
@@ -69,8 +69,8 @@ class YwActiveForm extends TbActiveForm
 	 * labels, help and error messages. This method is a replacement of the old 'typeRow' methods from Yii-Bootstrap
 	 * extension. Example:
 	 * <pre>
-	 *     $form->row(YwHtml::INPUT_TEXT, $model, 'attribute', array('style'=>'width:125px'));
-	 *    $form->row(YwHtml::INPUT_DROPDOWN, $model, 'attribute', array('a'=>'A','b'=>'B'), array());
+	 *     $form->row(WhHtml::INPUT_TEXT, $model, 'attribute', array('style'=>'width:125px'));
+	 *    $form->row(WhHtml::INPUT_DROPDOWN, $model, 'attribute', array('a'=>'A','b'=>'B'), array());
 	 * </pre>
 	 * @param $type
 	 * @param $model
@@ -82,45 +82,45 @@ class YwActiveForm extends TbActiveForm
 	 */
 	public function row($type, $model, $attribute, $data = array(), $htmlOptions = array())
 	{
-		if (!in_array($type, YwHtml::validInputs()))
+		if (!in_array($type, WhHtml::validInputs()))
 			throw new CException(Yii::t('tb', 'Unrecognized input type'));
 
-		$labelOptions = YwHtml::popOption('labelOptions', $htmlOptions, array());
-		$errorOptions = YwHtml::popOption('errorOptions', $htmlOptions, array());
-		$containerOptions = YwHtml::popOption('containerOptions', $htmlOptions, array());
+		$labelOptions = WhHtml::popOption('labelOptions', $htmlOptions, array());
+		$errorOptions = WhHtml::popOption('errorOptions', $htmlOptions, array());
+		$containerOptions = WhHtml::popOption('containerOptions', $htmlOptions, array());
 
-		$labelOptions = YwHtml::defaultOption('formType', $this->type, $labelOptions);
+		$labelOptions = WhHtml::defaultOption('formType', $this->type, $labelOptions);
 
 		ob_start();
 
 		// make sure it holds the class control-label
-		if ($this->type === YwHtml::FORM_HORIZONTAL)
-			echo CHtml::openTag('div', YwHtml::addClassName('control-group', $containerOptions));
+		if ($this->type === WhHtml::FORM_HORIZONTAL)
+			echo CHtml::openTag('div', WhHtml::addClassName('control-group', $containerOptions));
 
 		// form's inline do not render labels and radio|checkbox input types render label's differently
-		if ($this->type !== YwHtml::FORM_INLINE
+		if ($this->type !== WhHtml::FORM_INLINE
 			&& !preg_match('/radio|checkbox/i', $type)
-			&& YwHtml::popOption('label', $htmlOptions, true)
+			&& WhHtml::popOption('label', $htmlOptions, true)
 		)
-			echo YwHtml::activeLabel($model, $attribute, $labelOptions);
+			echo WhHtml::activeLabel($model, $attribute, $labelOptions);
 		elseif (preg_match('/radio|checkbox/i', $type))
 			$htmlOptions['labelOptions'] = $labelOptions;
 
-		if (YwHtml::popOption('block', $htmlOptions, false))
-			$htmlOptions = YwHtml::addClassName('input-block-level', $htmlOptions);
+		if (WhHtml::popOption('block', $htmlOptions, false))
+			$htmlOptions = WhHtml::addClassName('input-block-level', $htmlOptions);
 
-		$params = in_array($type, YwHtml::$dataInputs)
+		$params = in_array($type, WhHtml::$dataInputs)
 			? array($model, $attribute, $data, $htmlOptions)
 			: array($model, $attribute, $htmlOptions);
 
 		$errorSpan = $this->error($model, $attribute, $errorOptions);
 
-		echo $this->wrapControl(call_user_func_array('YwHtml::active' . ucfirst($type), $params), $errorSpan); /* since PHP 5.3 */
+		echo $this->wrapControl(call_user_func_array('WhHtml::active' . ucfirst($type), $params), $errorSpan); /* since PHP 5.3 */
 
-		if ($this->type == YwHtml::FORM_VERTICAL && YwHtml::popOption('error', $htmlOptions, true))
+		if ($this->type == WhHtml::FORM_VERTICAL && WhHtml::popOption('error', $htmlOptions, true))
 			echo $errorSpan;
 
-		if ($this->type == YwHtml::FORM_HORIZONTAL)
+		if ($this->type == WhHtml::FORM_HORIZONTAL)
 			echo '</div>';
 
 		return ob_get_clean();

@@ -1,15 +1,15 @@
 <?php
 /**
- * YwSelect2 widget class
+ * WhSelect2 widget class
  *
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
  * @copyright Copyright &copy; 2amigos.us 2013-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets
- * @uses YiiStrap.YwHtml
+ * @uses YiiStrap.WhHtml
  */
 
-class YwSelect2 extends CInputWidget
+class WhSelect2 extends CInputWidget
 {
 
 	/**
@@ -45,7 +45,7 @@ class YwSelect2 extends CInputWidget
 		if(empty($this->data) && $this->asDropDownList === true)
 			throw new CException(Yii::t('zii', '"data" attribute cannot be blank'));
 
-		$this->attachBehavior('ywplugin', array('class'=>'yiiwheels.behaviors.YwPlugin'));
+		$this->attachBehavior('ywplugin', array('class'=>'yiiwheels.behaviors.WhPlugin'));
 	}
 
 	/**
@@ -64,19 +64,19 @@ class YwSelect2 extends CInputWidget
 	{
 		list($name, $id) = $this->resolveNameID();
 
-		$this->htmlOptions = YwHtml::defaultOption('id', $id, $this->htmlOptions);
-		$this->htmlOptions = YwHtml::defaultOption('name', $name, $this->htmlOptions);
+		$this->htmlOptions = WhHtml::defaultOption('id', $id, $this->htmlOptions);
+		$this->htmlOptions = WhHtml::defaultOption('name', $name, $this->htmlOptions);
 
 		if ($this->hasModel())
 		{
 			echo $this->asDropDownList?
-				YwHtml::activeDropDownList($this->model, $this->attribute, $this->data, $this->htmlOptions) :
-				YwHtml::activeHiddenField($this->model, $this->attribute);
+				WhHtml::activeDropDownList($this->model, $this->attribute, $this->data, $this->htmlOptions) :
+				WhHtml::activeHiddenField($this->model, $this->attribute);
 
 		} else
 			echo $this->asDropDownList ?
-				YwHtml::dropDownList($this->name, $this->value, $this->data, $this->htmlOptions) :
-				YwHtml::hiddenField($this->name, $this->value);
+				WhHtml::dropDownList($this->name, $this->value, $this->data, $this->htmlOptions) :
+				WhHtml::hiddenField($this->name, $this->value);
 	}
 	/**
 	 * Registers required client script for bootstrap select2. It is not used through bootstrap->registerPlugin
@@ -101,7 +101,7 @@ class YwSelect2 extends CInputWidget
 		}
 
 		/* initialize plugin */
-		$selector = '#' . YwHtml::getOption('id', $this->htmlOptions, $this->getId());
+		$selector = '#' . WhHtml::getOption('id', $this->htmlOptions, $this->getId());
 
 		$this->getApi()->registerPlugin('select2', $selector, $this->pluginOptions);
 		$this->getApi()->registerEvents($selector, $this->events);

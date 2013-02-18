@@ -1,14 +1,14 @@
 <?php
 /**
- * YwDatePicker widget class
+ * WhDatePicker widget class
  *
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
  * @copyright Copyright &copy; 2amigos.us 2013-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets
- * @uses YiiWheels.helpers.YwHtml
+ * @uses YiiWheels.helpers.WhHtml
  */
-class YwDatePicker extends CInputWidget
+class WhDatePicker extends CInputWidget
 {
 	/**
 	 * @var array the options for the Bootstrap JavaScript plugin.
@@ -25,10 +25,10 @@ class YwDatePicker extends CInputWidget
 	 */
 	public function init()
 	{
-		$this->attachBehavior('ywplugin', array('class'=>'yiiwheels.behaviors.YwPlugin'));
+		$this->attachBehavior('ywplugin', array('class'=>'yiiwheels.behaviors.WhPlugin'));
 
-		$this->htmlOptions = YwHtml::defaultOption('autocomplete', 'off', $this->htmlOptions);
-		$this->htmlOptions = YwHtml::addClassName('grd-white', $this->htmlOptions);
+		$this->htmlOptions = WhHtml::defaultOption('autocomplete', 'off', $this->htmlOptions);
+		$this->htmlOptions = WhHtml::addClassName('grd-white', $this->htmlOptions);
 
 		$this->initOptions();
 	}
@@ -38,8 +38,8 @@ class YwDatePicker extends CInputWidget
 	 */
 	public function initOptions()
 	{
-		$this->pluginOptions = YwHtml::defaultOption('format', 'mm/dd/yyyy', $this->pluginOptions);
-		$this->pluginOptions = YwHtml::defaultOption('autoclose', true, $this->pluginOptions);
+		$this->pluginOptions = WhHtml::defaultOption('format', 'mm/dd/yyyy', $this->pluginOptions);
+		$this->pluginOptions = WhHtml::defaultOption('autoclose', true, $this->pluginOptions);
 	}
 
 	/**
@@ -58,15 +58,15 @@ class YwDatePicker extends CInputWidget
 	{
 		list($name, $id) = $this->resolveNameID();
 
-		$this->htmlOptions = YwHtml::defaultOption('id', $id, $this->htmlOptions);
-		$this->htmlOptions = YwHtml::defaultOption('name', $name, $this->htmlOptions);
+		$this->htmlOptions = WhHtml::defaultOption('id', $id, $this->htmlOptions);
+		$this->htmlOptions = WhHtml::defaultOption('name', $name, $this->htmlOptions);
 
 		if ($this->hasModel())
 		{
-			echo YwHtml::activeTextField($this->model, $this->attribute, $this->htmlOptions);
+			echo WhHtml::activeTextField($this->model, $this->attribute, $this->htmlOptions);
 
 		} else
-			echo YwHtml::textField($name, $this->value, $this->htmlOptions);
+			echo WhHtml::textField($name, $this->value, $this->htmlOptions);
 	}
 
 	/**
@@ -84,13 +84,13 @@ class YwDatePicker extends CInputWidget
 		$cs->registerCssFile($assetsUrl . '/css/datepicker.css');
 		$cs->registerScriptFile($assetsUrl . '/js/bootstrap-datepicker.js');
 
-		if ($language = YwHtml::getOption('language', $this->pluginOptions))
+		if ($language = WhHtml::getOption('language', $this->pluginOptions))
 		{
 			$cs->registerScriptFile($assetsUrl . '/js/locales/bootstrap-datepicker.' . $language . '.js', CClientScript::POS_END);
 		}
 
 		/* initialize plugin */
-		$selector = '#' . YwHtml::getOption('id', $this->htmlOptions, $this->getId());
+		$selector = '#' . WhHtml::getOption('id', $this->htmlOptions, $this->getId());
 
 		$this->getApi()->registerPlugin('datepicker', $selector, $this->pluginOptions);
 		$this->getApi()->registerEvents($selector, $this->events);

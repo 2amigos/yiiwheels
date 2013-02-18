@@ -1,6 +1,6 @@
 <?php
 /**
- * YwModal class file.
+ * WhModal class file.
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
  * @copyright Copyright &copy; 2amigos.us 2013-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
@@ -13,7 +13,7 @@
  *
  * @see http://jschr.github.com/bootstrap-modal/
  */
-class YwModal extends TbModal
+class WhModal extends TbModal
 {
 
 	/**
@@ -22,7 +22,7 @@ class YwModal extends TbModal
 	public function init()
 	{
 		parent::init();
-		$this->attachBehavior('ywplugin', new YwPlugin());
+		$this->attachBehavior('ywplugin', new WhPlugin());
 	}
 
 	/**

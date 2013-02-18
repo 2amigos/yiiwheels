@@ -6,7 +6,7 @@
  * Time: 02:31
  *
  */
-class YwHtml extends TbHtml
+class WhHtml extends TbHtml
 {
 	const INPUT_DATEPICKER = 'datePickerField';
 	const INPUT_TIMEPICKER = 'timePickerField';
@@ -14,9 +14,9 @@ class YwHtml extends TbHtml
 	const INPUT_TYPEAHEAD = 'typeAheadField';
 
 	static $validInputs = array(
-		self::INPUT_DATEPICKER => 'yiiwheels.widgets.datepicker.YwDatePicker',
-		self::INPUT_TIMEPICKER => 'yiiwheels.widgets.timepicker.YwTimePicker',
-		self::INPUT_SELECT2 => 'yiiwheels.widgets.select2.YwSelect2',
+		self::INPUT_DATEPICKER => 'yiiwheels.widgets.datepicker.WhDatePicker',
+		self::INPUT_TIMEPICKER => 'yiiwheels.widgets.timepicker.WhTimePicker',
+		self::INPUT_SELECT2 => 'yiiwheels.widgets.select2.WhSelect2',
 		self::INPUT_TYPEAHEAD => 'bootstrap.widgets.TbTypeAhead'
 	);
 

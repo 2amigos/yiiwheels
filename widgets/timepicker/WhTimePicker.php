@@ -1,15 +1,15 @@
 <?php
 /**
- * YwTimePicker widget class
+ * WhTimePicker widget class
  *
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
  * @copyright Copyright &copy; 2amigos.us 2013-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets
- * @uses YiiWheels.helpers.YwHtml
+ * @uses YiiWheels.helpers.WhHtml
  */
 
-class YwTimePicker extends CInputWidget
+class WhTimePicker extends CInputWidget
 {
 	/**
 	 * @var array the options for the Bootstrap JavaScript plugin.
@@ -52,7 +52,7 @@ class YwTimePicker extends CInputWidget
 	 */
 	public function init()
 	{
-		$this->attachBehavior('ywplugin', array('class'=>'yiiwheels.behaviors.YwPlugin'));
+		$this->attachBehavior('ywplugin', array('class'=>'yiiwheels.behaviors.WhPlugin'));
 	}
 
 	/**
@@ -73,14 +73,14 @@ class YwTimePicker extends CInputWidget
 	{
 		list($name, $id) = $this->resolveNameID();
 
-		$this->htmlOptions = YwHtml::defaultOption('id', $id, $this->htmlOptions);
-		$this->htmlOptions = YwHtml::defaultOption('name', $name, $this->htmlOptions);
+		$this->htmlOptions = WhHtml::defaultOption('id', $id, $this->htmlOptions);
+		$this->htmlOptions = WhHtml::defaultOption('name', $name, $this->htmlOptions);
 
 		echo '<span class="bootstrap-timepicker">';
 		if ($this->hasModel())
-			echo YwHtml::activeTextField($this->model, $this->attribute, $this->htmlOptions);
+			echo WhHtml::activeTextField($this->model, $this->attribute, $this->htmlOptions);
 		 else
-			echo YwHtml::textField($name, $this->value, $this->htmlOptions, array('style'=>'width:100%'));
+			echo WhHtml::textField($name, $this->value, $this->htmlOptions, array('style'=>'width:100%'));
 		echo '</span>';
 	}
 
@@ -101,7 +101,7 @@ class YwTimePicker extends CInputWidget
 		$cs->registerScriptFile($assetsUrl . '/js/bootstrap-timepicker.min.js');
 
 		/* initialize plugin */
-		$selector = '#' . YwHtml::getOption('id', $this->htmlOptions, $this->getId());
+		$selector = '#' . WhHtml::getOption('id', $this->htmlOptions, $this->getId());
 
 		$this->getApi()->registerPlugin('timepicker', $selector, $this->pluginOptions);
 		$this->getApi()->registerEvents($selector, $this->events);

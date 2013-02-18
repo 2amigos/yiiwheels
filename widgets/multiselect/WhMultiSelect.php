@@ -1,15 +1,15 @@
 <?php
 /**
- * YwMultiSelect widget class
+ * WhMultiSelect widget class
  *
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
  * @copyright Copyright &copy; 2amigos.us 2013-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets
- * @uses YiiStrap.YwHtml
+ * @uses YiiStrap.WhHtml
  */
 
-class YwMultiSelect extends CInputWidget
+class WhMultiSelect extends CInputWidget
 {
 
 	/**
@@ -36,7 +36,7 @@ class YwMultiSelect extends CInputWidget
 		if(empty($this->data) && $this->asDropDownList === true)
 			throw new CException(Yii::t('zii', '"data" attribute cannot be blank'));
 
-		$this->attachBehavior('ywplugin', array('class'=>'yiiwheels.behaviors.YwPlugin'));
+		$this->attachBehavior('ywplugin', array('class'=>'yiiwheels.behaviors.WhPlugin'));
 	}
 
 	/**
@@ -55,15 +55,15 @@ class YwMultiSelect extends CInputWidget
 	{
 		list($name, $id) = $this->resolveNameID();
 
-		$this->htmlOptions = YwHtml::defaultOption('id', $id, $this->htmlOptions);
-		$this->htmlOptions = YwHtml::defaultOption('name', $name, $this->htmlOptions);
+		$this->htmlOptions = WhHtml::defaultOption('id', $id, $this->htmlOptions);
+		$this->htmlOptions = WhHtml::defaultOption('name', $name, $this->htmlOptions);
 
 		if ($this->hasModel())
 		{
-			echo YwHtml::activeDropDownList($this->model, $this->attribute, $this->data, $this->htmlOptions);
+			echo WhHtml::activeDropDownList($this->model, $this->attribute, $this->data, $this->htmlOptions);
 
 		} else
-			echo YwHtml::dropDownList($this->name, $this->value, $this->data, $this->htmlOptions);
+			echo WhHtml::dropDownList($this->name, $this->value, $this->data, $this->htmlOptions);
 	}
 
 	/**
@@ -83,7 +83,7 @@ class YwMultiSelect extends CInputWidget
 		$cs->registerScriptFile($assetsUrl . '/js/bootstrap-multiselect.js');
 
 		/* initialize plugin */
-		$selector = '#' . YwHtml::getOption('id', $this->htmlOptions, $this->getId());
+		$selector = '#' . WhHtml::getOption('id', $this->htmlOptions, $this->getId());
 
 		$this->getApi()->registerPlugin('multiselect', $selector, $this->pluginOptions);
 		$this->getApi()->registerEvents($selector, $this->events);

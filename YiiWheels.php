@@ -49,7 +49,7 @@ class YiiWheels extends CApplicationComponent
 		/* ensure all widgets - plugins are accessible to the library */
 		Yii::import('bootstrap.widgets.*');
 		/* ensure common behavior is also accessible to the library */
-		Yii::import('yiiwheels.behaviors.YwPlugin');
+		Yii::import('yiiwheels.behaviors.WhPlugin');
 
 		/* register css assets */
 		foreach ($this->assetsCss as $css)

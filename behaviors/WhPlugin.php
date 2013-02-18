@@ -1,6 +1,6 @@
 <?php
 /**
- * YwPlugin class file.
+ * WhPlugin class file.
  * Extends the plugins with common shared methods.
  *
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
@@ -8,7 +8,7 @@
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package yiiwheels.widgets
  */
-class YwPlugin extends CBehavior
+class WhPlugin extends CBehavior
 {
 	protected $_assetsUrl;
 
