@@ -83,7 +83,7 @@ class WhAceEditor extends CInputWidget
 	}
 
 	/**
-	 * Registers required client script for bootstrap datepicker.
+	 * Registers required client script for ace editor
 	 */
 	public function registerClientScript()
 	{
