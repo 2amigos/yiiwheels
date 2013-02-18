@@ -1,11 +1,15 @@
 <?php
 /**
+ * YwTimePicker widget class
  *
- * User: tonydspaniard <amigo.cobos@gmail.com>
- * Date: 16/02/13
- * Time: 02:27
- *
+ * @author Antonio Ramirez <amigo.cobos@gmail.com>
+ * @copyright Copyright &copy; 2amigos.us 2013-
+ * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+ * @package YiiWheels.widgets
+ * @uses YiiStrap.widgets.TbActiveForm
+ * @uses YiiWheels.helpers.YwHtml
  */
+
 Yii::import('bootstrap.widgets.TbActiveForm');
 Yii::import('yiiwheels.helpers.YwHtml');
 

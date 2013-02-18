@@ -14,6 +14,7 @@ class YwPlugin extends CBehavior
 
 	protected static $_api;
 
+	protected static $_wheels;
 	/**
 	 * Returns
 	 * @param $path
@@ -40,8 +41,21 @@ class YwPlugin extends CBehavior
 	{
 		if(self::$_api === null)
 		{
-			self::$_api = Yii::app()->getComponent('yiiwheels')->getApi();
+			self::$_api = self::getYiiWheels()->getApi();
 		}
 		return self::$_api;
+	}
+
+	/**
+	 * Returns the main component
+	 * @return YiiWheels
+	 */
+	public function getYiiWheels()
+	{
+		if(self::$_wheels === null)
+		{
+			self::$_wheels = Yii::app()->getComponent('yiiwheels');
+		}
+		return self::$_wheels;
 	}
 }
