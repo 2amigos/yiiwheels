@@ -1,10 +1,11 @@
 <?php
 /**
+ * WhHtml class file.
  *
- * User: tonydspaniard <amigo.cobos@gmail.com>
- * Date: 16/02/13
- * Time: 02:31
- *
+ * @author Antonio Ramirez <amigo.cobos@gmail.com>
+ * @copyright Copyright &copy; Antonio Ramirez 2013-
+ * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+ * @package yiiwheels.helpers
  */
 class WhHtml extends TbHtml
 {
@@ -12,19 +13,22 @@ class WhHtml extends TbHtml
 	const INPUT_TIMEPICKER = 'timePickerField';
 	const INPUT_SELECT2 = 'select2Field';
 	const INPUT_TYPEAHEAD = 'typeAheadField';
+	const INPUT_MULTISELECT = 'multiSelectField';
 
 	static $validInputs = array(
+		self::INPUT_TYPEAHEAD => 'bootstrap.widgets.TbTypeAhead',
 		self::INPUT_DATEPICKER => 'yiiwheels.widgets.datepicker.WhDatePicker',
 		self::INPUT_TIMEPICKER => 'yiiwheels.widgets.timepicker.WhTimePicker',
 		self::INPUT_SELECT2 => 'yiiwheels.widgets.select2.WhSelect2',
-		self::INPUT_TYPEAHEAD => 'bootstrap.widgets.TbTypeAhead'
+		self::INPUT_MULTISELECT => 'yiiwheels.widgets.multiselect.WhMultiSelect'
 	);
 
 	static $configurationOptions = array(
 		self::INPUT_DATEPICKER => array('pluginOptions', 'events'),
 		self::INPUT_TIMEPICKER => array('pluginOptions', 'events'),
 		self::INPUT_TYPEAHEAD => array('source', 'items', 'matcher', 'sorter', 'updater', 'minLength', 'highlighter'),
-		self::INPUT_SELECT2 => array('pluginOptions', 'events', 'asDropDownList', 'language', 'data')
+		self::INPUT_SELECT2 => array('pluginOptions', 'events', 'asDropDownList', 'language', 'data'),
+		self::INPUT_MULTISELECT => array('pluginOptions', 'events', 'data')
 	);
 
 	/**
@@ -102,6 +106,22 @@ class WhHtml extends TbHtml
 		return self::widget(self::getWidgetPath(self::INPUT_SELECT2), $widgetOptions);
 	}
 
+	/**
+	 * Renders a multiselect field
+	 * @param $name
+	 * @param string $value
+	 * @param array $htmlOptions
+	 * @return string
+	 */
+	public static function multiSelectField($name, $value = '', $htmlOptions = array())
+	{
+		$defaultOptions = array('name' => $name, 'value' => $value);
+
+		$widgetOptions = self::getWidgetConfigurationOptions(self::INPUT_MULTISELECT, $htmlOptions, $defaultOptions);
+
+		return self::widget(self::getWidgetPath(self::INPUT_MULTISELECT), $widgetOptions);
+	}
+
 	// Active Fields
 	/**
 	 * Renders an active datepicker field
@@ -169,6 +189,23 @@ class WhHtml extends TbHtml
 		$widgetOptions = self::getWidgetConfigurationOptions(self::INPUT_SELECT2, $htmlOptions, $defaultOptions);
 
 		return self::widget(self::getWidgetPath(self::INPUT_SELECT2), $widgetOptions);
+	}
+
+	/**
+	 * Renders an active multi select field
+	 * @param CActiveRecord $model
+	 * @param string $attribute
+	 * @param array $htmlOptions additional attributes of the HTML element. Special attributes are supported.
+	 * @see YiiStrap.TbTypeAhead for information about the special attributes.
+	 * @return string
+	 */
+	public static function activeMultiSelectField($model, $attribute, $htmlOptions = array())
+	{
+		$defaultOptions = array('model' => $model, 'attribute' => $attribute);
+
+		$widgetOptions = self::getWidgetConfigurationOptions(self::INPUT_MULTISELECT, $htmlOptions, $defaultOptions);
+
+		return self::widget(self::getWidgetPath(self::INPUT_MULTISELECT), $widgetOptions);
 	}
 
 	// Utility methods

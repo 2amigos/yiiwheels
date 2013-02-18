@@ -8,6 +8,7 @@
  * @package YiiWheels.widgets
  * @uses YiiStrap.WhHtml
  */
+Yii::import('yiiwheels.helpers.WhHtml');
 
 class WhSelect2 extends CInputWidget
 {

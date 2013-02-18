@@ -13,6 +13,8 @@
  *
  * @see http://jschr.github.com/bootstrap-modal/
  */
+Yii::import('yiiwheels.helpers.WhHtml');
+
 class WhModal extends TbModal
 {
 
@@ -22,7 +24,7 @@ class WhModal extends TbModal
 	public function init()
 	{
 		parent::init();
-		$this->attachBehavior('ywplugin', new WhPlugin());
+		$this->attachBehavior('ywplugin', array('class'=>'yiiwheels.behaviors.WhPlugin'));
 	}
 
 	/**

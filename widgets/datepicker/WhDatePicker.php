@@ -8,6 +8,8 @@
  * @package YiiWheels.widgets
  * @uses YiiWheels.helpers.WhHtml
  */
+Yii::import('yiiwheels.helpers.WhHtml');
+
 class WhDatePicker extends CInputWidget
 {
 	/**

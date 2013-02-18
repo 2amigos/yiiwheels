@@ -9,6 +9,8 @@
  * @uses YiiStrap.WhHtml
  */
 
+Yii::import('yiiwheels.helpers.WhHtml');
+
 class WhMultiSelect extends CInputWidget
 {
 
