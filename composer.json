@@ -11,6 +11,12 @@
 			"homepage": "http://www.ramirezcobos.com/"
 		}
 	],
+	"repositories": [
+		{
+		    "type": "composer",
+		    "url": "http://packages.phundament.com"
+		}
+	],
 	"require": {
 		"yii-twbs/yiistrap": "dev-master"
 	}
