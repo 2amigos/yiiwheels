@@ -13,5 +13,5 @@
 	],
 	"require": {
 		"yii-twbs/yiistrap": "dev-master"
-	},
+	}
 }
