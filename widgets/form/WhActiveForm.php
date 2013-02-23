@@ -22,7 +22,7 @@ class WhActiveForm extends TbActiveForm
 	 * @param array $htmlOptions
 	 * @return string
 	 */
-	public function datePickerField($model, $attribute, $htmlOptions = array())
+	public function datePickerRow($model, $attribute, $htmlOptions = array())
 	{
 		return $this->row(WhHtml::INPUT_DATEPICKER, $model, $attribute, array(), $htmlOptions);
 	}
@@ -34,7 +34,7 @@ class WhActiveForm extends TbActiveForm
 	 * @param array $htmlOptions
 	 * @return string
 	 */
-	public function timePickerField($model, $attribute, $htmlOptions = array())
+	public function timePickerRow($model, $attribute, $htmlOptions = array())
 	{
 		return $this->row(WhHtml::INPUT_TIMEPICKER, $model, $attribute, array(), $htmlOptions);
 	}
@@ -46,7 +46,7 @@ class WhActiveForm extends TbActiveForm
 	 * @param array $htmlOptions
 	 * @return string
 	 */
-	public function typeAheadField($model, $attribute, $htmlOptions = array())
+	public function typeAheadRow($model, $attribute, $htmlOptions = array())
 	{
 		return $this->row(WhHtml::INPUT_TYPEAHEAD, $model, $attribute, array(), $htmlOptions);
 	}
@@ -58,7 +58,7 @@ class WhActiveForm extends TbActiveForm
 	 * @param array $htmlOptions
 	 * @return string
 	 */
-	public function select2Field($model, $attribute, $htmlOptions = array())
+	public function select2Row($model, $attribute, $htmlOptions = array())
 	{
 		return $this->row(WhHtml::INPUT_SELECT2, $model, $attribute, array(), $htmlOptions);
 	}

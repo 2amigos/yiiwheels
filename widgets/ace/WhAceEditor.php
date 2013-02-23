@@ -77,13 +77,13 @@ class WhAceEditor extends CInputWidget
 		if ($this->hasModel())
 			echo WhHtml::activeTextArea($this->model, $this->attribute, $this->htmlOptions);
 		else
-			echo WhHtml::textField($name, $this->value, $this->htmlOptions);
+			echo WhHtml::textArea($name, $this->value, $this->htmlOptions);
 
 		$this->htmlOptions = $tagOptions;
 	}
 
 	/**
-	 * Registers required client script for ace editor
+	 * Registers required client script for bootstrap ace editor.
 	 */
 	public function registerClientScript()
 	{

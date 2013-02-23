@@ -9,11 +9,11 @@
  */
 class WhHtml extends TbHtml
 {
-	const INPUT_DATEPICKER = 'datePickerField';
-	const INPUT_TIMEPICKER = 'timePickerField';
-	const INPUT_SELECT2 = 'select2Field';
-	const INPUT_TYPEAHEAD = 'typeAheadField';
-	const INPUT_MULTISELECT = 'multiSelectField';
+	const INPUT_DATEPICKER = 'datePickerRow';
+	const INPUT_TIMEPICKER = 'timePickerRow';
+	const INPUT_SELECT2 = 'select2Row';
+	const INPUT_TYPEAHEAD = 'typeAheadRow';
+	const INPUT_MULTISELECT = 'multiSelectRow';
 
 	static $validInputs = array(
 		self::INPUT_TYPEAHEAD => 'bootstrap.widgets.TbTypeAhead',
@@ -46,7 +46,7 @@ class WhHtml extends TbHtml
 	 * @param array $htmlOptions
 	 * @return string
 	 */
-	public static function datePickerField($name, $value = '', $htmlOptions = array())
+	public static function datePickerRow($name, $value = '', $htmlOptions = array())
 	{
 		$defaultOptions = array('name' => $name, 'value' => $value);
 
@@ -62,7 +62,7 @@ class WhHtml extends TbHtml
 	 * @param array $htmlOptions
 	 * @return string
 	 */
-	public static function timePickerField($name, $value = '', $htmlOptions = array())
+	public static function timePickerRow($name, $value = '', $htmlOptions = array())
 	{
 		$defaultOptions = array('name' => $name, 'value' => $value);
 
@@ -81,7 +81,7 @@ class WhHtml extends TbHtml
 	 * @see YiiStrap.TbTypeAhead for information about the special attributes.
 	 * @return string
 	 */
-	public static function typeAheadField($name, $value = '', $htmlOptions = array())
+	public static function typeAheadRow($name, $value = '', $htmlOptions = array())
 	{
 		$defaultOptions = array('name' => $name, 'value' => $value);
 
@@ -97,7 +97,7 @@ class WhHtml extends TbHtml
 	 * @param array $htmlOptions
 	 * @return string
 	 */
-	public static function select2Field($name, $value = '', $htmlOptions = array())
+	public static function select2Row($name, $value = '', $htmlOptions = array())
 	{
 		$defaultOptions = array('name' => $name, 'value' => $value);
 
@@ -113,7 +113,7 @@ class WhHtml extends TbHtml
 	 * @param array $htmlOptions
 	 * @return string
 	 */
-	public static function multiSelectField($name, $value = '', $htmlOptions = array())
+	public static function multiSelectRow($name, $value = '', $htmlOptions = array())
 	{
 		$defaultOptions = array('name' => $name, 'value' => $value);
 

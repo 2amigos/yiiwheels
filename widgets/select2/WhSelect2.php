@@ -6,7 +6,7 @@
  * @copyright Copyright &copy; 2amigos.us 2013-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets
- * @uses YiiStrap.WhHtml
+ * @uses YiiWheels.WhHtml
  */
 Yii::import('yiiwheels.helpers.WhHtml');
 
@@ -79,6 +79,7 @@ class WhSelect2 extends CInputWidget
 				WhHtml::dropDownList($this->name, $this->value, $this->data, $this->htmlOptions) :
 				WhHtml::hiddenField($this->name, $this->value);
 	}
+
 	/**
 	 * Registers required client script for bootstrap select2. It is not used through bootstrap->registerPlugin
 	 * in order to attach events if any
