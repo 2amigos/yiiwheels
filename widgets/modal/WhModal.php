@@ -43,7 +43,7 @@ class WhModal extends TbModal
 	public function registerPluginFiles()
 	{
 		/* publish assets dir */
-		$path = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'assets';+
+		$path = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'assets';
 
 		$assetsUrl = $this->getAssetsUrl($path);
 
