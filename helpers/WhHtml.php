@@ -130,7 +130,7 @@ class WhHtml extends TbHtml
 	 * @param array $htmlOptions
 	 * @return string
 	 */
-	public static function activeDatePickerField($model, $attribute, $htmlOptions = array())
+	public static function activeDatePickerRow($model, $attribute, $htmlOptions = array())
 	{
 		$defaultOptions = array('model' => $model, 'attribute' => $attribute);
 
@@ -146,7 +146,7 @@ class WhHtml extends TbHtml
 	 * @param array $htmlOptions
 	 * @return string
 	 */
-	public static function activeTimePickerField($model, $attribute, $htmlOptions = array())
+	public static function activeTimePickerRow($model, $attribute, $htmlOptions = array())
 	{
 		$defaultOptions = array('model' => $model, 'attribute' => $attribute);
 
@@ -165,7 +165,7 @@ class WhHtml extends TbHtml
 	 * @see YiiStrap.TbTypeAhead for information about the special attributes.
 	 * @return string
 	 */
-	public static function activeTypeAheadField($model, $attribute, $htmlOptions = array())
+	public static function activeTypeAheadRow($model, $attribute, $htmlOptions = array())
 	{
 		$defaultOptions = array('model' => $model, 'attribute' => $attribute);
 
@@ -182,7 +182,7 @@ class WhHtml extends TbHtml
 	 * @see YiiStrap.TbTypeAhead for information about the special attributes.
 	 * @return string
 	 */
-	public static function activeSelect2Field($model, $attribute, $htmlOptions = array())
+	public static function activeSelect2Row($model, $attribute, $htmlOptions = array())
 	{
 		$defaultOptions = array('model' => $model, 'attribute' => $attribute);
 
@@ -199,7 +199,7 @@ class WhHtml extends TbHtml
 	 * @see YiiStrap.TbTypeAhead for information about the special attributes.
 	 * @return string
 	 */
-	public static function activeMultiSelectField($model, $attribute, $htmlOptions = array())
+	public static function activeMultiSelectRow($model, $attribute, $htmlOptions = array())
 	{
 		$defaultOptions = array('model' => $model, 'attribute' => $attribute);
 
