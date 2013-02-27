@@ -1,6 +1,6 @@
 {
 	"name": "2amigos/yiiwheels",
-	"description": "Extension library for Yiistrap.",
+	"description": "Extension library for Yiistrap, Yii Twitter's Bootstrap.",
 	"keywords": ["bootstrap"],
 	"type": "yii-extension",
 	"license": "BSD-3-Clause",
