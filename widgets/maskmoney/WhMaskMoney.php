@@ -1,8 +1,8 @@
 <?php
 /**
- * WhMultiSelect widget class
- *
- * @author Antonio Ramirez <amigo.cobos@gmail.com>
+* WhMaskMoney widget class
+*
+* @author Antonio Ramirez <amigo.cobos@gmail.com>
  * @copyright Copyright &copy; 2amigos.us 2013-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets
@@ -11,18 +11,8 @@
 
 Yii::import('yiiwheels.helpers.WhHtml');
 
-class WhMultiSelect extends CInputWidget
+class WhMaskMoney extends CInputWidget
 {
-
-	/**
-	 * @var array @param data for generating the list options (value=>display)
-	 */
-	public $data = array();
-
-	/**
-	 * @var string[] the JavaScript event handlers.
-	 */
-	public $events = array();
 
 	/**
 	 * @var array the plugin options
@@ -35,10 +25,7 @@ class WhMultiSelect extends CInputWidget
 	 */
 	public function init()
 	{
-		if (empty($this->data) && $this->asDropDownList === true)
-			throw new CException(Yii::t('zii', '"data" attribute cannot be blank'));
-
-		$this->attachBehavior('ywplugin', array('class' => 'yiiwheels.behaviors.WhPlugin'));
+		$this->attachBehavior('ywplugin', array('class'=>'yiiwheels.behaviors.WhPlugin'));
 	}
 
 	/**
@@ -61,9 +48,9 @@ class WhMultiSelect extends CInputWidget
 		$this->htmlOptions = WhHtml::defaultOption('name', $name, $this->htmlOptions);
 
 		if ($this->hasModel())
-			echo WhHtml::activeDropDownList($this->model, $this->attribute, $this->data, $this->htmlOptions);
+			echo WhHtml::activeTextField($this->model, $this->attribute, $this->htmlOptions);
 		else
-			echo WhHtml::dropDownList($this->name, $this->value, $this->data, $this->htmlOptions);
+			echo WhHtml::textField($this->name, $this->value, $this->htmlOptions);
 	}
 
 	/**
@@ -79,13 +66,11 @@ class WhMultiSelect extends CInputWidget
 		/* @var $cs CClientScript */
 		$cs = Yii::app()->getClientScript();
 
-		$cs->registerCssFile($assetsUrl . '/css/bootstrap-multiselect.css');
-		$cs->registerScriptFile($assetsUrl . '/js/bootstrap-multiselect.js');
+		$cs->registerScriptFile($assetsUrl . '/js/jquery.maskmoney.js');
 
 		/* initialize plugin */
 		$selector = '#' . WhHtml::getOption('id', $this->htmlOptions, $this->getId());
 
-		$this->getApi()->registerPlugin('multiselect', $selector, $this->pluginOptions);
-		$this->getApi()->registerEvents($selector, $this->events);
+		$this->getApi()->registerPlugin('maskMoney', $selector, $this->pluginOptions);
 	}
 }

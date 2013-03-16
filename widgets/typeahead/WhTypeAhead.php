@@ -1,6 +1,8 @@
 <?php
 /**
- * WhMultiSelect widget class
+ * WhTypeAhead widget class
+ *
+ * @see https://github.com/twitter/typeahead.js
  *
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
  * @copyright Copyright &copy; 2amigos.us 2013-
@@ -8,27 +10,21 @@
  * @package YiiWheels.widgets
  * @uses YiiWheels.WhHtml
  */
-
 Yii::import('yiiwheels.helpers.WhHtml');
 
-class WhMultiSelect extends CInputWidget
+class WhTypeAhead extends CInputWidget
 {
 
 	/**
-	 * @var array @param data for generating the list options (value=>display)
-	 */
-	public $data = array();
-
-	/**
-	 * @var string[] the JavaScript event handlers.
-	 */
-	public $events = array();
-
-	/**
 	 * @var array the plugin options
-	 * @see http://davidstutz.github.com/bootstrap-multiselect/
+	 * @see https://github.com/twitter/typeahead.js
 	 */
 	public $pluginOptions;
+
+	/**
+	 * @var bool whether to display minified versions of the files or not
+	 */
+	public $debugMode = false;
 
 	/**
 	 * Initializes the widget.
@@ -51,7 +47,7 @@ class WhMultiSelect extends CInputWidget
 	}
 
 	/**
-	 * Renders the multiselect field
+	 * Renders the typeahead field
 	 */
 	public function renderField()
 	{
@@ -61,13 +57,14 @@ class WhMultiSelect extends CInputWidget
 		$this->htmlOptions = WhHtml::defaultOption('name', $name, $this->htmlOptions);
 
 		if ($this->hasModel())
-			echo WhHtml::activeDropDownList($this->model, $this->attribute, $this->data, $this->htmlOptions);
+			echo WhHtml::activeTextField($this->model, $this->attribute, $this->htmlOptions);
+
 		else
-			echo WhHtml::dropDownList($this->name, $this->value, $this->data, $this->htmlOptions);
+			echo WhHtml::textField($this->name, $this->value, $this->htmlOptions);
 	}
 
 	/**
-	 * Registers required client script for bootstrap multiselect. It is not used through bootstrap->registerPlugin
+	 * Registers required client script for bootstrap typeahead. It is not used through bootstrap->registerPlugin
 	 * in order to attach events if any
 	 */
 	public function registerClientScript()
@@ -79,13 +76,16 @@ class WhMultiSelect extends CInputWidget
 		/* @var $cs CClientScript */
 		$cs = Yii::app()->getClientScript();
 
-		$cs->registerCssFile($assetsUrl . '/css/bootstrap-multiselect.css');
-		$cs->registerScriptFile($assetsUrl . '/js/bootstrap-multiselect.js');
+		$min = $this->debugMode
+			? '.min'
+			: '';
+
+		$cs->registerCssFile($assetsUrl . '/css/typeahead'.$min.'.css');
+		$cs->registerScriptFile($assetsUrl . '/js/typeahead'.$min.'.js');
 
 		/* initialize plugin */
 		$selector = '#' . WhHtml::getOption('id', $this->htmlOptions, $this->getId());
 
-		$this->getApi()->registerPlugin('multiselect', $selector, $this->pluginOptions);
-		$this->getApi()->registerEvents($selector, $this->events);
+		$this->getApi()->registerPlugin('typeahead', $selector, $this->pluginOptions);
 	}
 }

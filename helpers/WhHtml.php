@@ -14,13 +14,15 @@ class WhHtml extends TbHtml
 	const INPUT_SELECT2 = 'select2Row';
 	const INPUT_TYPEAHEAD = 'typeAheadRow';
 	const INPUT_MULTISELECT = 'multiSelectRow';
+	const INPUT_MASKMONEY = 'maskMoneyRow';
 
 	static $validInputs = array(
 		self::INPUT_TYPEAHEAD => 'bootstrap.widgets.TbTypeAhead',
 		self::INPUT_DATEPICKER => 'yiiwheels.widgets.datepicker.WhDatePicker',
 		self::INPUT_TIMEPICKER => 'yiiwheels.widgets.timepicker.WhTimePicker',
 		self::INPUT_SELECT2 => 'yiiwheels.widgets.select2.WhSelect2',
-		self::INPUT_MULTISELECT => 'yiiwheels.widgets.multiselect.WhMultiSelect'
+		self::INPUT_MULTISELECT => 'yiiwheels.widgets.multiselect.WhMultiSelect',
+		self::INPUT_MASKMONEY => 'yiiwheels.widgets.maskmoney.WhMaskMoney'
 	);
 
 	static $configurationOptions = array(
@@ -28,7 +30,8 @@ class WhHtml extends TbHtml
 		self::INPUT_TIMEPICKER => array('pluginOptions', 'events'),
 		self::INPUT_TYPEAHEAD => array('source', 'items', 'matcher', 'sorter', 'updater', 'minLength', 'highlighter'),
 		self::INPUT_SELECT2 => array('pluginOptions', 'events', 'asDropDownList', 'language', 'data'),
-		self::INPUT_MULTISELECT => array('pluginOptions', 'events', 'data')
+		self::INPUT_MULTISELECT => array('pluginOptions', 'events', 'data'),
+		self::INPUT_MASKMONEY => array('pluginOptions')
 	);
 
 	/**
@@ -122,6 +125,22 @@ class WhHtml extends TbHtml
 		return self::widget(self::getWidgetPath(self::INPUT_MULTISELECT), $widgetOptions);
 	}
 
+	/**
+	 * Renders a maskmoney field
+	 * @param $name
+	 * @param string $value
+	 * @param array $htmlOptions
+	 * @return string
+	 */
+	public static function maskMoneyRow($name, $value = '', $htmlOptions = array())
+	{
+		$defaultOptions = array('name' => $name, 'value' => $value);
+
+		$widgetOptions = self::getWidgetConfigurationOptions(self::INPUT_MASKMONEY, $htmlOptions, $defaultOptions);
+
+		return self::widget(self::getWidgetPath(self::INPUT_MASKMONEY), $widgetOptions);
+	}
+
 	// Active Fields
 	/**
 	 * Renders an active datepicker field
@@ -140,7 +159,7 @@ class WhHtml extends TbHtml
 	}
 
 	/**
-	 * Renders an activeTimePickerField
+	 * Renders an activeTimePickerRow
 	 * @param $model
 	 * @param $attribute
 	 * @param array $htmlOptions
@@ -206,6 +225,23 @@ class WhHtml extends TbHtml
 		$widgetOptions = self::getWidgetConfigurationOptions(self::INPUT_MULTISELECT, $htmlOptions, $defaultOptions);
 
 		return self::widget(self::getWidgetPath(self::INPUT_MULTISELECT), $widgetOptions);
+	}
+
+	/**
+	 * Renders an active mask money field
+	 * @param CActiveRecord $model
+	 * @param string $attribute
+	 * @param array $htmlOptions additional attributes of the HTML element. Special attributes are supported.
+	 * @see YiiStrap.TbTypeAhead for information about the special attributes.
+	 * @return string
+	 */
+	public static function activeMaskMoneyRow($model, $attribute, $htmlOptions = array())
+	{
+		$defaultOptions = array('model' => $model, 'attribute' => $attribute);
+
+		$widgetOptions = self::getWidgetConfigurationOptions(self::INPUT_MASKMONEY, $htmlOptions, $defaultOptions);
+
+		return self::widget(self::getWidgetPath(self::INPUT_MASKMONEY), $widgetOptions);
 	}
 
 	// Utility methods

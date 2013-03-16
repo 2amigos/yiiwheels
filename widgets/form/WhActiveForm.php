@@ -63,6 +63,29 @@ class WhActiveForm extends TbActiveForm
 		return $this->row(WhHtml::INPUT_SELECT2, $model, $attribute, array(), $htmlOptions);
 	}
 
+	/**
+	 * Renders a multiselect field
+	 * @param $model
+	 * @param $attribute
+	 * @param array $htmlOptions
+	 * @return string
+	 */
+	public function multiSelectRow($model, $attribute, $htmlOptions = array())
+	{
+		return $this->row(WhHtml::INPUT_MULTISELECT, $model, $attribute, array(), $htmlOptions);
+	}
+
+	/**
+	 * Renders a maskmoney field
+	 * @param $model
+	 * @param $attribute
+	 * @param array $htmlOptions
+	 * @return string
+	 */
+	public function maskMoneyRow($model, $attribute, $htmlOptions = array())
+	{
+		return $this->row(WhHtml::INPUT_MASKMONEY, $model, $attribute, array(), $htmlOptions);
+	}
 
 	/**
 	 * Helper method to display different input types for the different complain bootstrap forms wrapped with their

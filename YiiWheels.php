@@ -98,6 +98,7 @@ class YiiWheels extends CApplicationComponent
 	public function registerAssetJs($jsFile, $position = CClientScript::POS_END)
 	{
 		Yii::app()->getClientScript()->registerScriptFile($this->getAssetsUrl() . "/js/{$jsFile}", $position);
+		return $this;
 	}
 
 	/**
@@ -108,5 +109,6 @@ class YiiWheels extends CApplicationComponent
 	public function registerAssetCss($cssFile, $media = '')
 	{
 		Yii::app()->getClientScript()->registerCssFile($this->getAssetsUrl() . "/css/{$cssFile}", $media);
+		return $this;
 	}
 }
