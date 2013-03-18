@@ -88,6 +88,18 @@ class WhActiveForm extends TbActiveForm
 	}
 
 	/**
+	 * Renders a redactor wyiwyg field
+	 * @param $model
+	 * @param $attribute
+	 * @param array $htmlOptions
+	 * @return string
+	 */
+	public function redactorJsRow($model, $attribute, $htmlOptions = array())
+	{
+		return $this->row(WhHtml::INPUT_REDACTOR, $model, $attribute, $htmlOptions);
+	}
+
+	/**
 	 * Helper method to display different input types for the different complain bootstrap forms wrapped with their
 	 * labels, help and error messages. This method is a replacement of the old 'typeRow' methods from Yii-Bootstrap
 	 * extension. Example:

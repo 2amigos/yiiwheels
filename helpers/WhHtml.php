@@ -15,6 +15,7 @@ class WhHtml extends TbHtml
 	const INPUT_TYPEAHEAD = 'typeAheadRow';
 	const INPUT_MULTISELECT = 'multiSelectRow';
 	const INPUT_MASKMONEY = 'maskMoneyRow';
+	const INPUT_REDACTOR = 'redactorRow';
 
 	static $validInputs = array(
 		self::INPUT_TYPEAHEAD => 'bootstrap.widgets.TbTypeAhead',
@@ -22,7 +23,8 @@ class WhHtml extends TbHtml
 		self::INPUT_TIMEPICKER => 'yiiwheels.widgets.timepicker.WhTimePicker',
 		self::INPUT_SELECT2 => 'yiiwheels.widgets.select2.WhSelect2',
 		self::INPUT_MULTISELECT => 'yiiwheels.widgets.multiselect.WhMultiSelect',
-		self::INPUT_MASKMONEY => 'yiiwheels.widgets.maskmoney.WhMaskMoney'
+		self::INPUT_MASKMONEY => 'yiiwheels.widgets.maskmoney.WhMaskMoney',
+		self::INPUT_REDACTOR => 'yiiwheels.widgets.redactor.WhRedactor'
 	);
 
 	static $configurationOptions = array(
@@ -31,7 +33,8 @@ class WhHtml extends TbHtml
 		self::INPUT_TYPEAHEAD => array('source', 'items', 'matcher', 'sorter', 'updater', 'minLength', 'highlighter'),
 		self::INPUT_SELECT2 => array('pluginOptions', 'events', 'asDropDownList', 'language', 'data'),
 		self::INPUT_MULTISELECT => array('pluginOptions', 'events', 'data'),
-		self::INPUT_MASKMONEY => array('pluginOptions')
+		self::INPUT_MASKMONEY => array('pluginOptions'),
+		self::INPUT_REDACTOR => array('pluginOptions', 'debugMode')
 	);
 
 	/**
@@ -141,6 +144,22 @@ class WhHtml extends TbHtml
 		return self::widget(self::getWidgetPath(self::INPUT_MASKMONEY), $widgetOptions);
 	}
 
+	/**
+	 * Renders a redactor field
+	 * @param $name
+	 * @param string $value
+	 * @param array $htmlOptions
+	 * @return string
+	 */
+	public static function redactorRow($name, $value = '', $htmlOptions = array())
+	{
+		$defaultOptions = array('name' => $name, 'value' => $value);
+
+		$widgetOptions = self::getWidgetConfigurationOptions(self::INPUT_REDACTOR, $htmlOptions, $defaultOptions);
+
+		return self::widget(self::getWidgetPath(self::INPUT_REDACTOR), $widgetOptions);
+	}
+
 	// Active Fields
 	/**
 	 * Renders an active datepicker field
@@ -242,6 +261,23 @@ class WhHtml extends TbHtml
 		$widgetOptions = self::getWidgetConfigurationOptions(self::INPUT_MASKMONEY, $htmlOptions, $defaultOptions);
 
 		return self::widget(self::getWidgetPath(self::INPUT_MASKMONEY), $widgetOptions);
+	}
+
+	/**
+	 * Renders an active redactor field
+	 * @param CActiveRecord $model
+	 * @param string $attribute
+	 * @param array $htmlOptions additional attributes of the HTML element. Special attributes are supported.
+	 * @see YiiStrap.TbTypeAhead for information about the special attributes.
+	 * @return string
+	 */
+	public static function activeRedactorRow($model, $attribute, $htmlOptions = array())
+	{
+		$defaultOptions = array('model' => $model, 'attribute' => $attribute);
+
+		$widgetOptions = self::getWidgetConfigurationOptions(self::INPUT_REDACTOR, $htmlOptions, $defaultOptions);
+
+		return self::widget(self::getWidgetPath(self::INPUT_REDACTOR), $widgetOptions);
 	}
 
 	// Utility methods
