@@ -22,3 +22,6 @@ switch
 index
 
 
+#demo directories
+/docs/app/runtime/*
+/docs/web/assets/*
