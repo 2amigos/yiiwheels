@@ -80,8 +80,8 @@ class WhTypeAhead extends CInputWidget
 			? '.min'
 			: '';
 
-		$cs->registerCssFile($assetsUrl . '/css/typeahead'.$min.'.css');
-		$cs->registerScriptFile($assetsUrl . '/js/typeahead'.$min.'.js');
+		$cs->registerCssFile($assetsUrl . '/css/typeahead' . $min . '.css');
+		$cs->registerScriptFile($assetsUrl . '/js/typeahead' . $min . '.js');
 
 		/* initialize plugin */
 		$selector = '#' . WhHtml::getOption('id', $this->htmlOptions, $this->getId());

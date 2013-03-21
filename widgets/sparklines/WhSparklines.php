@@ -45,10 +45,10 @@ class WhSparkLines extends CWidget
 	 */
 	public function init()
 	{
-		if(empty($this->data))
+		if (empty($this->data))
 			throw new CException(Yii::t('zii', '"data" attribute cannot be blank'));
 
-		$this->attachBehavior('ywplugin', array('class'=>'yiiwheels.behaviors.WhPlugin'));
+		$this->attachBehavior('ywplugin', array('class' => 'yiiwheels.behaviors.WhPlugin'));
 
 		$this->htmlOptions['id'] = WhHtml::getOption('id', $this->htmlOptions, $this->getId());
 	}

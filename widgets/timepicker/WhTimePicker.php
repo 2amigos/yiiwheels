@@ -14,26 +14,26 @@ class WhTimePicker extends CInputWidget
 	/**
 	 * @var array the options for the Bootstrap JavaScript plugin.
 	 * Available options:
-	 * template	string
+	 * template    string
 	 *      'dropdown' (default), Show picker in a dropdown
 	 *      'modal', Show picker in a modal
 	 *      false, Don't show a widget
-	 * minuteStep	integer	15	Specify a step for the minute field.
-	 * showSeconds	boolean	false	Show the seconds field.
-	 * secondStep	integer	15	Specify a step for the second field.
-	 * defaultTime	string
+	 * minuteStep    integer    15    Specify a step for the minute field.
+	 * showSeconds    boolean    false    Show the seconds field.
+	 * secondStep    integer    15    Specify a step for the second field.
+	 * defaultTime    string
 	 *      'current' (default) Set to the current time.
 	 *      'value' Set to inputs current value
-	 *      false	Do not set a default time
-	 * showMeridian	boolean
+	 *      false    Do not set a default time
+	 * showMeridian    boolean
 	 *      true (default)  12hr mode
 	 *      false24hr mode
-	 * showInputs	boolean
+	 * showInputs    boolean
 	 *      true (default )Shows the text inputs in the widget.
 	 *      false Hide the text inputs in the widget
-	 * disableFocus	boolean	false	Disables the input from focusing. This is useful for touch screen devices that
+	 * disableFocus    boolean    false    Disables the input from focusing. This is useful for touch screen devices that
 	 *          display a keyboard on input focus.
-	 * modalBackdrop	boolean	false	Show modal backdrop.
+	 * modalBackdrop    boolean    false    Show modal backdrop.
 	 */
 	public $pluginOptions = array();
 
@@ -52,7 +52,7 @@ class WhTimePicker extends CInputWidget
 	 */
 	public function init()
 	{
-		$this->attachBehavior('ywplugin', array('class'=>'yiiwheels.behaviors.WhPlugin'));
+		$this->attachBehavior('ywplugin', array('class' => 'yiiwheels.behaviors.WhPlugin'));
 	}
 
 	/**
@@ -79,8 +79,8 @@ class WhTimePicker extends CInputWidget
 		echo '<span class="bootstrap-timepicker">';
 		if ($this->hasModel())
 			echo WhHtml::activeTextField($this->model, $this->attribute, $this->htmlOptions);
-		 else
-			echo WhHtml::textField($name, $this->value, $this->htmlOptions, array('style'=>'width:100%'));
+		else
+			echo WhHtml::textField($name, $this->value, $this->htmlOptions, array('style' => 'width:100%'));
 		echo '</span>';
 	}
 

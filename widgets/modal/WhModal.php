@@ -24,7 +24,7 @@ class WhModal extends TbModal
 	public function init()
 	{
 		parent::init();
-		$this->attachBehavior('ywplugin', array('class'=>'yiiwheels.behaviors.WhPlugin'));
+		$this->attachBehavior('ywplugin', array('class' => 'yiiwheels.behaviors.WhPlugin'));
 	}
 
 	/**

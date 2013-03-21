@@ -12,310 +12,315 @@
 
 (function () {
 
-var win = window,
-	doc = document,
-	mooVersion = win.MooTools.version.substring(0, 3), // Get the first three characters of the version number
-	legacy = mooVersion === '1.2' || mooVersion === '1.1', // 1.1 && 1.2 considered legacy, 1.3 is not.
-	legacyEvent = legacy || mooVersion === '1.3', // In versions 1.1 - 1.3 the event class is named Event, in newer versions it is named DOMEvent.
-	$extend = win.$extend || function () {
-		return Object.append.apply(Object, arguments);
-	};
+    var win = window,
+        doc = document,
+        mooVersion = win.MooTools.version.substring(0, 3), // Get the first three characters of the version number
+        legacy = mooVersion === '1.2' || mooVersion === '1.1', // 1.1 && 1.2 considered legacy, 1.3 is not.
+        legacyEvent = legacy || mooVersion === '1.3', // In versions 1.1 - 1.3 the event class is named Event, in newer versions it is named DOMEvent.
+        $extend = win.$extend || function () {
+            return Object.append.apply(Object, arguments);
+        };
 
-win.HighchartsAdapter = {
-	/**
-	 * Initialize the adapter. This is run once as Highcharts is first run.
-	 * @param {Object} pathAnim The helper object to do animations across adapters.
-	 */
-	init: function (pathAnim) {
-		var fxProto = Fx.prototype,
-			fxStart = fxProto.start,
-			morphProto = Fx.Morph.prototype,
-			morphCompute = morphProto.compute;
+    win.HighchartsAdapter = {
+        /**
+         * Initialize the adapter. This is run once as Highcharts is first run.
+         * @param {Object} pathAnim The helper object to do animations across adapters.
+         */
+        init: function (pathAnim) {
+            var fxProto = Fx.prototype,
+                fxStart = fxProto.start,
+                morphProto = Fx.Morph.prototype,
+                morphCompute = morphProto.compute;
 
-		// override Fx.start to allow animation of SVG element wrappers
-		/*jslint unparam: true*//* allow unused parameters in fx functions */
-		fxProto.start = function (from, to) {
-			var fx = this,
-				elem = fx.element;
+            // override Fx.start to allow animation of SVG element wrappers
+            /*jslint unparam: true*/
+            /* allow unused parameters in fx functions */
+            fxProto.start = function (from, to) {
+                var fx = this,
+                    elem = fx.element;
 
-			// special for animating paths
-			if (from.d) {
-				//this.fromD = this.element.d.split(' ');
-				fx.paths = pathAnim.init(
-					elem,
-					elem.d,
-					fx.toD
-				);
-			}
-			fxStart.apply(fx, arguments);
+                // special for animating paths
+                if (from.d) {
+                    //this.fromD = this.element.d.split(' ');
+                    fx.paths = pathAnim.init(
+                        elem,
+                        elem.d,
+                        fx.toD
+                    );
+                }
+                fxStart.apply(fx, arguments);
 
-			return this; // chainable
-		};
+                return this; // chainable
+            };
 
-		// override Fx.step to allow animation of SVG element wrappers
-		morphProto.compute = function (from, to, delta) {
-			var fx = this,
-				paths = fx.paths;
+            // override Fx.step to allow animation of SVG element wrappers
+            morphProto.compute = function (from, to, delta) {
+                var fx = this,
+                    paths = fx.paths;
 
-			if (paths) {
-				fx.element.attr(
-					'd',
-					pathAnim.step(paths[0], paths[1], delta, fx.toD)
-				);
-			} else {
-				return morphCompute.apply(fx, arguments);
-			}
-		};
-		/*jslint unparam: false*/
-	},
-	
-	/**
-	 * Run a general method on the framework, following jQuery syntax
-	 * @param {Object} el The HTML element
-	 * @param {String} method Which method to run on the wrapped element
-	 */
-	adapterRun: function (el, method) {
-		
-		// This currently works for getting inner width and height. If adding
-		// more methods later, we need a conditional implementation for each.
-		return $(el).getStyle(method).toInt();
-		
-	},
+                if (paths) {
+                    fx.element.attr(
+                        'd',
+                        pathAnim.step(paths[0], paths[1], delta, fx.toD)
+                    );
+                } else {
+                    return morphCompute.apply(fx, arguments);
+                }
+            };
+            /*jslint unparam: false*/
+        },
 
-	/**
-	 * Downloads a script and executes a callback when done.
-	 * @param {String} scriptLocation
-	 * @param {Function} callback
-	 */
-	getScript: function (scriptLocation, callback) {
-		// We cannot assume that Assets class from mootools-more is available so instead insert a script tag to download script.
-		var head = doc.getElementsByTagName('head')[0];
-		var script = doc.createElement('script');
+        /**
+         * Run a general method on the framework, following jQuery syntax
+         * @param {Object} el The HTML element
+         * @param {String} method Which method to run on the wrapped element
+         */
+        adapterRun: function (el, method) {
 
-		script.type = 'text/javascript';
-		script.src = scriptLocation;
-		script.onload = callback;
+            // This currently works for getting inner width and height. If adding
+            // more methods later, we need a conditional implementation for each.
+            return $(el).getStyle(method).toInt();
 
-		head.appendChild(script);
-	},
+        },
 
-	/**
-	 * Animate a HTML element or SVG element wrapper
-	 * @param {Object} el
-	 * @param {Object} params
-	 * @param {Object} options jQuery-like animation options: duration, easing, callback
-	 */
-	animate: function (el, params, options) {
-		var isSVGElement = el.attr,
-			effect,
-			complete = options && options.complete;
+        /**
+         * Downloads a script and executes a callback when done.
+         * @param {String} scriptLocation
+         * @param {Function} callback
+         */
+        getScript: function (scriptLocation, callback) {
+            // We cannot assume that Assets class from mootools-more is available so instead insert a script tag to download script.
+            var head = doc.getElementsByTagName('head')[0];
+            var script = doc.createElement('script');
 
-		if (isSVGElement && !el.setStyle) {
-			// add setStyle and getStyle methods for internal use in Moo
-			el.getStyle = el.attr;
-			el.setStyle = function () { // property value is given as array in Moo - break it down
-				var args = arguments;
-				el.attr.call(el, args[0], args[1][0]);
-			};
-			// dirty hack to trick Moo into handling el as an element wrapper
-			el.$family = function () { return true; };
-		}
+            script.type = 'text/javascript';
+            script.src = scriptLocation;
+            script.onload = callback;
 
-		// stop running animations
-		win.HighchartsAdapter.stop(el);
+            head.appendChild(script);
+        },
 
-		// define and run the effect
-		effect = new Fx.Morph(
-			isSVGElement ? el : $(el),
-			$extend({
-				transition: Fx.Transitions.Quad.easeInOut
-			}, options)
-		);
+        /**
+         * Animate a HTML element or SVG element wrapper
+         * @param {Object} el
+         * @param {Object} params
+         * @param {Object} options jQuery-like animation options: duration, easing, callback
+         */
+        animate: function (el, params, options) {
+            var isSVGElement = el.attr,
+                effect,
+                complete = options && options.complete;
 
-		// Make sure that the element reference is set when animating svg elements
-		if (isSVGElement) {
-			effect.element = el;
-		}
+            if (isSVGElement && !el.setStyle) {
+                // add setStyle and getStyle methods for internal use in Moo
+                el.getStyle = el.attr;
+                el.setStyle = function () { // property value is given as array in Moo - break it down
+                    var args = arguments;
+                    el.attr.call(el, args[0], args[1][0]);
+                };
+                // dirty hack to trick Moo into handling el as an element wrapper
+                el.$family = function () {
+                    return true;
+                };
+            }
 
-		// special treatment for paths
-		if (params.d) {
-			effect.toD = params.d;
-		}
+            // stop running animations
+            win.HighchartsAdapter.stop(el);
 
-		// jQuery-like events
-		if (complete) {
-			effect.addEvent('complete', complete);
-		}
+            // define and run the effect
+            effect = new Fx.Morph(
+                isSVGElement ? el : $(el),
+                $extend({
+                    transition: Fx.Transitions.Quad.easeInOut
+                }, options)
+            );
 
-		// run
-		effect.start(params);
+            // Make sure that the element reference is set when animating svg elements
+            if (isSVGElement) {
+                effect.element = el;
+            }
 
-		// record for use in stop method
-		el.fx = effect;
-	},
+            // special treatment for paths
+            if (params.d) {
+                effect.toD = params.d;
+            }
 
-	/**
-	 * MooTool's each function
-	 *
-	 */
-	each: function (arr, fn) {
-		return legacy ?
-			$each(arr, fn) :
-			Array.each(arr, fn);
-	},
+            // jQuery-like events
+            if (complete) {
+                effect.addEvent('complete', complete);
+            }
 
-	/**
-	 * Map an array
-	 * @param {Array} arr
-	 * @param {Function} fn
-	 */
-	map: function (arr, fn) {
-		return arr.map(fn);
-	},
+            // run
+            effect.start(params);
 
-	/**
-	 * Grep or filter an array
-	 * @param {Array} arr
-	 * @param {Function} fn
-	 */
-	grep: function (arr, fn) {
-		return arr.filter(fn);
-	},
+            // record for use in stop method
+            el.fx = effect;
+        },
 
-	/**
-	 * Deep merge two objects and return a third
-	 */
-	merge: function () {
-		var args = arguments,
-			args13 = [{}], // MooTools 1.3+
-			i = args.length,
-			ret;
+        /**
+         * MooTool's each function
+         *
+         */
+        each: function (arr, fn) {
+            return legacy ?
+                $each(arr, fn) :
+                Array.each(arr, fn);
+        },
 
-		if (legacy) {
-			ret = $merge.apply(null, args);
-		} else {
-			while (i--) {
-				// Boolean argumens should not be merged.
-				// JQuery explicitly skips this, so we do it here as well.
-				if (typeof args[i] !== 'boolean') {
-					args13[i + 1] = args[i];
-				}
-			}
-			ret = Object.merge.apply(Object, args13);
-		}
+        /**
+         * Map an array
+         * @param {Array} arr
+         * @param {Function} fn
+         */
+        map: function (arr, fn) {
+            return arr.map(fn);
+        },
 
-		return ret;
-	},
+        /**
+         * Grep or filter an array
+         * @param {Array} arr
+         * @param {Function} fn
+         */
+        grep: function (arr, fn) {
+            return arr.filter(fn);
+        },
 
-	/**
-	 * Get the offset of an element relative to the top left corner of the web page
-	 */
-	offset: function (el) {
-		var offsets = $(el).getOffsets();
-		return {
-			left: offsets.x,
-			top: offsets.y
-		};
-	},
+        /**
+         * Deep merge two objects and return a third
+         */
+        merge: function () {
+            var args = arguments,
+                args13 = [
+                    {}
+                ], // MooTools 1.3+
+                i = args.length,
+                ret;
 
-	/**
-	 * Extends an object with Events, if its not done
-	 */
-	extendWithEvents: function (el) {
-		// if the addEvent method is not defined, el is a custom Highcharts object
-		// like series or point
-		if (!el.addEvent) {
-			if (el.nodeName) {
-				el = $(el); // a dynamically generated node
-			} else {
-				$extend(el, new Events()); // a custom object
-			}
-		}
-	},
+            if (legacy) {
+                ret = $merge.apply(null, args);
+            } else {
+                while (i--) {
+                    // Boolean argumens should not be merged.
+                    // JQuery explicitly skips this, so we do it here as well.
+                    if (typeof args[i] !== 'boolean') {
+                        args13[i + 1] = args[i];
+                    }
+                }
+                ret = Object.merge.apply(Object, args13);
+            }
 
-	/**
-	 * Add an event listener
-	 * @param {Object} el HTML element or custom object
-	 * @param {String} type Event type
-	 * @param {Function} fn Event handler
-	 */
-	addEvent: function (el, type, fn) {
-		if (typeof type === 'string') { // chart broke due to el being string, type function
+            return ret;
+        },
 
-			if (type === 'unload') { // Moo self destructs before custom unload events
-				type = 'beforeunload';
-			}
+        /**
+         * Get the offset of an element relative to the top left corner of the web page
+         */
+        offset: function (el) {
+            var offsets = $(el).getOffsets();
+            return {
+                left: offsets.x,
+                top: offsets.y
+            };
+        },
 
-			win.HighchartsAdapter.extendWithEvents(el);
+        /**
+         * Extends an object with Events, if its not done
+         */
+        extendWithEvents: function (el) {
+            // if the addEvent method is not defined, el is a custom Highcharts object
+            // like series or point
+            if (!el.addEvent) {
+                if (el.nodeName) {
+                    el = $(el); // a dynamically generated node
+                } else {
+                    $extend(el, new Events()); // a custom object
+                }
+            }
+        },
 
-			el.addEvent(type, fn);
-		}
-	},
+        /**
+         * Add an event listener
+         * @param {Object} el HTML element or custom object
+         * @param {String} type Event type
+         * @param {Function} fn Event handler
+         */
+        addEvent: function (el, type, fn) {
+            if (typeof type === 'string') { // chart broke due to el being string, type function
 
-	removeEvent: function (el, type, fn) {
-		if (typeof el === 'string') {
-			// el.removeEvents below apperantly calls this method again. Do not quite understand why, so for now just bail out.
-			return;
-		}
-		
-		win.HighchartsAdapter.extendWithEvents(el);
-		if (type) {
-			if (type === 'unload') { // Moo self destructs before custom unload events
-				type = 'beforeunload';
-			}
+                if (type === 'unload') { // Moo self destructs before custom unload events
+                    type = 'beforeunload';
+                }
 
-			if (fn) {
-				el.removeEvent(type, fn);
-			} else if (el.removeEvents) { // #958
-				el.removeEvents(type);
-			}
-		} else {
-			el.removeEvents();
-		}
-	},
+                win.HighchartsAdapter.extendWithEvents(el);
 
-	fireEvent: function (el, event, eventArguments, defaultFunction) {
-		var eventArgs = {
-			type: event,
-			target: el
-		};
-		// create an event object that keeps all functions
-		event = legacyEvent ? new Event(eventArgs) : new DOMEvent(eventArgs);
-		event = $extend(event, eventArguments);
-		// override the preventDefault function to be able to use
-		// this for custom events
-		event.preventDefault = function () {
-			defaultFunction = null;
-		};
-		// if fireEvent is not available on the object, there hasn't been added
-		// any events to it above
-		if (el.fireEvent) {
-			el.fireEvent(event.type, event);
-		}
+                el.addEvent(type, fn);
+            }
+        },
 
-		// fire the default if it is passed and it is not prevented above
-		if (defaultFunction) {
-			defaultFunction(event);
-		}
-	},
-	
-	/**
-	 * Set back e.pageX and e.pageY that MooTools has abstracted away
-	 */
-	washMouseEvent: function (e) {
-		e.pageX = e.page.x;
-		e.pageY = e.page.y;
-		return e;
-	},
+        removeEvent: function (el, type, fn) {
+            if (typeof el === 'string') {
+                // el.removeEvents below apperantly calls this method again. Do not quite understand why, so for now just bail out.
+                return;
+            }
 
-	/**
-	 * Stop running animations on the object
-	 */
-	stop: function (el) {
-		if (el.fx) {
-			el.fx.cancel();
-		}
-	}
-};
+            win.HighchartsAdapter.extendWithEvents(el);
+            if (type) {
+                if (type === 'unload') { // Moo self destructs before custom unload events
+                    type = 'beforeunload';
+                }
+
+                if (fn) {
+                    el.removeEvent(type, fn);
+                } else if (el.removeEvents) { // #958
+                    el.removeEvents(type);
+                }
+            } else {
+                el.removeEvents();
+            }
+        },
+
+        fireEvent: function (el, event, eventArguments, defaultFunction) {
+            var eventArgs = {
+                type: event,
+                target: el
+            };
+            // create an event object that keeps all functions
+            event = legacyEvent ? new Event(eventArgs) : new DOMEvent(eventArgs);
+            event = $extend(event, eventArguments);
+            // override the preventDefault function to be able to use
+            // this for custom events
+            event.preventDefault = function () {
+                defaultFunction = null;
+            };
+            // if fireEvent is not available on the object, there hasn't been added
+            // any events to it above
+            if (el.fireEvent) {
+                el.fireEvent(event.type, event);
+            }
+
+            // fire the default if it is passed and it is not prevented above
+            if (defaultFunction) {
+                defaultFunction(event);
+            }
+        },
+
+        /**
+         * Set back e.pageX and e.pageY that MooTools has abstracted away
+         */
+        washMouseEvent: function (e) {
+            e.pageX = e.page.x;
+            e.pageY = e.page.y;
+            return e;
+        },
+
+        /**
+         * Stop running animations on the object
+         */
+        stop: function (el) {
+            if (el.fx) {
+                el.fx.cancel();
+            }
+        }
+    };
 
 }());

@@ -39,23 +39,23 @@
         options: {
             // The list of file processing actions:
             process: [
-            /*
-                {
-                    action: 'load',
-                    fileTypes: /^image\/(gif|jpeg|png)$/,
-                    maxFileSize: 20000000 // 20MB
-                },
-                {
-                    action: 'resize',
-                    maxWidth: 1920,
-                    maxHeight: 1200,
-                    minWidth: 800,
-                    minHeight: 600
-                },
-                {
-                    action: 'save'
-                }
-            */
+                /*
+                 {
+                 action: 'load',
+                 fileTypes: /^image\/(gif|jpeg|png)$/,
+                 maxFileSize: 20000000 // 20MB
+                 },
+                 {
+                 action: 'resize',
+                 maxWidth: 1920,
+                 maxHeight: 1200,
+                 minWidth: 800,
+                 minHeight: 600
+                 },
+                 {
+                 action: 'save'
+                 }
+                 */
             ],
 
             // The add callback is invoked as soon as files are added to the
@@ -78,11 +78,11 @@
                     file = data.files[data.index],
                     dfd = $.Deferred();
                 if (window.HTMLCanvasElement &&
-                        window.HTMLCanvasElement.prototype.toBlob &&
-                        ($.type(options.maxFileSize) !== 'number' ||
-                            file.size < options.maxFileSize) &&
-                        (!options.fileTypes ||
-                            options.fileTypes.test(file.type))) {
+                    window.HTMLCanvasElement.prototype.toBlob &&
+                    ($.type(options.maxFileSize) !== 'number' ||
+                        file.size < options.maxFileSize) &&
+                    (!options.fileTypes ||
+                        options.fileTypes.test(file.type))) {
                     loadImage(
                         file,
                         function (img) {
@@ -106,7 +106,7 @@
                 if (img) {
                     canvas = loadImage.scale(img, options);
                     if (canvas.width !== img.width ||
-                            canvas.height !== img.height) {
+                        canvas.height !== img.height) {
                         data.canvas = canvas;
                     }
                 }
@@ -159,10 +159,12 @@
         // the original position of the files list, returns a Promise object:
         _processFile: function (files, index, options) {
             var that = this,
-                dfd = $.Deferred().resolveWith(that, [{
-                    files: files,
-                    index: index
-                }]),
+                dfd = $.Deferred().resolveWith(that, [
+                    {
+                        files: files,
+                        index: index
+                    }
+                ]),
                 chain = dfd.promise();
             that._processing += 1;
             $.each(options.process, function (i, settings) {
@@ -191,7 +193,7 @@
             var that = this,
                 options = $.extend({}, this.options, data);
             if (options.process && options.process.length &&
-                    this._isXHRUpload(options)) {
+                this._isXHRUpload(options)) {
                 $.each(data.files, function (index, file) {
                     that._processingQueue = that._processingQueue.pipe(
                         function () {

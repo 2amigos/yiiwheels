@@ -62,7 +62,7 @@ RELANG['by'] = {
     fullscreen: 'Ва ўвесь экран',
     deleted: 'Закрэслены',
     anchor: 'Anchor',
-	link_new_tab: 'Open link in new tab',
-	underline: 'Underline',
-	alignment: 'Alignment'
+    link_new_tab: 'Open link in new tab',
+    underline: 'Underline',
+    alignment: 'Alignment'
 };

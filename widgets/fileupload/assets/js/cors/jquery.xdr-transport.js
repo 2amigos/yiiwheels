@@ -41,6 +41,7 @@
                             xdr = null;
                             completeCallback(status, statusText, responses, responseHeaders);
                         }
+
                         xdr = new XDomainRequest();
                         // XDomainRequest only supports GET and POST:
                         if (s.type === 'DELETE') {

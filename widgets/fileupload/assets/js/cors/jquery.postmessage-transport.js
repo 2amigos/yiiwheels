@@ -72,38 +72,38 @@
                         '<iframe style="display:none;" src="' +
                             options.postMessage + '" name="' +
                             message.id + '"></iframe>'
-                    ).bind('load', function () {
-                        $.each(names, function (i, name) {
-                            message[name] = options[name];
-                        });
-                        message.dataType = message.dataType.replace('postmessage ', '');
-                        $(window).bind(eventName, function (e) {
-                            e = e.originalEvent;
-                            var data = e.data,
-                                ev;
-                            if (e.origin === target && data.id === message.id) {
-                                if (data.type === 'progress') {
-                                    ev = document.createEvent('Event');
-                                    ev.initEvent(data.type, false, true);
-                                    $.extend(ev, data);
-                                    xhrUpload.dispatchEvent(ev);
-                                } else {
-                                    completeCallback(
-                                        data.status,
-                                        data.statusText,
-                                        {postmessage: data.result},
-                                        data.headers
-                                    );
-                                    iframe.remove();
-                                    $(window).unbind(eventName);
+                    ).bind('load',function () {
+                            $.each(names, function (i, name) {
+                                message[name] = options[name];
+                            });
+                            message.dataType = message.dataType.replace('postmessage ', '');
+                            $(window).bind(eventName, function (e) {
+                                e = e.originalEvent;
+                                var data = e.data,
+                                    ev;
+                                if (e.origin === target && data.id === message.id) {
+                                    if (data.type === 'progress') {
+                                        ev = document.createEvent('Event');
+                                        ev.initEvent(data.type, false, true);
+                                        $.extend(ev, data);
+                                        xhrUpload.dispatchEvent(ev);
+                                    } else {
+                                        completeCallback(
+                                            data.status,
+                                            data.statusText,
+                                            {postmessage: data.result},
+                                            data.headers
+                                        );
+                                        iframe.remove();
+                                        $(window).unbind(eventName);
+                                    }
                                 }
-                            }
-                        });
-                        iframe[0].contentWindow.postMessage(
-                            message,
-                            target
-                        );
-                    }).appendTo(document.body);
+                            });
+                            iframe[0].contentWindow.postMessage(
+                                message,
+                                target
+                            );
+                        }).appendTo(document.body);
                 },
                 abort: function () {
                     if (iframe) {

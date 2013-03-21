@@ -60,11 +60,11 @@ $(function () {
                 url: '//jquery-file-upload.appspot.com/',
                 type: 'HEAD'
             }).fail(function () {
-                $('<span class="alert alert-error"/>')
-                    .text('Upload server currently unavailable - ' +
+                    $('<span class="alert alert-error"/>')
+                        .text('Upload server currently unavailable - ' +
                             new Date())
-                    .appendTo('#fileupload');
-            });
+                        .appendTo('#fileupload');
+                });
         }
     } else {
         // Load existing files:
@@ -75,11 +75,11 @@ $(function () {
             dataType: 'json',
             context: $('#fileupload')[0]
         }).done(function (result) {
-            if (result && result.length) {
-                $(this).fileupload('option', 'done')
-                    .call(this, null, {result: result});
-            }
-        });
+                if (result && result.length) {
+                    $(this).fileupload('option', 'done')
+                        .call(this, null, {result: result});
+                }
+            });
     }
 
 });

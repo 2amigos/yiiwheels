@@ -116,10 +116,10 @@
                 isXHRUpload = this._isXHRUpload(options);
             $.each(data.files, function (index, file) {
                 if (isXHRUpload && that._resizeSupport &&
-                        (options.resizeMaxWidth || options.resizeMaxHeight ||
-                            options.resizeMinWidth || options.resizeMinHeight) &&
-                        (resizeAll || file.size < options.resizeSourceMaxFileSize) &&
-                        options.resizeSourceFileTypes.test(file.type)) {
+                    (options.resizeMaxWidth || options.resizeMaxHeight ||
+                        options.resizeMinWidth || options.resizeMinHeight) &&
+                    (resizeAll || file.size < options.resizeSourceMaxFileSize) &&
+                    options.resizeSourceFileTypes.test(file.type)) {
                     that._processing += 1;
                     if (that._processing === 1) {
                         that.element.addClass('fileupload-processing');
@@ -127,17 +127,17 @@
                     that._processingQueue = that._processingQueue.pipe(function () {
                         var deferred = $.Deferred();
                         that._resizeImage(
-                            data.files,
-                            index,
-                            options
-                        ).done(function () {
-                            that._processing -= 1;
-                            if (that._processing === 0) {
-                                that.element
-                                    .removeClass('fileupload-processing');
-                            }
-                            deferred.resolveWith(that);
-                        });
+                                data.files,
+                                index,
+                                options
+                            ).done(function () {
+                                that._processing -= 1;
+                                if (that._processing === 0) {
+                                    that.element
+                                        .removeClass('fileupload-processing');
+                                }
+                                deferred.resolveWith(that);
+                            });
                         return deferred.promise();
                     });
                 }

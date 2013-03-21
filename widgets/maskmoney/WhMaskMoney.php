@@ -1,8 +1,8 @@
 <?php
 /**
-* WhMaskMoney widget class
-*
-* @author Antonio Ramirez <amigo.cobos@gmail.com>
+ * WhMaskMoney widget class
+ *
+ * @author Antonio Ramirez <amigo.cobos@gmail.com>
  * @copyright Copyright &copy; 2amigos.us 2013-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets
@@ -25,7 +25,7 @@ class WhMaskMoney extends CInputWidget
 	 */
 	public function init()
 	{
-		$this->attachBehavior('ywplugin', array('class'=>'yiiwheels.behaviors.WhPlugin'));
+		$this->attachBehavior('ywplugin', array('class' => 'yiiwheels.behaviors.WhPlugin'));
 	}
 
 	/**

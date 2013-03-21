@@ -99,7 +99,7 @@ class WhFileUpload extends CJuiInputWidget
 
 		list($name, $id) = $this->resolveNameID();
 
-		$this->htmlOptions['id'] = ($this->hasModel()? get_class($this->model): 'fileupload') . '-form';
+		$this->htmlOptions['id'] = ($this->hasModel() ? get_class($this->model) : 'fileupload') . '-form';
 
 		$this->options['url'] = $this->url;
 
@@ -162,7 +162,7 @@ class WhFileUpload extends CJuiInputWidget
 			$cs->registerScriptFile($assetsUrl . '/js/jquery.fileupload-ip.js');
 		}
 		// The File Upload file processing plugin
-		if($this->previewImages)
+		if ($this->previewImages)
 		{
 			$cs->registerScriptFile($assetsUrl . '/js/jquery.fileupload-fp.js');
 		}
@@ -175,7 +175,7 @@ class WhFileUpload extends CJuiInputWidget
 		/* initialize plugin */
 		$selector = '#' . WhHtml::getOption('id', $this->htmlOptions, $this->getId());
 
-		$this->getYiiWheels()->registerPlugin('fileupload', $selector, $this->options );
+		$this->getYiiWheels()->registerPlugin('fileupload', $selector, $this->options);
 	}
 
 }

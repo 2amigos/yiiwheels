@@ -15,7 +15,7 @@ RELANG['id'] = {
     header2: 'Header 2',
     header3: 'Header 3',
     header4: 'Header 4',
-    bold:  'Tebal',
+    bold: 'Tebal',
     italic: 'Miring',
     fontcolor: 'Warna Huruf',
     backcolor: 'Warna Latar',
@@ -55,7 +55,7 @@ RELANG['id'] = {
     choose: 'Pilih',
     or_choose: 'Atau pilih',
     drop_file_here: 'Letakkan berkas disini',
-    align_left:	'Rata Kiri',
+    align_left: 'Rata Kiri',
     align_center: 'Rata Tengah',
     align_right: 'Rata Kanan',
     align_justify: 'Rata Kiri dan Kanan',
@@ -63,7 +63,7 @@ RELANG['id'] = {
     fullscreen: 'Layar penuh',
     deleted: 'Coret',
     anchor: 'Jangkar',
-	link_new_tab: 'Open link in new tab',
-	underline: 'Underline',
-	alignment: 'Alignment'
+    link_new_tab: 'Open link in new tab',
+    underline: 'Underline',
+    alignment: 'Alignment'
 };
