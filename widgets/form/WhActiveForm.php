@@ -137,7 +137,7 @@ class WhActiveForm extends TbActiveForm
 			&& !preg_match('/radio|checkbox/i', $type)
 			&& WhHtml::popOption('label', $htmlOptions, true)
 		)
-			echo WhHtml::activeLabel($model, $attribute, $labelOptions);
+			echo CHtml::activeLabel($model, $attribute, $labelOptions);
 		elseif (preg_match('/radio|checkbox/i', $type))
 			$htmlOptions['labelOptions'] = $labelOptions;
 

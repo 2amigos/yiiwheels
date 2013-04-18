@@ -66,7 +66,7 @@ class YwTimeAgo extends CWidget
 		if (null !== $this->date)
 		{
 			$this->htmlOptions['title'] = $this->date;
-			echo WhHtml::tag($this->tagName, $this->htmlOptions, '&nbsp;');
+			echo CHtml::tag($this->tagName, $this->htmlOptions, '&nbsp;');
 		}
 		$this->registerClientScript();
 	}

@@ -78,9 +78,9 @@ class WhTimePicker extends CInputWidget
 
 		echo '<span class="bootstrap-timepicker">';
 		if ($this->hasModel())
-			echo WhHtml::activeTextField($this->model, $this->attribute, $this->htmlOptions);
+			echo CHtml::activeTextField($this->model, $this->attribute, $this->htmlOptions);
 		else
-			echo WhHtml::textField($name, $this->value, $this->htmlOptions, array('style' => 'width:100%'));
+			echo CHtml::textField($name, $this->value, $this->htmlOptions, array('style' => 'width:100%'));
 		echo '</span>';
 	}
 

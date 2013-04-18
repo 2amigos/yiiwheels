@@ -57,10 +57,10 @@ class WhTypeAhead extends CInputWidget
 		$this->htmlOptions = WhHtml::defaultOption('name', $name, $this->htmlOptions);
 
 		if ($this->hasModel())
-			echo WhHtml::activeTextField($this->model, $this->attribute, $this->htmlOptions);
+			echo CHtml::activeTextField($this->model, $this->attribute, $this->htmlOptions);
 
 		else
-			echo WhHtml::textField($this->name, $this->value, $this->htmlOptions);
+			echo CHtml::textField($this->name, $this->value, $this->htmlOptions);
 	}
 
 	/**

@@ -71,13 +71,13 @@ class WhSelect2 extends CInputWidget
 		if ($this->hasModel())
 		{
 			echo $this->asDropDownList ?
-				WhHtml::activeDropDownList($this->model, $this->attribute, $this->data, $this->htmlOptions) :
-				WhHtml::activeHiddenField($this->model, $this->attribute);
+				CHtml::activeDropDownList($this->model, $this->attribute, $this->data, $this->htmlOptions) :
+				CHtml::activeHiddenField($this->model, $this->attribute);
 
 		} else
 			echo $this->asDropDownList ?
-				WhHtml::dropDownList($this->name, $this->value, $this->data, $this->htmlOptions) :
-				WhHtml::hiddenField($this->name, $this->value);
+				CHtml::dropDownList($this->name, $this->value, $this->data, $this->htmlOptions) :
+				CHtml::hiddenField($this->name, $this->value);
 	}
 
 	/**
