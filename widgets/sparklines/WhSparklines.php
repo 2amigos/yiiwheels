@@ -59,7 +59,7 @@ class WhSparkLines extends CWidget
 	public function run()
 	{
 		echo CHtml::openTag($this->tagName, $this->htmlOptions);
-		echo '</div>';
+		echo CHtml::closeTag($this->tagName);
 		$this->registerClientScript();
 	}
 
