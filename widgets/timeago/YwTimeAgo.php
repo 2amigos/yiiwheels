@@ -49,11 +49,11 @@ class YwTimeAgo extends CWidget
 	 */
 	public function init()
 	{
-		$this->attachBehavior('ywplugin', array('class'=>'yiiwheels.behaviors.WhPlugin'));
+		$this->attachBehavior('ywplugin', array('class' => 'yiiwheels.behaviors.WhPlugin'));
 
 		$this->htmlOptions['id'] = WhHtml::getOption('id', $this->htmlOptions, $this->getId());
 
-		if(!$this->selector)
+		if (!$this->selector)
 			$this->selector = '#' . WhHtml::getOption('id', $this->htmlOptions);
 
 	}
@@ -63,10 +63,10 @@ class YwTimeAgo extends CWidget
 	 */
 	public function run()
 	{
-		if(null!==$this->date)
+		if (null !== $this->date)
 		{
 			$this->htmlOptions['title'] = $this->date;
-			echo WhHtml::tag($this->tagName, $this->htmlOptions, '&nbsp;');
+			echo CHtml::tag($this->tagName, $this->htmlOptions, '&nbsp;');
 		}
 		$this->registerClientScript();
 	}
@@ -85,8 +85,8 @@ class YwTimeAgo extends CWidget
 
 		$cs->registerScriptFile($assetsUrl . '/js/jquery.timeago.js');
 
-		if(null !== $this->language)
-			$cs->registerScriptFile($assetsUrl . '/js/locales/jquery.timeago.'.$this->language.'.js');
+		if (null !== $this->language)
+			$cs->registerScriptFile($assetsUrl . '/js/locales/jquery.timeago.' . $this->language . '.js');
 
 		/* initialize plugin */
 		$this->getApi()->registerPlugin('timeago', $this->selector, $this->pluginOptions);

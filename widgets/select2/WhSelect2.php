@@ -43,10 +43,10 @@ class WhSelect2 extends CInputWidget
 	 */
 	public function init()
 	{
-		if(empty($this->data) && $this->asDropDownList === true)
+		if (empty($this->data) && $this->asDropDownList === true)
 			throw new CException(Yii::t('zii', '"data" attribute cannot be blank'));
 
-		$this->attachBehavior('ywplugin', array('class'=>'yiiwheels.behaviors.WhPlugin'));
+		$this->attachBehavior('ywplugin', array('class' => 'yiiwheels.behaviors.WhPlugin'));
 	}
 
 	/**
@@ -70,14 +70,14 @@ class WhSelect2 extends CInputWidget
 
 		if ($this->hasModel())
 		{
-			echo $this->asDropDownList?
-				WhHtml::activeDropDownList($this->model, $this->attribute, $this->data, $this->htmlOptions) :
-				WhHtml::activeHiddenField($this->model, $this->attribute);
+			echo $this->asDropDownList ?
+				CHtml::activeDropDownList($this->model, $this->attribute, $this->data, $this->htmlOptions) :
+				CHtml::activeHiddenField($this->model, $this->attribute);
 
 		} else
 			echo $this->asDropDownList ?
-				WhHtml::dropDownList($this->name, $this->value, $this->data, $this->htmlOptions) :
-				WhHtml::hiddenField($this->name, $this->value);
+				CHtml::dropDownList($this->name, $this->value, $this->data, $this->htmlOptions) :
+				CHtml::hiddenField($this->name, $this->value);
 	}
 
 	/**

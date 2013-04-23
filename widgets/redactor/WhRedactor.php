@@ -88,8 +88,8 @@ class WhRedactor extends CInputWidget
 
 		/* register language */
 		$language = WhHtml::getOption('lang', $this->pluginOptions);
-		if ($language != 'en')
-			$cs->registerScriptFile($assetsUrl . '/js/langs' . $language . '.js', CClientScript::POS_END);
+		if (!empty($language) && $language != 'en')
+			$cs->registerScriptFile($assetsUrl . '/js/langs/' . $language . '.js', CClientScript::POS_END);
 
 		/* register plugins (if any) */
 		$this->registerPlugins($assetsUrl);

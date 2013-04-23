@@ -38,6 +38,11 @@ class WhFineUploader extends CInputWidget
 	public $events = array();
 
 	/**
+	 * @var string which scenario we get the validation from
+	 */
+	public $scenario;
+
+	/**
 	 * @var array d
 	 */
 	protected $defaultOptions = array();
@@ -47,8 +52,8 @@ class WhFineUploader extends CInputWidget
 	 */
 	public function init()
 	{
-		if ($this->action === null)
-			throw new CException(Yii::t('zii', '"action" attribute cannot be blank'));
+		if ($this->uploadAction === null)
+			throw new CException(Yii::t('zii', '"uploadAction" attribute cannot be blank'));
 		if ($this->noScriptText === null)
 			$this->noScriptText = Yii::t('zii', "Please enable JavaScript to use file uploader.");
 
@@ -94,7 +99,7 @@ class WhFineUploader extends CInputWidget
 		/* initialize plugin */
 		$selector = '#' . WhHtml::getOption('id', $this->htmlOptions, $this->getId());
 
-		$this->getApi()->registerPlugin('fineUploader', $selector, $this->pluginOptions);
+		$this->getApi()->registerPlugin('fineUploader', $selector, CMap::mergeArray($this->defaultOptions, $this->pluginOptions));
 		$this->getApi()->registerEvents($selector, $this->events);
 	}
 
@@ -117,12 +122,12 @@ class WhFineUploader extends CInputWidget
 			),
 			'validation' => $this->getValidator(),
 			'messages' => array(
-				'typeError' => Yii::t('EFineUploader', '{file} has an invalid extension. Valid extension(s): {extensions}.'),
-				'sizeError' => Yii::t('EFineUploader', '{file} is too large, maximum file size is {sizeLimit}.'),
-				'minSizeError' => Yii::t('EFineUploader', '{file} is too small, minimum file size is {minSizeLimit}.'),
-				'emptyError:' => Yii::t('EFineUploader', '{file} is empty, please select files again without it.'),
-				'noFilesError' => Yii::t('EFineUploader', 'No files to upload.'),
-				'onLeave' => Yii::t('EFineUploader', 'The files are being uploaded, if you leave now the upload will be cancelled.')
+				'typeError' => Yii::t('zii', '{file} has an invalid extension. Valid extension(s): {extensions}.'),
+				'sizeError' => Yii::t('zii', '{file} is too large, maximum file size is {sizeLimit}.'),
+				'minSizeError' => Yii::t('zii', '{file} is too small, minimum file size is {minSizeLimit}.'),
+				'emptyError:' => Yii::t('zii', '{file} is empty, please select files again without it.'),
+				'noFilesError' => Yii::t('zii', 'No files to upload.'),
+				'onLeave' => Yii::t('zii', 'The files are being uploaded, if you leave now the upload will be cancelled.')
 			),
 		);
 	}
@@ -135,7 +140,15 @@ class WhFineUploader extends CInputWidget
 		$ret = array();
 		if ($this->hasModel())
 		{
-			$validators = $this->model->getValidators($this->attribute);
+			if ($this->scenario !== null)
+			{
+				$originalScenario = $this->model->getScenario();
+				$this->model->setScenario($this->scenario);
+				$validators = $this->model->getValidators($this->attribute);
+				$this->model->setScenario($originalScenario);
+
+			} else
+				$validators = $this->model->getValidators($this->attribute);
 
 			// we are just looking for the first founded CFileValidator
 			foreach ($validators as $validator)

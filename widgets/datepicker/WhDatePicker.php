@@ -27,7 +27,7 @@ class WhDatePicker extends CInputWidget
 	 */
 	public function init()
 	{
-		$this->attachBehavior('ywplugin', array('class'=>'yiiwheels.behaviors.WhPlugin'));
+		$this->attachBehavior('ywplugin', array('class' => 'yiiwheels.behaviors.WhPlugin'));
 
 		$this->htmlOptions = WhHtml::defaultOption('autocomplete', 'off', $this->htmlOptions);
 		$this->htmlOptions = WhHtml::addClassName('grd-white', $this->htmlOptions);

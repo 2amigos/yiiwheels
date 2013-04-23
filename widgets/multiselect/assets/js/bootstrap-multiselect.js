@@ -20,17 +20,17 @@
 
     "use strict"; // jshint ;_;
 
-    if(typeof ko != 'undefined' && ko.bindingHandlers && !ko.bindingHandlers.multiselect){
+    if (typeof ko != 'undefined' && ko.bindingHandlers && !ko.bindingHandlers.multiselect) {
         ko.bindingHandlers.multiselect = {
             init: function (element) {
                 var ms = $(element).data('multiselect');
 
-                if(!ms)
+                if (!ms)
                     throw new Error("Bootstrap-multiselect's multiselect() has to be called on element before applying the Knockout View model!");
 
                 var prev = ms.options.onChange;
 
-                ms.options.onChange = function(option, checked){
+                ms.options.onChange = function (option, checked) {
                     // We dont want to refresh the multiselect since it would delete / recreate all items
                     $(element).data('blockRefresh', true);
 
@@ -43,7 +43,9 @@
             },
             update: function (element) {
                 var blockRefresh = $(element).data('blockRefresh') || false;
-                if (!blockRefresh) { $(element).multiselect("refresh"); }
+                if (!blockRefresh) {
+                    $(element).multiselect("refresh");
+                }
                 $.data(element, 'blockRefresh', false);
             }
         };
@@ -79,10 +81,10 @@
     };
 
     Multiselect.prototype = {
-        buildDrowdown: function(select, options){
+        buildDrowdown: function (select, options) {
 
             // Build the dropdown.
-            $('option', this.select).each($.proxy(function(index, element) {
+            $('option', this.select).each($.proxy(function (index, element) {
                 if ($(element).is(':selected')) {
                     $(element).attr('selected', 'selected');
                     $(element).prop('selected', 'selected');
@@ -101,7 +103,7 @@
             }, this));
 
             // Bind the change event on the dropdown elements.
-            $('ul li input[type="checkbox"]', this.container).on('change', $.proxy(function(event) {
+            $('ul li input[type="checkbox"]', this.container).on('change', $.proxy(function (event) {
                 var checked = $(event.target).prop('checked') || false;
 
                 if (checked) {
@@ -120,23 +122,23 @@
                 else {
                     option.removeAttr('selected');
                 }
-                
+
                 var options = $('option:selected', this.select);
                 $('button', this.container).html(this.options.buttonText(options));
 
                 this.options.onChange(option, checked);
             }, this));
 
-            $('ul li a', this.container).on('click', function(event) {
+            $('ul li a', this.container).on('click', function (event) {
                 event.stopPropagation();
             });
         },
-        
+
         defaults: {
             // Default text function will either print 'None selected' in case no option is selected,
             // or a list of the selected options up to a length of 3 selected options.
             // If more than 3 options are selected, the number of selected options is printed.
-            buttonText: function(options) {
+            buttonText: function (options) {
                 if (options.length == 0) {
                     return 'None selected <b class="caret"></b>';
                 }
@@ -145,14 +147,14 @@
                 }
                 else {
                     var selected = '';
-                    options.each(function() {
+                    options.each(function () {
                         selected += $(this).text() + ', ';
                     });
-                    return selected.substr(0, selected.length -2) + ' <b class="caret"></b>';
+                    return selected.substr(0, selected.length - 2) + ' <b class="caret"></b>';
                 }
             },
             // Is triggered on change of the selected options.
-            onChange: function() {
+            onChange: function () {
 
             },
             buttonClass: 'btn',
@@ -166,14 +168,14 @@
         constructor: Multiselect,
 
         // Destroy - unbind - the plugin.
-        destroy: function() {
+        destroy: function () {
             this.container.remove();
             this.select.show();
         },
 
         // Refreshs the checked options based on the current state of the select.
-        refresh: function() {
-            $('option', this.select).each($.proxy(function(index, element) {
+        refresh: function () {
+            $('option', this.select).each($.proxy(function (index, element) {
                 if ($(element).is(':selected')) {
                     $('ul li input[value="' + $(element).val() + '"]', this.container).prop('checked', true);
                     $('ul li input[value="' + $(element).val() + '"]', this.container).parents('li').addClass('active');
@@ -187,13 +189,13 @@
             $('button', this.container).html(this.options.buttonText($('option:selected', this.select)));
         },
 
-		rebuild: function() {
-			$('ul', this.container).html('');
+        rebuild: function () {
+            $('ul', this.container).html('');
             this.buildDrowdown(this.select, this.options);
-		},
+        },
 
         // Get options by merging defaults and given options.
-        getOptions: function(options) {
+        getOptions: function (options) {
             return $.extend({}, this.defaults, options);
         }
     };

@@ -35,10 +35,10 @@ class WhMultiSelect extends CInputWidget
 	 */
 	public function init()
 	{
-		if(empty($this->data) && $this->asDropDownList === true)
+		if (empty($this->data) && $this->asDropDownList === true)
 			throw new CException(Yii::t('zii', '"data" attribute cannot be blank'));
 
-		$this->attachBehavior('ywplugin', array('class'=>'yiiwheels.behaviors.WhPlugin'));
+		$this->attachBehavior('ywplugin', array('class' => 'yiiwheels.behaviors.WhPlugin'));
 	}
 
 	/**
@@ -61,10 +61,8 @@ class WhMultiSelect extends CInputWidget
 		$this->htmlOptions = WhHtml::defaultOption('name', $name, $this->htmlOptions);
 
 		if ($this->hasModel())
-		{
 			echo WhHtml::activeDropDownList($this->model, $this->attribute, $this->data, $this->htmlOptions);
-
-		} else
+		else
 			echo WhHtml::dropDownList($this->name, $this->value, $this->data, $this->htmlOptions);
 	}
 
