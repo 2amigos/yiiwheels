@@ -51,8 +51,8 @@ class WhModal extends TbModal
 		$cs = Yii::app()->getClientScript();
 
 		$cs->registerCssFile($assetsUrl . '/css/bootstrap-modal.css');
-		$cs->registerScriptFile($assetsUrl . '/js/bootstrap-modal.js');
-		$cs->registerScriptFile($assetsUrl . '/js/bootstrap-modalmanager.js');
+		$cs->registerScriptFile($assetsUrl . '/js/bootstrap-modal.js', CClientScript::POS_END);
+		$cs->registerScriptFile($assetsUrl . '/js/bootstrap-modalmanager.js', CClientScript::POS_END);
 	}
 
 }
