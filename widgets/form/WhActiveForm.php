@@ -96,7 +96,7 @@ class WhActiveForm extends TbActiveForm
 	 */
 	public function redactorJsRow($model, $attribute, $htmlOptions = array())
 	{
-		return $this->row(WhHtml::INPUT_REDACTOR, $model, $attribute, $htmlOptions);
+		return $this->row(WhHtml::INPUT_REDACTOR, $model, $attribute, array(), $htmlOptions);
 	}
 
 	/**
