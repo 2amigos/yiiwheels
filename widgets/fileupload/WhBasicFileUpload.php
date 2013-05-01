@@ -48,10 +48,10 @@ class WhBasicFileUpload extends CInputWidget
 		$this->htmlOptions['data-url'] = $this->uploadAction;
 		if ($this->hasModel())
 		{
-			echo WhHtml::activeFileField($this->model, $this->attribute, $this->htmlOptions);
+			echo CHtml::activeFileField($this->model, $this->attribute, $this->htmlOptions);
 
 		} else
-			echo WhHtml::fileField($name, $this->value, $this->htmlOptions);
+			echo CHtml::fileField($name, $this->value, $this->htmlOptions);
 	}
 
 	/**
