@@ -72,7 +72,6 @@ class YiiWheels extends CApplicationComponent
 	/**
 	 * Returns the assets URL.
 	 * Assets folder has few orphan and very useful utility libraries.
-	 * @param $path
 	 * @return string
 	 */
 	public function getAssetsUrl()
@@ -94,6 +93,7 @@ class YiiWheels extends CApplicationComponent
 	 * @param string $jsFile
 	 * @param int $position the position of the JavaScript code.
 	 * @see CClientScript::registerScriptFile
+	 * @return $this
 	 */
 	public function registerAssetJs($jsFile, $position = CClientScript::POS_END)
 	{
@@ -105,6 +105,7 @@ class YiiWheels extends CApplicationComponent
 	 * Registers a specific css in the asset's css folder
 	 * @param string $cssFile the css file name to register
 	 * @param string $media the media that the CSS file should be applied to. If empty, it means all media types.
+	 * @return $this
 	 */
 	public function registerAssetCss($cssFile, $media = '')
 	{
