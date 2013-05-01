@@ -158,7 +158,7 @@ class WhToggleColumn extends TbDataColumn
 		if ($this->emptyButtonLabel === null)
 			$this->emptyButtonLabel = Yii::t('zii', 'Not set');
 
-		$this->button = array(
+		$this->toggleOptions = array(
 			'url' => 'Yii::app()->controller->createUrl("' . $this->toggleAction . '",array("id"=>$data->primaryKey,"attribute"=>"' . $this->name . '"))',
 			'htmlOptions' => array('class' => $this->name . '_toggle'.$this->uniqueClassSuffix),
 		);
@@ -200,13 +200,12 @@ function() {
 	{
 		$js = array();
 
-		$function = CJavaScript::encode($this->toggleOptions['click']);
-		unset($this->button['click']);
+		$function = CJavaScript::encode(WhHtml::popOption('click', $this->toggleOptions,''));
+
 		$class = preg_replace('/\s+/', '.', $this->toggleOptions['htmlOptions']['class']);
 		$js[] = "$(document).on('click','#{$this->grid->id} a.{$class}',$function);";
 
-		if ($js !== array())
-			Yii::app()->getClientScript()->registerScript(__CLASS__ . '#' . $this->id, implode("\n", $js));
+		Yii::app()->getClientScript()->registerScript(__CLASS__ . '#ReadyJS', implode("\n", $js));
 	}
 
 	/**
