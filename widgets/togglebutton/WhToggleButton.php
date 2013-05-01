@@ -163,7 +163,7 @@ class WhToggleButton extends CInputWidget
 		/* initialize plugin */
 		$selector = '#wrapper-' . WhHtml::getOption('id', $this->htmlOptions, $this->getId());
 
-		$this->getApi()->registerPlugin('toggleButtons', $selector, $this->getConfiguration());
+		$this->getApi()->registerPlugin('toggleButtons', $selector, $this->getConfiguration(), CClientScript::POS_READY);
 
 	}
 

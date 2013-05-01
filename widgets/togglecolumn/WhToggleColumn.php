@@ -1,7 +1,7 @@
 <?php
 /**
  * WhToggleColumn widget class
- *
+ * Renders a button to toggle values of a column
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
  * @copyright Copyright &copy; 2amigos.us 2013-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
@@ -194,21 +194,6 @@ function() {
 	}
 
 	/**
-	 * Registers the client scripts for the button column.
-	 */
-	protected function registerClientScript()
-	{
-		$js = array();
-
-		$function = CJavaScript::encode(WhHtml::popOption('click', $this->toggleOptions,''));
-
-		$class = preg_replace('/\s+/', '.', $this->toggleOptions['htmlOptions']['class']);
-		$js[] = "$(document).on('click','#{$this->grid->id} a.{$class}',$function);";
-
-		Yii::app()->getClientScript()->registerScript(__CLASS__ . '#ReadyJS', implode("\n", $js));
-	}
-
-	/**
 	 * Renders the data cell content.
 	 * This method renders the view, update and toggle buttons in the data cell.
 	 * @param integer $row the row number (zero-based)
@@ -239,6 +224,21 @@ function() {
 		{
 			echo WhHtml::button($this->getButtonLabel($checked), $toggleOptions);
 		}
+	}
+
+	/**
+	 * Registers the client scripts for the button column.
+	 */
+	protected function registerClientScript()
+	{
+		$js = array();
+
+		$function = CJavaScript::encode(WhHtml::popOption('click', $this->toggleOptions,''));
+
+		$class = preg_replace('/\s+/', '.', $this->toggleOptions['htmlOptions']['class']);
+		$js[] = "$(document).on('click','#{$this->grid->id} a.{$class}',$function);";
+
+		Yii::app()->getClientScript()->registerScript(__CLASS__ . '#ReadyJS', implode("\n", $js));
 	}
 
 	/**
