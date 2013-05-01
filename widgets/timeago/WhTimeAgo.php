@@ -1,6 +1,6 @@
 <?php
 /**
- * YwTimeAgo class
+ * WhTimeAgo class
  *
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
  * @copyright Copyright &copy; 2amigos.us 2013-
@@ -10,7 +10,7 @@
  */
 Yii::import('yiiwheels.helpers.WhHtml');
 
-class YwTimeAgo extends CWidget
+class WhTimeAgo extends CWidget
 {
 	/**
 	 * @var string the HTML tag type
