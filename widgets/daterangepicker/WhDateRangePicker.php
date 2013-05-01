@@ -9,7 +9,6 @@
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets
  * @uses YiiWheels.helpers.WhHtml
- * @uses YiiStrap.widgets.TbDataColumn
  */
 class WhDateRangePicker extends CInputWidget
 {
