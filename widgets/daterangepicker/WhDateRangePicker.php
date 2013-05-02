@@ -101,8 +101,8 @@ class WhDateRangePicker extends CInputWidget
      */
     private function setMonthNames()
     {
-        if (empty($this->options['locale']['monthNames'])) {
-            $this->options['locale']['monthNames'] = array_values(
+        if (empty($this->pluginOptions['locale']['monthNames'])) {
+            $this->pluginOptions['locale']['monthNames'] = array_values(
                 Yii::app()->locale->getMonthNames('wide', true)
             );
         }
@@ -124,7 +124,7 @@ class WhDateRangePicker extends CInputWidget
         /* @var $cs CClientScript */
         $cs = Yii::app()->getClientScript();
 
-        $cs->registerCssFile($assetsUrl . '/css/datepicker.css');
+        $cs->registerCssFile($assetsUrl . '/css/daterangepicker.css');
         $cs->registerScriptFile($assetsUrl . '/js/daterangepicker.js', CClientScript::POS_END);
 
         /* initialize plugin */
@@ -134,7 +134,7 @@ class WhDateRangePicker extends CInputWidget
 
         $callback = ($this->callback instanceof CJavaScriptExpression)
             ? $this->callback
-            : new CJavaScriptExpression($this->callback);
+            : ($this->callback === null ? '' : new CJavaScriptExpression($this->callback));
 
         $cs->registerScript(
             __CLASS__ . '#' . $this->getId(),
