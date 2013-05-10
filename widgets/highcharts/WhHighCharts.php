@@ -29,80 +29,84 @@
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
  * @copyright Copyright &copy; 2amigos.us 2013-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
- * @package YiiWheels.widgets
+ * @package YiiWheels.widgets.highcharts
  * @uses YiiWheels.WhHtml
  */
 Yii::import('yiiwheels.helpers.WhHtml');
 
 class WhHighCharts extends CWidget
 {
-	/**
-	 * @var array $options the highcharts js configuration options
-	 * @see http://api.highcharts.com/highcharts
-	 */
-	public $pluginOptions = array();
+    /**
+     * @var array $options the highcharts js configuration options
+     * @see http://api.highcharts.com/highcharts
+     */
+    public $pluginOptions = array();
 
-	/**
-	 * @var array $htmlOptions the HTML tag attributes
-	 */
-	public $htmlOptions = array();
+    /**
+     * @var array $htmlOptions the HTML tag attributes
+     */
+    public $htmlOptions = array();
 
-	/**
-	 * Widget's initialization method
-	 */
-	public function init()
-	{
-		$this->attachBehavior('ywplugin', array('class' => 'yiiwheels.behaviors.WhPlugin'));
-		$this->htmlOptions['id'] = WhHtml::getOption('id', $this->htmlOptions, $this->getId());
-	}
+    /**
+     * Widget's initialization method
+     */
+    public function init()
+    {
+        $this->attachBehavior('ywplugin', array('class' => 'yiiwheels.behaviors.WhPlugin'));
+        $this->htmlOptions['id'] = WhHtml::getOption('id', $this->htmlOptions, $this->getId());
+    }
 
-	/**
-	 * Renders the widget.
-	 */
-	public function run()
-	{
-		// if there is no renderTo id, build the layer with current id and initialize renderTo option
-		if (!isset($this->options['chart']) || !isset($this->options['chart']['renderTo']))
-		{
-			echo WhHtml::tag('div', $this->htmlOptions);
+    /**
+     * Renders the widget.
+     */
+    public function run()
+    {
+        // if there is no renderTo id, build the layer with current id and initialize renderTo option
+        if (!isset($this->options['chart']) || !isset($this->options['chart']['renderTo'])) {
+            echo WhHtml::tag('div', $this->htmlOptions);
 
-			if (isset($this->pluginOptions['chart']) && is_array($this->pluginOptions['chart']))
-				$this->pluginOptions['chart']['renderTo'] = $this->htmlOptions['id'];
-			else
-				$this->pluginOptions['chart'] = array('renderTo' => $this->htmlOptions['id']);
+            if (isset($this->pluginOptions['chart']) && is_array($this->pluginOptions['chart'])) {
+                $this->pluginOptions['chart']['renderTo'] = $this->htmlOptions['id'];
+            } else {
+                $this->pluginOptions['chart'] = array('renderTo' => $this->htmlOptions['id']);
+            }
 
-		}
-		$this->registerClientScript();
-	}
+        }
+        $this->registerClientScript();
+    }
 
-	/**
-	 * Publishes and registers the necessary script files.
-	 */
-	protected function registerClientScript()
-	{
-		/* publish assets dir */
-		$path = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'assets';
-		$assetsUrl = $this->getAssetsUrl($path);
+    /**
+     * Publishes and registers the necessary script files.
+     */
+    protected function registerClientScript()
+    {
+        /* publish assets dir */
+        $path      = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'assets';
+        $assetsUrl = $this->getAssetsUrl($path);
 
-		/* @var $cs CClientScript */
-		$cs = Yii::app()->getClientScript();
+        /* @var $cs CClientScript */
+        $cs = Yii::app()->getClientScript();
 
-		$cs->registerScriptFile($assetsUrl . '/js/highcharts.js');
+        $cs->registerScriptFile($assetsUrl . '/js/highcharts.js');
 
-		/* register required files */
-		$defaultOptions = array('exporting' => array('enabled' => true));
+        /* register required files */
+        $defaultOptions = array('exporting' => array('enabled' => true));
 
-		$this->pluginOptions = CMap::mergeArray($defaultOptions, $this->pluginOptions);
+        $this->pluginOptions = CMap::mergeArray($defaultOptions, $this->pluginOptions);
 
-		if (isset($this->options['exporting']) && @$this->options['exporting']['enabled'])
-			$cs->registerScriptFile($assetsUrl . '/js/modules/exporting.js');
+        if (isset($this->options['exporting']) && @$this->options['exporting']['enabled']) {
+            $cs->registerScriptFile($assetsUrl . '/js/modules/exporting.js');
+        }
 
-		if ($theme = WhHtml::getOption('theme', $this->pluginOptions))
-			$cs->registerScriptFile($assetsUrl . '/js/themes/' . $theme . '.js');
+        if ($theme = WhHtml::getOption('theme', $this->pluginOptions)) {
+            $cs->registerScriptFile($assetsUrl . '/js/themes/' . $theme . '.js');
+        }
 
-		$options = CJavaScript::encode($this->pluginOptions);
+        $options = CJavaScript::encode($this->pluginOptions);
 
-		$cs->registerScript(__CLASS__ . '#' . $this->getId(),
-			"var highchart{$this->getId()} = new Highcharts.Chart({$options});");
-	}
+        $cs->registerScript(
+            __CLASS__ . '#' . $this->getId(),
+            "var highchart{$this->getId()} = new Highcharts.Chart({$options});"
+        );
+    }
 }

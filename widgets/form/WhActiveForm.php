@@ -1,12 +1,15 @@
 <?php
 /**
- * WhTimePicker widget class
+ * WhActiveForm widget class
+ * Extends TbActiveForm and implements the different types of rows for a form
+ *
+ * TODO: dateRangePickerRow, toggleButtonRow
  *
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
  * @copyright Copyright &copy; 2amigos.us 2013-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets
- * @uses YiiStrap.widgets.TbActiveForm
+ * @uses YiiStrap.widgets.form
  * @uses YiiWheels.helpers.WhHtml
  */
 
@@ -96,7 +99,7 @@ class WhActiveForm extends TbActiveForm
 	 */
 	public function redactorJsRow($model, $attribute, $htmlOptions = array())
 	{
-		return $this->row(WhHtml::INPUT_REDACTOR, $model, $attribute, $htmlOptions);
+		return $this->row(WhHtml::INPUT_REDACTOR, $model, $attribute, array(), $htmlOptions);
 	}
 
 	/**

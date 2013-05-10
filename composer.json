@@ -18,6 +18,6 @@
 		}
 	],
 	"require": {
-		"yii-twbs/yiistrap": "dev-master"
+        "2amigos/yiistrap": "dev-master"
 	}
 }

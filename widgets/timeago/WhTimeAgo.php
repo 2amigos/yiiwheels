@@ -1,28 +1,21 @@
 <?php
 /**
- * WhSparkLines class
+ * WhTimeAgo class
  *
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
  * @copyright Copyright &copy; 2amigos.us 2013-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
- * @package YiiWheels.widgets.sparklines
+ * @package YiiWheels.widgets.timeago
  * @uses YiiWheels.WhHtml
  */
 Yii::import('yiiwheels.helpers.WhHtml');
 
-class WhSparkLines extends CWidget
+class WhTimeAgo extends CWidget
 {
     /**
-     * @var string the tag name to render the sparkline to
-     * NOTE: span type of tag may have issues.
+     * @var string the HTML tag type
      */
-    public $tagName = 'div';
-
-    /**
-     * @var array the data to show on the chart
-     * @see http://omnipotent.net/jquery.sparkline/#s-about
-     */
-    public $data = array();
+    public $tagName = 'abbr';
 
     /**
      * @var array additional HTML attributes to the tag
@@ -35,23 +28,35 @@ class WhSparkLines extends CWidget
     public $pluginOptions = array();
 
     /**
-     * Debug mode
-     * Used to publish full js file instead of min version
+     * @var string the language
+     * @see js/locales
      */
-    public $debugMode = false;
+    public $language = 'en';
+
+    /**
+     * @var string the selector to initialize the widget. Defaults to widget id.
+     */
+    public $selector;
+
+    /**
+     * @var string the date to use the timeago against. If null, the widget will not render the tag, assuming that
+     * everything will be handled via the $selector.
+     */
+    public $date;
 
     /**
      * Widget's initialization method
      */
     public function init()
     {
-        if (empty($this->data)) {
-            throw new CException(Yii::t('zii', '"data" attribute cannot be blank'));
-        }
-
         $this->attachBehavior('ywplugin', array('class' => 'yiiwheels.behaviors.WhPlugin'));
 
         $this->htmlOptions['id'] = WhHtml::getOption('id', $this->htmlOptions, $this->getId());
+
+        if (!$this->selector) {
+            $this->selector = '#' . WhHtml::getOption('id', $this->htmlOptions);
+        }
+
     }
 
     /**
@@ -59,8 +64,10 @@ class WhSparkLines extends CWidget
      */
     public function run()
     {
-        echo CHtml::openTag($this->tagName, $this->htmlOptions);
-        echo CHtml::closeTag($this->tagName);
+        if (null !== $this->date) {
+            $this->htmlOptions['title'] = $this->date;
+            echo CHtml::tag($this->tagName, $this->htmlOptions, '&nbsp;');
+        }
         $this->registerClientScript();
     }
 
@@ -76,18 +83,14 @@ class WhSparkLines extends CWidget
         /* @var $cs CClientScript */
         $cs = Yii::app()->getClientScript();
 
-        $script = $this->debugMode
-            ? 'jquery.sparkline.js'
-            : 'jquery.sparkline.min.js';
+        $cs->registerScriptFile($assetsUrl . '/js/jquery.timeago.js');
 
-        $cs->registerScriptFile($assetsUrl . '/js/' . $script);
+        if (null !== $this->language) {
+            $cs->registerScriptFile($assetsUrl . '/js/locales/jquery.timeago.' . $this->language . '.js');
+        }
 
         /* initialize plugin */
-        $selector = '#' . WhHtml::getOption('id', $this->htmlOptions, $this->getId());
-
-        $data    = CJavaScript::encode($this->data);
-        $options = CJavaScript::encode($this->pluginOptions);
-
-        $cs->registerScript(__CLASS__ . '#' . $selector, "jQuery('{$selector}').sparkline({$data}, {$options});");
+        $this->getApi()->registerPlugin('timeago', $this->selector, $this->pluginOptions);
     }
+
 }
