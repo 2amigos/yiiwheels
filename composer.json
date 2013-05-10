@@ -18,6 +18,6 @@
 		}
 	],
 	"require": {
-        "crisu83/yiistrap": "dev-master"
+        "2amigos/yiistrap": "dev-stable"
 	}
 }
