@@ -18,6 +18,6 @@
 		}
 	],
 	"require": {
-        "2amigos/yiistrap": "dev-stable"
+        "2amigos/yiistrap": "dev-master"
 	}
 }
