@@ -167,7 +167,7 @@ class WhFileUpload extends CJuiInputWidget
         /* initialize plugin */
         $selector = '#' . WhHtml::getOption('id', $this->htmlOptions, $this->getId());
 
-        $this->getYiiWheels()->registerPlugin('fileupload', $selector, $this->options);
+        $this->getApi()->registerPlugin('fileupload', $selector, $this->options);
     }
 
 }
