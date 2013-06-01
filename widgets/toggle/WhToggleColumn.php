@@ -244,7 +244,7 @@ function() {
         $class = preg_replace('/\s+/', '.', $this->toggleOptions['htmlOptions']['class']);
         $js[]  = "$(document).on('click','#{$this->grid->id} a.{$class}',$function);";
 
-        Yii::app()->getClientScript()->registerScript(__CLASS__ . '#ReadyJS', implode("\n", $js));
+        Yii::app()->getClientScript()->registerScript( $this->name. '#ReadyJS', implode("\n", $js));
     }
 
     /**
