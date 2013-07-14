@@ -1,6 +1,6 @@
 <?php
 /**
- * WhBasicFileUpload widget class
+ * WhDetailView widget class
  *
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
  * @copyright Copyright &copy; 2amigos.us 2013-
