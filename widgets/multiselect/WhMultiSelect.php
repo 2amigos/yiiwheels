@@ -35,7 +35,7 @@ class WhMultiSelect extends CInputWidget
      */
     public function init()
     {
-        if (empty($this->data) && $this->asDropDownList === true) {
+        if (empty($this->data)) {
             throw new CException(Yii::t('zii', '"data" attribute cannot be blank'));
         }
 
