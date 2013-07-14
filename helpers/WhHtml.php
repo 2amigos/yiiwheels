@@ -42,7 +42,7 @@ class WhHtml extends TbHtml
 	 */
 	public static function validInputs()
 	{
-		return array_merge(parent::$inputs, array_keys(self::$validInputs));
+		return array_keys(self::$validInputs);
 	}
 
 	/**
