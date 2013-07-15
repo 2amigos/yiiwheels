@@ -92,6 +92,8 @@ class WhBox extends CWidget
             $this->htmlHeaderOptions['class'] = 'bootstrap-widget-header';
         }
 
+        $this->attachBehavior('ywplugin', array('class' => 'yiiwheels.behaviors.WhPlugin'));
+
         echo CHtml::openTag('div', $this->htmlOptions);
 
         $this->registerClientScript();
@@ -205,7 +207,7 @@ class WhBox extends CWidget
     public function registerClientScript()
     {
         /* publish assets dir */
-        $path      = realpath(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'assets';
+        $path      = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'assets';
         $assetsUrl = $this->getAssetsUrl($path);
 
         /* @var $cs CClientScript */
