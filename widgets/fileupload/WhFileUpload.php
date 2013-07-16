@@ -50,22 +50,22 @@ class WhFileUpload extends CJuiInputWidget
     /**
      * @var string name of the form view to be rendered
      */
-    public $formView = 'yiiwheels.fileupload.views.fileupload.form';
+    public $formView = 'yiiwheels.widgets.fileupload.views.form';
 
     /**
      * @var string name of the upload view to be rendered
      */
-    public $uploadView = 'yiiwheels.fileupload.views.fileupload.upload';
+    public $uploadView = 'yiiwheels.widgets.fileupload.views.upload';
 
     /**
      * @var string name of the download view to be rendered
      */
-    public $downloadView = 'yiiwheels.fileupload.views.fileupload.download';
+    public $downloadView = 'yiiwheels.widgets.fileupload.views.download';
 
     /**
      * @var string name of the view to display images at bootstrap-slideshow
      */
-    public $previewImagesView = 'yiiwheels.fileupload.views.gallery.preview';
+    public $previewImagesView = 'yiiwheels.widgets.fileupload.views.gallery';
 
     /**
      * Widget initialization
