@@ -23,7 +23,7 @@ class WhFileUpload extends CJuiInputWidget
      * set to true to use multiple file upload
      * @var boolean
      */
-    public $multiple = false;
+    public $multiple = true;
 
     /**
      * The upload template id to display files available for upload
@@ -43,7 +43,7 @@ class WhFileUpload extends CJuiInputWidget
     public $previewImages = true;
 
     /**
-     * Wheter or not to add the image processing pluing
+     * Wheter or not to add the image processing pluging
      */
     public $imageProcessing = true;
 
@@ -108,7 +108,7 @@ class WhFileUpload extends CJuiInputWidget
 
         $this->render($this->uploadView);
         $this->render($this->downloadView);
-        $this->render($this->formView, compact('htmlOptions'));
+        $this->render($this->formView, array('model', $this->model, 'name' => $name, 'htmlOptions' => $htmlOptions));
 
         if ($this->previewImages || $this->imageProcessing) {
             $this->render($this->previewImagesView);
@@ -134,7 +134,7 @@ class WhFileUpload extends CJuiInputWidget
 
         // Upgrade widget factory
         // @todo remove when jquery.ui 1.9+ is fully integrated into stable Yii versions
-        $cs->registerScriptFile($assetsUrl . '/js/vendor/jquery.ui.widget.js');
+        $cs->registerScriptFile($assetsUrl . '/js/vendor/jquery.ui.widget.js', CClientScript::POS_END);
 
         //The Templates plugin is included to render the upload/download listings
         $cs->registerScriptFile($assetsUrl . '/js/tmpl.min.js', CClientScript::POS_END);
@@ -143,26 +143,26 @@ class WhFileUpload extends CJuiInputWidget
             $cs->registerScriptFile($assetsUrl . '/js/load-image.min.js', CClientScript::POS_END);
             $cs->registerScriptFile($assetsUrl . '/js/canvas-to-blob.min.js', CClientScript::POS_END);
             // gallery :)
-            $this->getApi()->registerAssetCss("bootstrap-image-gallery.min.css");
-            $this->getApi()->registerAssetJs("bootstrap-image-gallery.min.js", CClientScript::POS_END);
+            $this->getYiiWheels()->registerAssetCss("bootstrap-image-gallery.min.css");
+            $this->getYiiWheels()->registerAssetJs("bootstrap-image-gallery.min.js", CClientScript::POS_END);
         }
         //The Iframe Transport is required for browsers without support for XHR file uploads
-        Yii::app()->bootstrap->registerAssetJs('fileupload/jquery.iframe-transport.js');
-        Yii::app()->bootstrap->registerAssetJs('fileupload/jquery.fileupload.js');
+        $cs->registerScriptFile($assetsUrl . '/js/jquery.iframe-transport.js');
+        $cs->registerScriptFile($assetsUrl . '/js/jquery.fileupload.js');
 
         // The File Upload image processing plugin
         if ($this->imageProcessing) {
-            $cs->registerScriptFile($assetsUrl . '/js/jquery.fileupload-ip.js');
+            $cs->registerScriptFile($assetsUrl . '/js/jquery.fileupload-ip.js', CClientScript::POS_END);
         }
         // The File Upload file processing plugin
         if ($this->previewImages) {
-            $cs->registerScriptFile($assetsUrl . '/js/jquery.fileupload-fp.js');
+            $cs->registerScriptFile($assetsUrl . '/js/jquery.fileupload-fp.js', CClientScript::POS_END);
         }
         // locale
-        $cs->registerScriptFile($assetsUrl . '/js/jquery.fileupload-locale.js');
+        $cs->registerScriptFile($assetsUrl . '/js/jquery.fileupload-locale.js', CClientScript::POS_END);
 
         //The File Upload user interface plugin
-        $cs->registerScriptFile($assetsUrl . '/js/jquery.fileupload-ui.js');
+        $cs->registerScriptFile($assetsUrl . '/js/jquery.fileupload-ui.js', CClientScript::POS_END);
 
         /* initialize plugin */
         $selector = '#' . WhHtml::getOption('id', $this->htmlOptions, $this->getId());
