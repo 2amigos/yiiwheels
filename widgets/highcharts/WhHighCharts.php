@@ -62,7 +62,7 @@ class WhHighCharts extends CWidget
     public function run()
     {
         // if there is no renderTo id, build the layer with current id and initialize renderTo option
-        if (!isset($this->options['chart']) || !isset($this->options['chart']['renderTo'])) {
+        if (!isset($this->pluginOptions['chart']) || !isset($this->pluginOptions['chart']['renderTo'])) {
             echo WhHtml::tag('div', $this->htmlOptions);
 
             if (isset($this->pluginOptions['chart']) && is_array($this->pluginOptions['chart'])) {
@@ -94,7 +94,7 @@ class WhHighCharts extends CWidget
 
         $this->pluginOptions = CMap::mergeArray($defaultOptions, $this->pluginOptions);
 
-        if (isset($this->options['exporting']) && @$this->options['exporting']['enabled']) {
+        if (isset($this->pluginOptions['exporting']) && @$this->pluginOptions['exporting']['enabled']) {
             $cs->registerScriptFile($assetsUrl . '/js/modules/exporting.js');
         }
 
