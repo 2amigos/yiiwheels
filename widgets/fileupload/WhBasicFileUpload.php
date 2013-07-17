@@ -53,6 +53,7 @@ class WhBasicFileUpload extends CInputWidget
         $this->htmlOptions             = WhHtml::defaultOption('id', $id, $this->htmlOptions);
         $this->htmlOptions             = WhHtml::defaultOption('name', $name, $this->htmlOptions);
         $this->htmlOptions['data-url'] = $this->uploadAction;
+        $this->pluginOptions['url']    = $this->uploadAction;
         if ($this->hasModel()) {
             echo CHtml::activeFileField($this->model, $this->attribute, $this->htmlOptions);
 
@@ -81,7 +82,7 @@ class WhBasicFileUpload extends CInputWidget
         /* initialize plugin */
         $selector = '#' . WhHtml::getOption('id', $this->htmlOptions, $this->getId());
 
-        $this->getApi()->registerPlugin('fileupload#'.$this->getId(), $selector, $this->pluginOptions);
+        $this->getApi()->registerPlugin('fileupload#' . $this->getId(), $selector, $this->pluginOptions);
     }
 
 }
