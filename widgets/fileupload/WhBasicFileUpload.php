@@ -81,7 +81,7 @@ class WhBasicFileUpload extends CInputWidget
         /* initialize plugin */
         $selector = '#' . WhHtml::getOption('id', $this->htmlOptions, $this->getId());
 
-        $this->getApi()->registerPlugin('fileupload', $selector, $this->pluginOptions);
+        $this->getApi()->registerPlugin('fileupload#'.$this->getId(), $selector, $this->pluginOptions);
     }
 
 }
