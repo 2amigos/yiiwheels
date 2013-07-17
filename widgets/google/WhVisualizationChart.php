@@ -47,10 +47,10 @@ class WhVisualizationChart extends CWidget
     public function run()
     {
         $id                      = $this->getId();
-        $this->htmlOptions['id'] = $id;
         // if no container is set, it will create one
         if ($this->containerId == null) {
-            $this->containerId = 'div-chart' . $id;
+            $this->htmlOptions['id'] = 'div-chart'.$id;
+            $this->containerId = $this->htmlOptions['id'];
             echo '<div ' . CHtml::renderAttributes($this->htmlOptions) . '></div>';
         }
         $this->registerClientScript();
