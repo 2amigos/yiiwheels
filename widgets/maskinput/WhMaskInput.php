@@ -5,19 +5,25 @@
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
  * @copyright Copyright &copy; 2amigos.us 2013-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
- * @package YiiWheels.widgets.maskmoney
+ * @package YiiWheels.widgets.maskInput
  * @uses YiiWheels.WhHtml
  */
 
 Yii::import('yiiwheels.helpers.WhHtml');
 
-class WhMaskMoney extends CInputWidget
+class WhMaskInput extends CInputWidget
 {
 
     /**
      * @var array the plugin options
+     * @see http://igorescobar.github.io/jQuery-Mask-Plugin/
      */
     public $pluginOptions;
+
+    /**
+     * @var string
+     */
+    public $mask = '';
 
     /**
      * Initializes the widget.
@@ -37,7 +43,7 @@ class WhMaskMoney extends CInputWidget
     }
 
     /**
-     * Renders the the input field
+     * Renders the input field
      */
     public function renderField()
     {
@@ -54,7 +60,7 @@ class WhMaskMoney extends CInputWidget
     }
 
     /**
-     * Registers required client script for maskmoney plugin.
+     * Registers required client script for jquery mask plugin. It doesn't use bootstrap->registerPlugin.
      */
     public function registerClientScript()
     {
@@ -65,11 +71,13 @@ class WhMaskMoney extends CInputWidget
         /* @var $cs CClientScript */
         $cs = Yii::app()->getClientScript();
 
-        $cs->registerScriptFile($assetsUrl . '/js/jquery.maskmoney.js');
+        $cs->registerScriptFile($assetsUrl . '/js/jquery.mask.js');
 
         /* initialize plugin */
         $selector = '#' . WhHtml::getOption('id', $this->htmlOptions, $this->getId());
 
-        $this->getApi()->registerPlugin('maskMoney', $selector, $this->pluginOptions);
+        $options = !empty($this->pluginOptions) ? CJavaScript::encode($this->pluginOptions) : '{}';
+        $script = "jQuery('{$selector}').mask('{$this->mask}',{$options});";
+        Yii::app()->clientScript->registerScript((uniqid(__CLASS__ . '#', true)), $script, CClientScript::POS_END);
     }
 }
