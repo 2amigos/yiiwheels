@@ -63,7 +63,8 @@ class WhHighCharts extends CWidget
     {
         // if there is no renderTo id, build the layer with current id and initialize renderTo option
         if (!isset($this->pluginOptions['chart']) || !isset($this->pluginOptions['chart']['renderTo'])) {
-            echo WhHtml::tag('div', $this->htmlOptions);
+            echo WhHtml::openTag('div', $this->htmlOptions);
+            echo WhHtml::closeTag('div');
 
             if (isset($this->pluginOptions['chart']) && is_array($this->pluginOptions['chart'])) {
                 $this->pluginOptions['chart']['renderTo'] = $this->htmlOptions['id'];
