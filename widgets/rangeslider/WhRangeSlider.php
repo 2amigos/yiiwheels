@@ -1,8 +1,8 @@
 <?php
 /**
  * WhDateRangePicker widget class
- * A simple implementation for date range picker for Twitter Bootstrap
- * @see <http://www.dangrossman.info/2012/08/20/a-date-range-picker-for-twitter-bootstrap/>
+ * Implementation of jQRangeSlider. A powerful slider for selecting value ranges, supporting dates and more.
+ * @see http://ghusse.github.io/jQRangeSlider
  *
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
  * @copyright Copyright &copy; 2amigos.us 2013-
@@ -11,6 +11,7 @@
  * @uses YiiStrap.helpers.TbHtml
  */
 Yii::import('bootstrap.helpers.TbHtml');
+
 class WhRangeSlider extends CInputWidget
 {
 
@@ -242,7 +243,7 @@ class WhRangeSlider extends CInputWidget
         {
             $this->checkOptionAttribute($this->wheelMode, array('zoom', 'scroll'), 'wheelMode');
         }
-
+        $this->attachBehavior('ywplugin', array('class' => 'yiiwheels.behaviors.WhPlugin'));
         $this->buildOptions();
     }
 
@@ -290,7 +291,7 @@ class WhRangeSlider extends CInputWidget
 
         $cs->registerCoreScript('jquery');
         $cs->registerCoreScript('jquery.ui');
-        $this->getYiiWheels()->registerAssetJs('jquery.mousewheel.min.js');
+        $this->getYiiWheels()->registerAssetJs('jquery.mousewheel.min.js', CClientScript::POS_HEAD);
 
         $cs->registerCssFile($assetsUrl . '/css/' . $this->theme . '.css');
         $cs->registerScriptFile($assetsUrl . '/js/' . $jsFile);
@@ -375,7 +376,7 @@ class WhRangeSlider extends CInputWidget
      */
     protected function checkOptionAttribute($attribute, $availableOptions, $name)
     {
-        if(in_array($attribute, $availableOptions))
+        if(!in_array($attribute, $availableOptions))
         {
             throw new CException(Yii::t(
                 'zii',
