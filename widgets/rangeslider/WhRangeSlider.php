@@ -283,8 +283,8 @@ class WhRangeSlider extends CInputWidget
         $id = TbHtml::getOption('id', $this->htmlOptions, $this->getId());
 
         $jsFile = !empty($this->scales)
-            ? 'JQAllRangeSliders-withRuler-min.js'
-            : 'JQAllRangeSliders-min.js';
+            ? 'jQAllRangeSliders-withRuler-min.js'
+            : 'jQAllRangeSliders-min.js';
 
         /* @var $cs CClientScript */
         $cs = Yii::app()->getClientScript();
