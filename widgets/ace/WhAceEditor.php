@@ -80,7 +80,8 @@ class WhAceEditor extends CInputWidget
 
         $tagOptions['id'] = 'aceEditor_' . $tagOptions['id'];
 
-        echo WhHtml::tag('div', $tagOptions);
+        echo WhHtml::openTag('div', $tagOptions);
+        echo WhHtml::closeTag('div');
 
         $this->htmlOptions['style'] = 'display:none';
 
