@@ -6,9 +6,9 @@
  * @copyright Copyright &copy; 2amigos.us 2013-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets.datepicker
- * @uses YiiWheels.helpers.WhHtml
+ * @uses YiiStrap.helpers.TbHtml
  */
-Yii::import('yiiwheels.helpers.WhHtml');
+Yii::import('bootstrap.helpers.TbHtml');
 
 class WhDatePicker extends CInputWidget
 {
@@ -29,8 +29,8 @@ class WhDatePicker extends CInputWidget
     {
         $this->attachBehavior('ywplugin', array('class' => 'yiiwheels.behaviors.WhPlugin'));
 
-        $this->htmlOptions = WhHtml::defaultOption('autocomplete', 'off', $this->htmlOptions);
-        $this->htmlOptions = WhHtml::addClassName('grd-white', $this->htmlOptions);
+        $this->htmlOptions = TbHtml::defaultOption('autocomplete', 'off', $this->htmlOptions);
+        $this->htmlOptions = TbHtml::addClassName('grd-white', $this->htmlOptions);
 
         $this->initOptions();
     }
@@ -40,8 +40,8 @@ class WhDatePicker extends CInputWidget
      */
     public function initOptions()
     {
-        $this->pluginOptions = WhHtml::defaultOption('format', 'mm/dd/yyyy', $this->pluginOptions);
-        $this->pluginOptions = WhHtml::defaultOption('autoclose', true, $this->pluginOptions);
+        $this->pluginOptions = TbHtml::defaultOption('format', 'mm/dd/yyyy', $this->pluginOptions);
+        $this->pluginOptions = TbHtml::defaultOption('autoclose', true, $this->pluginOptions);
     }
 
     /**
@@ -60,14 +60,14 @@ class WhDatePicker extends CInputWidget
     {
         list($name, $id) = $this->resolveNameID();
 
-        $this->htmlOptions = WhHtml::defaultOption('id', $id, $this->htmlOptions);
-        $this->htmlOptions = WhHtml::defaultOption('name', $name, $this->htmlOptions);
+        $this->htmlOptions = TbHtml::defaultOption('id', $id, $this->htmlOptions);
+        $this->htmlOptions = TbHtml::defaultOption('name', $name, $this->htmlOptions);
 
         if ($this->hasModel()) {
-            echo WhHtml::activeTextField($this->model, $this->attribute, $this->htmlOptions);
+            echo CHtml::activeTextField($this->model, $this->attribute, $this->htmlOptions);
 
         } else {
-            echo WhHtml::textField($name, $this->value, $this->htmlOptions);
+            echo CHtml::textField($name, $this->value, $this->htmlOptions);
         }
     }
 
@@ -86,7 +86,7 @@ class WhDatePicker extends CInputWidget
         $cs->registerCssFile($assetsUrl . '/css/datepicker.css');
         $cs->registerScriptFile($assetsUrl . '/js/bootstrap-datepicker.js');
 
-        if ($language = WhHtml::getOption('language', $this->pluginOptions)) {
+        if ($language = TbHtml::getOption('language', $this->pluginOptions)) {
             $cs->registerScriptFile(
                 $assetsUrl . '/js/locales/bootstrap-datepicker.' . $language . '.js',
                 CClientScript::POS_END
@@ -94,7 +94,7 @@ class WhDatePicker extends CInputWidget
         }
 
         /* initialize plugin */
-        $selector = '#' . WhHtml::getOption('id', $this->htmlOptions, $this->getId());
+        $selector = '#' . TbHtml::getOption('id', $this->htmlOptions, $this->getId());
 
         $this->getApi()->registerPlugin('datepicker', $selector, $this->pluginOptions);
         $this->getApi()->registerEvents($selector, $this->events);

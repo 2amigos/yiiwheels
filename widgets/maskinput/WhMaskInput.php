@@ -6,10 +6,10 @@
  * @copyright Copyright &copy; 2amigos.us 2013-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets.maskInput
- * @uses YiiWheels.WhHtml
+ * @uses YiiStrap.helpers.TbHtml
  */
 
-Yii::import('yiiwheels.helpers.WhHtml');
+Yii::import('bootstrap.helpers.TbHtml');
 
 class WhMaskInput extends CInputWidget
 {
@@ -49,13 +49,13 @@ class WhMaskInput extends CInputWidget
     {
         list($name, $id) = $this->resolveNameID();
 
-        $this->htmlOptions = WhHtml::defaultOption('id', $id, $this->htmlOptions);
-        $this->htmlOptions = WhHtml::defaultOption('name', $name, $this->htmlOptions);
+        $this->htmlOptions = TbHtml::defaultOption('id', $id, $this->htmlOptions);
+        $this->htmlOptions = TbHtml::defaultOption('name', $name, $this->htmlOptions);
 
         if ($this->hasModel()) {
-            echo WhHtml::activeTextField($this->model, $this->attribute, $this->htmlOptions);
+            echo CHtml::activeTextField($this->model, $this->attribute, $this->htmlOptions);
         } else {
-            echo WhHtml::textField($this->name, $this->value, $this->htmlOptions);
+            echo CHtml::textField($this->name, $this->value, $this->htmlOptions);
         }
     }
 
@@ -74,7 +74,7 @@ class WhMaskInput extends CInputWidget
         $cs->registerScriptFile($assetsUrl . '/js/jquery.mask.js');
 
         /* initialize plugin */
-        $selector = '#' . WhHtml::getOption('id', $this->htmlOptions, $this->getId());
+        $selector = '#' . TbHtml::getOption('id', $this->htmlOptions, $this->getId());
 
         $options = !empty($this->pluginOptions) ? CJavaScript::encode($this->pluginOptions) : '{}';
         $script = "jQuery('{$selector}').mask('{$this->mask}',{$options});";

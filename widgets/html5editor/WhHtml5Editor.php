@@ -10,8 +10,10 @@
  * @copyright Copyright &copy; 2amigos.us 2013-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets.highcharts
- * @uses YiiWheels.WhHtml
+ * @uses YiiStrap.helpers.TbHtml
  */
+Yii::import('bootstrap.helpers.TbHtml');
+
 class WhHtml5Editor extends CInputWidget
 {
     /**
@@ -94,7 +96,7 @@ class WhHtml5Editor extends CInputWidget
         $this->normalizeStylesheetsProperty();
 
         /* initialize plugin */
-        $selector = '#' . WhHtml::getOption('id', $this->htmlOptions, $this->getId());
+        $selector = '#' . TbHtml::getOption('id', $this->htmlOptions, $this->getId());
 
         $this->getApi()->registerPlugin('wysihtml5', $selector, $this->pluginOptions);
 

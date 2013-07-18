@@ -30,9 +30,9 @@
  * @copyright Copyright &copy; 2amigos.us 2013-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets.highcharts
- * @uses YiiWheels.WhHtml
+ * @uses YiiStrap.helpers.TbHtml
  */
-Yii::import('yiiwheels.helpers.WhHtml');
+Yii::import('bootstrap.helpers.TbHtml');
 
 class WhHighCharts extends CWidget
 {
@@ -53,7 +53,7 @@ class WhHighCharts extends CWidget
     public function init()
     {
         $this->attachBehavior('ywplugin', array('class' => 'yiiwheels.behaviors.WhPlugin'));
-        $this->htmlOptions['id'] = WhHtml::getOption('id', $this->htmlOptions, $this->getId());
+        $this->htmlOptions['id'] = TbHtml::getOption('id', $this->htmlOptions, $this->getId());
     }
 
     /**
@@ -63,8 +63,8 @@ class WhHighCharts extends CWidget
     {
         // if there is no renderTo id, build the layer with current id and initialize renderTo option
         if (!isset($this->pluginOptions['chart']) || !isset($this->pluginOptions['chart']['renderTo'])) {
-            echo WhHtml::openTag('div', $this->htmlOptions);
-            echo WhHtml::closeTag('div');
+            echo CHtml::openTag('div', $this->htmlOptions);
+            echo CHtml::closeTag('div');
 
             if (isset($this->pluginOptions['chart']) && is_array($this->pluginOptions['chart'])) {
                 $this->pluginOptions['chart']['renderTo'] = $this->htmlOptions['id'];
@@ -99,7 +99,7 @@ class WhHighCharts extends CWidget
             $cs->registerScriptFile($assetsUrl . '/js/modules/exporting.js');
         }
 
-        if ($theme = WhHtml::getOption('theme', $this->pluginOptions)) {
+        if ($theme = TbHtml::getOption('theme', $this->pluginOptions)) {
             $cs->registerScriptFile($assetsUrl . '/js/themes/' . $theme . '.js');
         }
 

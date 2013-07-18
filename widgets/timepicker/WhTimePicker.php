@@ -6,7 +6,7 @@
  * @copyright Copyright &copy; 2amigos.us 2013-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets.timepicker
- * @uses YiiWheels.helpers.WhHtml
+ * @uses YiiStrap.helpers.TbHtml
  */
 
 class WhTimePicker extends CInputWidget
@@ -73,8 +73,8 @@ class WhTimePicker extends CInputWidget
     {
         list($name, $id) = $this->resolveNameID();
 
-        $this->htmlOptions = WhHtml::defaultOption('id', $id, $this->htmlOptions);
-        $this->htmlOptions = WhHtml::defaultOption('name', $name, $this->htmlOptions);
+        $this->htmlOptions = TbHtml::defaultOption('id', $id, $this->htmlOptions);
+        $this->htmlOptions = TbHtml::defaultOption('name', $name, $this->htmlOptions);
 
         echo '<span class="bootstrap-timepicker">';
         if ($this->hasModel()) {
@@ -102,7 +102,7 @@ class WhTimePicker extends CInputWidget
         $cs->registerScriptFile($assetsUrl . '/js/bootstrap-timepicker.min.js');
 
         /* initialize plugin */
-        $selector = '#' . WhHtml::getOption('id', $this->htmlOptions, $this->getId());
+        $selector = '#' . TbHtml::getOption('id', $this->htmlOptions, $this->getId());
 
         $this->getApi()->registerPlugin('timepicker', $selector, $this->pluginOptions);
         $this->getApi()->registerEvents($selector, $this->events);

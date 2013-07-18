@@ -6,8 +6,10 @@
  * @copyright Copyright &copy; 2amigos.us 2013-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets.fileupload
- * @uses YiiWheels.helpers.WhHtml
+ * @uses YiiStrap.helpers.TbHtml
  */
+Yii::import('bootstrap.helpers.TbHtml');
+
 class WhBasicFileUpload extends CInputWidget
 {
     /**
@@ -50,8 +52,8 @@ class WhBasicFileUpload extends CInputWidget
     {
         list($name, $id) = $this->resolveNameID();
 
-        $this->htmlOptions             = WhHtml::defaultOption('id', $id, $this->htmlOptions);
-        $this->htmlOptions             = WhHtml::defaultOption('name', $name, $this->htmlOptions);
+        $this->htmlOptions             = TbHtml::defaultOption('id', $id, $this->htmlOptions);
+        $this->htmlOptions             = TbHtml::defaultOption('name', $name, $this->htmlOptions);
         $this->htmlOptions['data-url'] = $this->uploadAction;
         $this->pluginOptions['url']    = $this->uploadAction;
         if ($this->hasModel()) {
@@ -80,7 +82,7 @@ class WhBasicFileUpload extends CInputWidget
         $cs->registerScriptFile($assetsUrl . '/js/jquery.fileupload.js');
 
         /* initialize plugin */
-        $selector = '#' . WhHtml::getOption('id', $this->htmlOptions, $this->getId());
+        $selector = '#' . TbHtml::getOption('id', $this->htmlOptions, $this->getId());
 
         $this->getApi()->registerPlugin('fileupload', $selector, $this->pluginOptions);
     }

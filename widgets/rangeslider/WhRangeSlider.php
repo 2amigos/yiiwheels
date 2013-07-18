@@ -8,9 +8,9 @@
  * @copyright Copyright &copy; 2amigos.us 2013-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets.rangeslider
- * @uses YiiWheels.helpers.WhHtml
+ * @uses YiiStrap.helpers.TbHtml
  */
-Yii::import('yiiwheels.helpers.WhHtml');
+Yii::import('bootstrap.helpers.TbHtml');
 class WhRangeSlider extends CInputWidget
 {
 
@@ -279,7 +279,7 @@ class WhRangeSlider extends CInputWidget
         /* publish assets dir */
         $path = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'assets';
         $assetsUrl = $this->getAssetsUrl($path);
-        $id = WhHtml::getOption('id', $this->htmlOptions, $this->getId());
+        $id = TbHtml::getOption('id', $this->htmlOptions, $this->getId());
 
         $jsFile = !empty($this->scales)
             ? 'JQAllRangeSliders-withRuler-min.js'

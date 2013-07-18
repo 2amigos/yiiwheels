@@ -12,7 +12,7 @@
  * @package YiiWheels.widgets.modal
  */
 
-Yii::import('yiiwheels.helpers.WhHtml');
+Yii::import('bootstrap.helpers.TbHtml');
 
 class WhModal extends TbModal
 {

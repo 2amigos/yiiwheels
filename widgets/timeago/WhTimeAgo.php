@@ -6,9 +6,9 @@
  * @copyright Copyright &copy; 2amigos.us 2013-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets.timeago
- * @uses YiiWheels.WhHtml
+ * @uses YiiStrap.helpers.TbHtml
  */
-Yii::import('yiiwheels.helpers.WhHtml');
+Yii::import('bootstrap.helpers.TbHtml');
 
 class WhTimeAgo extends CWidget
 {
@@ -51,10 +51,10 @@ class WhTimeAgo extends CWidget
     {
         $this->attachBehavior('ywplugin', array('class' => 'yiiwheels.behaviors.WhPlugin'));
 
-        $this->htmlOptions['id'] = WhHtml::getOption('id', $this->htmlOptions, $this->getId());
+        $this->htmlOptions['id'] = TbHtml::getOption('id', $this->htmlOptions, $this->getId());
 
         if (!$this->selector) {
-            $this->selector = '#' . WhHtml::getOption('id', $this->htmlOptions);
+            $this->selector = '#' . TbHtml::getOption('id', $this->htmlOptions);
         }
 
     }

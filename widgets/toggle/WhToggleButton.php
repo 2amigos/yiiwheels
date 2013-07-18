@@ -6,9 +6,9 @@
  * @copyright Copyright &copy; 2amigos.us 2013-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets.toggle
- * @uses YiiWheels.helpers.WhHtml
+ * @uses YiiStrap.helpers.TbHtml
  */
-Yii::import('yiiwheels.helpers.WhHtml');
+Yii::import('bootstrap.helpers.TbHtml');
 
 class WhToggleButton extends CInputWidget
 {
@@ -114,7 +114,7 @@ class WhToggleButton extends CInputWidget
     public function init()
     {
         $this->attachBehavior('ywplugin', array('class' => 'yiiwheels.behaviors.WhPlugin'));
-        $this->htmlOptions['id'] = WhHtml::getOption('id', $this->htmlOptions, $this->getId());
+        $this->htmlOptions['id'] = TbHtml::getOption('id', $this->htmlOptions, $this->getId());
     }
 
     /**
@@ -162,7 +162,7 @@ class WhToggleButton extends CInputWidget
         $cs->registerScriptFile($assetsUrl . '/js/jquery.toggle.buttons.js');
 
         /* initialize plugin */
-        $selector = '#wrapper-' . WhHtml::getOption('id', $this->htmlOptions, $this->getId());
+        $selector = '#wrapper-' . TbHtml::getOption('id', $this->htmlOptions, $this->getId());
 
         $this->getApi()->registerPlugin(
             'toggleButtons',

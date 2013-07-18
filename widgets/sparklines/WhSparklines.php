@@ -6,9 +6,9 @@
  * @copyright Copyright &copy; 2amigos.us 2013-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets.sparklines
- * @uses YiiWheels.WhHtml
+ * @uses YiiStrap.helpers.TbHtml
  */
-Yii::import('yiiwheels.helpers.WhHtml');
+Yii::import('bootstrap.helpers.TbHtml');
 
 class WhSparkLines extends CWidget
 {
@@ -51,7 +51,7 @@ class WhSparkLines extends CWidget
 
         $this->attachBehavior('ywplugin', array('class' => 'yiiwheels.behaviors.WhPlugin'));
 
-        $this->htmlOptions['id'] = WhHtml::getOption('id', $this->htmlOptions, $this->getId());
+        $this->htmlOptions['id'] = TbHtml::getOption('id', $this->htmlOptions, $this->getId());
     }
 
     /**
@@ -83,7 +83,7 @@ class WhSparkLines extends CWidget
         $cs->registerScriptFile($assetsUrl . '/js/' . $script);
 
         /* initialize plugin */
-        $selector = '#' . WhHtml::getOption('id', $this->htmlOptions, $this->getId());
+        $selector = '#' . TbHtml::getOption('id', $this->htmlOptions, $this->getId());
 
         $data    = CJavaScript::encode($this->data);
         $options = CJavaScript::encode($this->pluginOptions);

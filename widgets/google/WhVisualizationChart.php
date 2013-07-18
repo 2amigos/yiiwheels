@@ -7,9 +7,7 @@
  * @copyright Copyright &copy; 2amigos.us 2013-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets.google
- * @uses YiiWheels.helpers.WhHtml
  */
-Yii::import('yiiwheels.helpers.WhHtml');
 
 class WhVisualizationChart extends CWidget
 {

@@ -7,9 +7,9 @@
  * @copyright Copyright &copy; 2amigos.us 2013-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets.ace
- * @uses YiiWheels.helpers.WhHtml
+ * @uses Yiistrap.helpers.TbHtml
  */
-Yii::import('yiiwheels.helpers.WhHtml');
+Yii::import('bootstrap.helpers.TbHtml');
 
 class WhAceEditor extends CInputWidget
 {
@@ -73,22 +73,22 @@ class WhAceEditor extends CInputWidget
     {
         list($name, $id) = $this->resolveNameID();
 
-        $this->htmlOptions = WhHtml::defaultOption('id', $id, $this->htmlOptions);
-        $this->htmlOptions = WhHtml::defaultOption('name', $name, $this->htmlOptions);
+        $this->htmlOptions = TbHtml::defaultOption('id', $id, $this->htmlOptions);
+        $this->htmlOptions = TbHtml::defaultOption('name', $name, $this->htmlOptions);
 
         $tagOptions = $this->htmlOptions;
 
         $tagOptions['id'] = 'aceEditor_' . $tagOptions['id'];
 
-        echo WhHtml::openTag('div', $tagOptions);
-        echo WhHtml::closeTag('div');
+        echo CHtml::openTag('div', $tagOptions);
+        echo CHtml::closeTag('div');
 
         $this->htmlOptions['style'] = 'display:none';
 
         if ($this->hasModel()) {
-            echo WhHtml::activeTextArea($this->model, $this->attribute, $this->htmlOptions);
+            echo CHtml::activeTextArea($this->model, $this->attribute, $this->htmlOptions);
         } else {
-            echo WhHtml::textArea($name, $this->value, $this->htmlOptions);
+            echo CHtml::textArea($name, $this->value, $this->htmlOptions);
         }
 
         $this->htmlOptions = $tagOptions;
@@ -108,14 +108,14 @@ class WhAceEditor extends CInputWidget
 
         $cs->registerScriptFile($assetsUrl . '/js/ace.js');
 
-        $id = WhHtml::getOption('id', $this->htmlOptions, $this->getId());
+        $id = TbHtml::getOption('id', $this->htmlOptions, $this->getId());
 
         /* Global value that will hold the editor */
         $cs->registerScript(uniqid(__CLASS__ . '#' . $id, true), 'var ' . $id . ';', CClientScript::POS_HEAD);
 
         ob_start();
         /* initialize plugin */
-        $selector = WhHtml::getOption('id', $this->htmlOptions, $this->getId());
+        $selector = TbHtml::getOption('id', $this->htmlOptions, $this->getId());
 
         echo $selector . '= ace.edit("' . $id . '");' . PHP_EOL;
         echo $selector . '.setTheme("ace/theme/' . $this->theme . '");' . PHP_EOL;

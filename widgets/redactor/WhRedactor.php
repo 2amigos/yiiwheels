@@ -6,9 +6,9 @@
  * @copyright Copyright &copy; 2amigos.us 2013-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets.redactor
- * @uses YiiWheels.WhHtml
+ * @uses YiiStrap.helpers.TbHtml
  */
-Yii::import('yiiwheels.helpers.WhHtml');
+Yii::import('bootstrap.helpers.TbHtml');
 
 class WhRedactor extends CInputWidget
 {
@@ -32,12 +32,12 @@ class WhRedactor extends CInputWidget
 
         $this->attachBehavior('ywplugin', array('class' => 'yiiwheels.behaviors.WhPlugin'));
 
-        if (!$style = WhHtml::popOption('style', $this->htmlOptions, '')) {
+        if (!$style = TbHtml::popOption('style', $this->htmlOptions, '')) {
             $this->htmlOptions['style'] = $style;
         }
 
-        $width                      = WhHtml::getOption('width', $this->htmlOptions, '100%');
-        $height                     = WhHtml::popOption('height', $this->htmlOptions, '450px');
+        $width                      = TbHtml::getOption('width', $this->htmlOptions, '100%');
+        $height                     = TbHtml::popOption('height', $this->htmlOptions, '450px');
         $this->htmlOptions['style'] = "width:{$width};height:{$height};" . $this->htmlOptions['style'];
     }
 
@@ -57,13 +57,13 @@ class WhRedactor extends CInputWidget
     {
         list($name, $id) = $this->resolveNameID();
 
-        $this->htmlOptions = WhHtml::defaultOption('id', $id, $this->htmlOptions);
-        $this->htmlOptions = WhHtml::defaultOption('name', $name, $this->htmlOptions);
+        $this->htmlOptions = TbHtml::defaultOption('id', $id, $this->htmlOptions);
+        $this->htmlOptions = TbHtml::defaultOption('name', $name, $this->htmlOptions);
 
         if ($this->hasModel()) {
-            echo WhHtml::activeTextArea($this->model, $this->attribute, $this->htmlOptions);
+            echo CHtml::activeTextArea($this->model, $this->attribute, $this->htmlOptions);
         } else {
-            echo WhHtml::textArea($name, $this->value, $this->htmlOptions);
+            echo CHtml::textArea($name, $this->value, $this->htmlOptions);
         }
 
     }
@@ -89,7 +89,7 @@ class WhRedactor extends CInputWidget
         $cs->registerScriptFile($assetsUrl . '/js/' . $script);
 
         /* register language */
-        $language = WhHtml::getOption('lang', $this->pluginOptions);
+        $language = TbHtml::getOption('lang', $this->pluginOptions);
         if (!empty($language) && $language != 'en') {
             $cs->registerScriptFile($assetsUrl . '/js/langs/' . $language . '.js', CClientScript::POS_END);
         }
@@ -98,7 +98,7 @@ class WhRedactor extends CInputWidget
         $this->registerPlugins($assetsUrl);
 
         /* initialize plugin */
-        $selector = '#' . WhHtml::getOption('id', $this->htmlOptions, $this->getId());
+        $selector = '#' . TbHtml::getOption('id', $this->htmlOptions, $this->getId());
 
         $this->getApi()->registerPlugin('redactor', $selector, $this->pluginOptions);
     }
