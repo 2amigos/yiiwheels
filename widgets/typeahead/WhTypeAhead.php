@@ -31,10 +31,6 @@ class WhTypeAhead extends CInputWidget
      */
     public function init()
     {
-        if (empty($this->data) && $this->asDropDownList === true) {
-            throw new CException(Yii::t('zii', '"data" attribute cannot be blank'));
-        }
-
         $this->attachBehavior('ywplugin', array('class' => 'yiiwheels.behaviors.WhPlugin'));
     }
 
@@ -82,7 +78,7 @@ class WhTypeAhead extends CInputWidget
             : '';
 
         $cs->registerCssFile($assetsUrl . '/css/typeahead' . $min . '.css');
-        $cs->registerScriptFile($assetsUrl . '/js/typeahead' . $min . '.js');
+        $cs->registerScriptFile($assetsUrl . '/js/typeahead' . $min . '.js', CClientScript::POS_END);
 
         /* initialize plugin */
         $selector = '#' . TbHtml::getOption('id', $this->htmlOptions, $this->getId());
