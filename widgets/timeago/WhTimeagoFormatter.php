@@ -1,6 +1,6 @@
 <?php
 /**
- * WhTimeAgo class
+ * WhTimeAgoFormatter class
  *
  * @author Alex G <gubarev.alex@gmail.com>
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
