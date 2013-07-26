@@ -61,6 +61,9 @@ class WhMultiSelect extends CInputWidget
         $this->htmlOptions = TbHtml::defaultOption('id', $id, $this->htmlOptions);
         $this->htmlOptions = TbHtml::defaultOption('name', $name, $this->htmlOptions);
 
+        // fixes #32: 'multiple' will be forced later in jQuery plugin
+        $this->htmlOptions['multiple'] = 'multiple';
+
         if ($this->hasModel()) {
             echo CHtml::activeDropDownList($this->model, $this->attribute, $this->data, $this->htmlOptions);
         } else {
