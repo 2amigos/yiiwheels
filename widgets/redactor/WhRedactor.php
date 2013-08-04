@@ -86,7 +86,7 @@ class WhRedactor extends CInputWidget
             : 'redactor.min.js';
 
         $cs->registerCssFile($assetsUrl . '/css/redactor.css');
-        $cs->registerScriptFile($assetsUrl . '/js/' . $script);
+        $cs->registerScriptFile($assetsUrl . '/js/' . $script, CClientScript::POS_END);
 
         /* register language */
         $language = TbHtml::getOption('lang', $this->pluginOptions);
