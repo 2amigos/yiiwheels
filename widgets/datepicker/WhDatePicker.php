@@ -84,7 +84,7 @@ class WhDatePicker extends CInputWidget
         $cs = Yii::app()->getClientScript();
 
         $cs->registerCssFile($assetsUrl . '/css/datepicker.css');
-        $cs->registerScriptFile($assetsUrl . '/js/bootstrap-datepicker.js');
+        $cs->registerScriptFile($assetsUrl . '/js/bootstrap-datepicker.js', CClientScript::POS_END);
 
         if ($language = TbHtml::getOption('language', $this->pluginOptions)) {
             $cs->registerScriptFile(
