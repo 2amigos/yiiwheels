@@ -6,9 +6,9 @@
  * @copyright Copyright &copy; 2amigos.us 2013-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets.fileupload
- * @uses YiiStrap.helpers.TbHtml
+ * @uses YiiStrap.helpers.TbArray
  */
-Yii::import('bootstrap.helpers.TbHtml');
+Yii::import('bootstrap.helpers.TbArray');
 Yii::import('zii.widgets.jui.CJuiInputWidget');
 
 class WhFileUpload extends CJuiInputWidget
@@ -165,7 +165,7 @@ class WhFileUpload extends CJuiInputWidget
         $cs->registerScriptFile($assetsUrl . '/js/jquery.fileupload-ui.js', CClientScript::POS_END);
 
         /* initialize plugin */
-        $selector = '#' . TbHtml::getOption('id', $this->htmlOptions, $this->getId());
+        $selector = '#' . TbArray::getValue('id', $this->htmlOptions, $this->getId());
 
         $this->getApi()->registerPlugin('fileupload', $selector, $this->options);
     }

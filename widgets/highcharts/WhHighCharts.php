@@ -30,9 +30,9 @@
  * @copyright Copyright &copy; 2amigos.us 2013-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets.highcharts
- * @uses YiiStrap.helpers.TbHtml
+ * @uses YiiStrap.helpers.TbArray
  */
-Yii::import('bootstrap.helpers.TbHtml');
+Yii::import('bootstrap.helpers.TbArray');
 
 class WhHighCharts extends CWidget
 {
@@ -53,7 +53,7 @@ class WhHighCharts extends CWidget
     public function init()
     {
         $this->attachBehavior('ywplugin', array('class' => 'yiiwheels.behaviors.WhPlugin'));
-        $this->htmlOptions['id'] = TbHtml::getOption('id', $this->htmlOptions, $this->getId());
+        $this->htmlOptions['id'] = TbArray::getValue('id', $this->htmlOptions, $this->getId());
     }
 
     /**
@@ -99,7 +99,7 @@ class WhHighCharts extends CWidget
             $cs->registerScriptFile($assetsUrl . '/js/modules/exporting.js');
         }
 
-        if ($theme = TbHtml::getOption('theme', $this->pluginOptions)) {
+        if ($theme = TbArray::getValue('theme', $this->pluginOptions)) {
             $cs->registerScriptFile($assetsUrl . '/js/themes/' . $theme . '.js');
         }
 

@@ -223,7 +223,7 @@ function() {
             : '#';
 
         if (!$this->displayText) {
-            $htmlOptions          = TbHtml::popOption('htmlOptions', $this->toggleOptions, array());
+            $htmlOptions          = TbArray::popValue('htmlOptions', $this->toggleOptions, array());
             $htmlOptions['title'] = $this->getButtonLabel($checked);
             $htmlOptions['rel']   = 'tooltip';
             echo CHtml::link(TbHtml::icon($toggleOptions['icon']), $toggleOptions['url'], $htmlOptions);
@@ -239,7 +239,7 @@ function() {
     {
         $js = array();
 
-        $function = CJavaScript::encode(TbHtml::popOption('click', $this->toggleOptions, ''));
+        $function = CJavaScript::encode(TbArray::popValue('click', $this->toggleOptions, ''));
 
         $class = preg_replace('/\s+/', '.', $this->toggleOptions['htmlOptions']['class']);
         $js[]  = "$(document).on('click','#{$this->grid->id} a.{$class}',$function);";

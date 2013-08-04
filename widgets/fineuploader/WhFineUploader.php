@@ -6,9 +6,9 @@
  * @copyright Copyright &copy; 2amigos.us 2013-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets.fileuploader
- * @uses YiiStrap.helpers.TbHtml
+ * @uses YiiStrap.helpers.TbArray
  */
-Yii::import('bootstrap.helpers.TbHtml');
+Yii::import('bootstrap.helpers.TbArray');
 
 class WhFineUploader extends CInputWidget
 {
@@ -99,7 +99,7 @@ class WhFineUploader extends CInputWidget
         $cs->registerScriptFile($assetsUrl . '/js/' . $script);
 
         /* initialize plugin */
-        $selector = '#' . TbHtml::getOption('id', $this->htmlOptions, $this->getId());
+        $selector = '#' . TbArray::getValue('id', $this->htmlOptions, $this->getId());
 
         $this->getApi()->registerPlugin(
             'fineUploader',
@@ -117,8 +117,8 @@ class WhFineUploader extends CInputWidget
     {
         list($name, $id) = $this->resolveNameID();
 
-        $this->htmlOptions = TbHtml::defaultOption('id', $id, $this->htmlOptions);
-        $this->htmlOptions = TbHtml::defaultOption('name', $name, $this->htmlOptions);
+        TbArray::defaultValue('id', $id, $this->htmlOptions);
+        TbArray::defaultValue('name', $name, $this->htmlOptions);
 
 
         $this->defaultOptions = array(

@@ -9,6 +9,7 @@
  * @uses YiiStrap.helpers.TbHtml
  */
 Yii::import('bootstrap.helpers.TbHtml');
+Yii::import('bootstrap.helpers.TbArray');
 
 class WhDatePicker extends CInputWidget
 {
@@ -29,8 +30,8 @@ class WhDatePicker extends CInputWidget
     {
         $this->attachBehavior('ywplugin', array('class' => 'yiiwheels.behaviors.WhPlugin'));
 
-        $this->htmlOptions = TbHtml::defaultOption('autocomplete', 'off', $this->htmlOptions);
-        $this->htmlOptions = TbHtml::addClassName('grd-white', $this->htmlOptions);
+        TbArray::defaultValue('autocomplete', 'off', $this->htmlOptions);
+        TbHtml::addCssClass('grd-white', $this->htmlOptions);
 
         $this->initOptions();
     }
@@ -40,8 +41,8 @@ class WhDatePicker extends CInputWidget
      */
     public function initOptions()
     {
-        $this->pluginOptions = TbHtml::defaultOption('format', 'mm/dd/yyyy', $this->pluginOptions);
-        $this->pluginOptions = TbHtml::defaultOption('autoclose', true, $this->pluginOptions);
+        TbArray::defaultValue('format', 'mm/dd/yyyy', $this->pluginOptions);
+        TbArray::defaultValue('autoclose', true, $this->pluginOptions);
     }
 
     /**
@@ -60,8 +61,8 @@ class WhDatePicker extends CInputWidget
     {
         list($name, $id) = $this->resolveNameID();
 
-        $this->htmlOptions = TbHtml::defaultOption('id', $id, $this->htmlOptions);
-        $this->htmlOptions = TbHtml::defaultOption('name', $name, $this->htmlOptions);
+        TbArray::defaultValue('id', $id, $this->htmlOptions);
+        TbArray::defaultValue('name', $name, $this->htmlOptions);
 
         if ($this->hasModel()) {
             echo CHtml::activeTextField($this->model, $this->attribute, $this->htmlOptions);
@@ -86,7 +87,7 @@ class WhDatePicker extends CInputWidget
         $cs->registerCssFile($assetsUrl . '/css/datepicker.css');
         $cs->registerScriptFile($assetsUrl . '/js/bootstrap-datepicker.js');
 
-        if ($language = TbHtml::getOption('language', $this->pluginOptions)) {
+        if ($language = TbArray::getValue('language', $this->pluginOptions)) {
             $cs->registerScriptFile(
                 $assetsUrl . '/js/locales/bootstrap-datepicker.' . $language . '.js',
                 CClientScript::POS_END
@@ -94,7 +95,7 @@ class WhDatePicker extends CInputWidget
         }
 
         /* initialize plugin */
-        $selector = '#' . TbHtml::getOption('id', $this->htmlOptions, $this->getId());
+        $selector = '#' . TbArray::getValue('id', $this->htmlOptions, $this->getId());
 
         $this->getApi()->registerPlugin('datepicker', $selector, $this->pluginOptions);
         $this->getApi()->registerEvents($selector, $this->events);

@@ -9,7 +9,7 @@
  * @uses YiiStrap.helpers.TbHtml
  */
 
-Yii::import('bootstrap.helpers.TbHtml');
+Yii::import('bootstrap.helpers.TbArray');
 
 class WhMaskInput extends CInputWidget
 {
@@ -49,8 +49,8 @@ class WhMaskInput extends CInputWidget
     {
         list($name, $id) = $this->resolveNameID();
 
-        $this->htmlOptions = TbHtml::defaultOption('id', $id, $this->htmlOptions);
-        $this->htmlOptions = TbHtml::defaultOption('name', $name, $this->htmlOptions);
+        TbArray::defaultValue('id', $id, $this->htmlOptions);
+        TbArray::defaultValue('name', $name, $this->htmlOptions);
 
         if ($this->hasModel()) {
             echo CHtml::activeTextField($this->model, $this->attribute, $this->htmlOptions);
@@ -74,7 +74,7 @@ class WhMaskInput extends CInputWidget
         $cs->registerScriptFile($assetsUrl . '/js/jquery.mask.js');
 
         /* initialize plugin */
-        $selector = '#' . TbHtml::getOption('id', $this->htmlOptions, $this->getId());
+        $selector = '#' . TbArray::getValue('id', $this->htmlOptions, $this->getId());
 
         $options = !empty($this->pluginOptions) ? CJavaScript::encode($this->pluginOptions) : '{}';
         $script = "jQuery('{$selector}').mask('{$this->mask}',{$options});";

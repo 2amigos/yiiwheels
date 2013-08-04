@@ -55,6 +55,6 @@ class WhDetailView extends CDetailView
             }
         }
 
-        $this->htmlOptions = TbHtml::addClassName(implode(' ', $classes), $this->htmlOptions);
+        TbHtml::addCssClass(implode(' ', $classes), $this->htmlOptions);
     }
 }

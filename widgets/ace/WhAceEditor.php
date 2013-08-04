@@ -10,6 +10,7 @@
  * @uses Yiistrap.helpers.TbHtml
  */
 Yii::import('bootstrap.helpers.TbHtml');
+Yii::import('bootstrap.helpers.TbArray');
 
 class WhAceEditor extends CInputWidget
 {
@@ -73,8 +74,8 @@ class WhAceEditor extends CInputWidget
     {
         list($name, $id) = $this->resolveNameID();
 
-        $this->htmlOptions = TbHtml::defaultOption('id', $id, $this->htmlOptions);
-        $this->htmlOptions = TbHtml::defaultOption('name', $name, $this->htmlOptions);
+        TbArray::defaultValue('id', $id, $this->htmlOptions);
+        TbArray::defaultValue('name', $name, $this->htmlOptions);
 
         $tagOptions = $this->htmlOptions;
 
@@ -108,14 +109,14 @@ class WhAceEditor extends CInputWidget
 
         $cs->registerScriptFile($assetsUrl . '/js/ace.js');
 
-        $id = TbHtml::getOption('id', $this->htmlOptions, $this->getId());
+        $id = TbArray::getValue('id', $this->htmlOptions, $this->getId());
 
         /* Global value that will hold the editor */
         $cs->registerScript(uniqid(__CLASS__ . '#' . $id, true), 'var ' . $id . ';', CClientScript::POS_HEAD);
 
         ob_start();
         /* initialize plugin */
-        $selector = TbHtml::getOption('id', $this->htmlOptions, $this->getId());
+        $selector = TbArray::getValue('id', $this->htmlOptions, $this->getId());
 
         echo $selector . '= ace.edit("' . $id . '");' . PHP_EOL;
         echo $selector . '.setTheme("ace/theme/' . $this->theme . '");' . PHP_EOL;
