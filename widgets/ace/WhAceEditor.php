@@ -107,7 +107,7 @@ class WhAceEditor extends CInputWidget
         /* @var $cs CClientScript */
         $cs = Yii::app()->getClientScript();
 
-        $cs->registerScriptFile($assetsUrl . '/js/ace.js');
+        $cs->registerScriptFile($assetsUrl . '/js/ace.js', CClientScript::POS_END);
 
         $id = TbArray::getValue('id', $this->htmlOptions, $this->getId());
 
