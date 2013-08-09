@@ -223,7 +223,7 @@ function() {
             : '#';
 
         if (!$this->displayText) {
-            $htmlOptions          = TbArray::popValue('htmlOptions', $this->toggleOptions, array());
+            $htmlOptions          = TbArray::getValue('htmlOptions', $this->toggleOptions, array());
             $htmlOptions['title'] = $this->getButtonLabel($checked);
             $htmlOptions['rel']   = 'tooltip';
             echo CHtml::link(TbHtml::icon($toggleOptions['icon']), $toggleOptions['url'], $htmlOptions);
