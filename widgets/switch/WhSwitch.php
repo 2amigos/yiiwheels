@@ -7,10 +7,12 @@
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
  * @copyright Copyright &copy; 2amigos.us 2013-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
- * @package YiiWheels.widgets.typeahead
+ * @package YiiWheels.widgets.switch
  * @uses YiiStrap.helpers.TbArray
+ * @uses YiiStrap.helpers.TbHtml
  */
 Yii::import('bootstrap.helpers.TbArray');
+Yii::import('bootstrap.helpers.TbHtml');
 
 class WhSwitch extends CInputWidget
 {
