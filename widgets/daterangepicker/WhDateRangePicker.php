@@ -32,11 +32,6 @@ class WhDateRangePicker extends CInputWidget
     public $pluginOptions = array();
 
     /**
-     * @var array the HTML attributes for the widget container.
-     */
-    public $htmlOptions = array();
-
-    /**
      * Initializes the widget.
      */
     public function init()
