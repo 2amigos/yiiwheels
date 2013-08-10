@@ -1,11 +1,12 @@
-var RELANG = {};
-RELANG['da'] = {
+(function ($) {
+$.Redactor.opts.langs['da'] = {
     html: 'HTML',
     video: 'Indsæt Video...',
     image: 'Indsæt Billede...',
     table: 'Tabel',
     link: 'Hyperlink',
     link_insert: 'Indsæt Hyperlink ...',
+    link_edit: 'Edit link',
     unlink: 'Fjern Hyperlink',
     formatting: 'Formatering',
     paragraph: 'Paragraf',
@@ -15,7 +16,8 @@ RELANG['da'] = {
     header2: 'Overskrift 2',
     header3: 'Overskrift 3',
     header4: 'Overskrift 4',
-    bold: 'Fed',
+    header5: 'Overskrift 5',
+    bold:  'Fed',
     italic: 'Kursiv',
     fontcolor: 'Skriftfarve',
     backcolor: 'Baggrundsfarve',
@@ -63,7 +65,10 @@ RELANG['da'] = {
     fullscreen: 'Fuldskærm',
     deleted: 'Slettet',
     anchor: 'Anchor',
-    link_new_tab: 'Open link in new tab',
-    underline: 'Underline',
-    alignment: 'Alignment'
+	link_new_tab: 'Open link in new tab',
+	underline: 'Underline',
+	alignment: 'Alignment',
+	filename: 'Name (optional)',
+	edit: 'Edit'
 };
+})( jQuery );
