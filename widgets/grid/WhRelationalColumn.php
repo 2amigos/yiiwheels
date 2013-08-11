@@ -70,6 +70,7 @@ class WhRelationalColumn extends TbDataColumn
         if (empty($this->url))
             $this->url = Yii::app()->getRequest()->requestUri;
 
+		$this->attachBehavior('ywplugin', array('class' => 'yiiwheels.behaviors.WhPlugin'));
         $this->registerClientScript();
     }
 
@@ -123,9 +124,13 @@ class WhRelationalColumn extends TbDataColumn
      */
     public function registerClientScript()
     {
-        Yii::app()->bootstrap->registerAssetCss('bootstrap-relational.css');
+		$path = __DIR__ . DIRECTORY_SEPARATOR . 'assets';
+		$assetsUrl = $this->getAssetsUrl($path);
+
         /** @var $cs CClientScript */
         $cs = Yii::app()->getClientScript();
+		$cs->registerCssFile($assetsUrl . '/css/bootstrap-relational.css');
+
         if ($this->afterAjaxUpdate !== null) {
             if ((!$this->afterAjaxUpdate instanceof CJavaScriptExpression) && strpos(
                     $this->afterAjaxUpdate,
