@@ -8,8 +8,6 @@
  *  - Display an extended summary of the records shown. The extended summary can be configured to any of the
  *  WhOperation type of widgets.
  *  - Automatic chart display (using WhHighCharts widget), where user can 'switch' between views.
- *  - Selectable cells
- *  - Sortable rows
  *
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
  * @copyright Copyright &copy; 2amigos.us 2013-
@@ -103,68 +101,15 @@ class WhGridView extends TbGridView
 	public $chartOptions = array();
 
 	/**
-	 * @var bool $sortableRows. If true the rows at the table will be sortable.
+	 * @var bool whether to make the grid responsive
 	 */
-	public $sortableRows = false;
-
-	/**
-	 * @var string Database field name for row sorting
-	 */
-	public $sortableAttribute = 'sort_order';
-
-	/**
-	 * @var boolean Save sort order by ajax defaults to false
-	 * @see bootstrap.action.TbSortableAction for an easy way to use with your controller
-	 */
-	public $sortableAjaxSave = false;
-
-	/**
-	 * @var string Name of the action to call and sort values
-	 * @see bootstrap.action.TbSortableAction for an easy way to use with your controller
-	 *
-	 * <pre>
-	 *  'sortableAction' => 'module/controller/sortable' | 'controller/sortable'
-	 * </pre>
-	 *
-	 * The widget will make use of the string to create the URL and then append $sortableAttribute
-	 * @see $sortableAttribute
-	 */
-	public $sortableAction;
-
-	/**
-	 * @var string a javascript function that will be invoked after a successful sorting is done.
-	 * The function signature is <code>function(id, position)</code> where 'id' refers to the ID of the model id key,
-	 * 'position' the new position in the list.
-	 */
-	public $afterSortableUpdate;
-
-	/**
-	 * @var bool whether to allow selecting of cells
-	 */
-	public $selectableCells = false;
-
-	/**
-	 * @var string the filter to use to allow selection. For example, if you set the "htmlOptions" property of a column to have a
-	 * "class" of "tobeselected", you could set this property as: "td.tobeselected" in order to allow  selection to
-	 * those columns with that class only.
-	 */
-	public $selectableCellsFilter = 'td';
-
-	/**
-	 * @var string a javascript function that will be invoked after a selection is done.
-	 * The function signature is <code>function(selected)</code> where 'selected' refers to the selected columns.
-	 */
-	public $afterSelectableCells;
+	public $responsiveTable = false;
 
 	/**
 	 * @var boolean $displayExtendedSummary a helper property that is set to true if we have to render the
 	 * extended summary
 	 */
 	protected $displayExtendedSummary;
-	/**
-	 * @var boolean $displayChart a helper property that is set to true if we have to render a chart.
-	 */
-	protected $displayChart;
 
 	/**
 	 * @var WhOperation[] $extendedSummaryTypes hold the current configured TbOperation that will process column values.
@@ -175,21 +120,18 @@ class WhGridView extends TbGridView
 	 * @var array $extendedSummaryOperations hold the supported operation types
 	 */
 	protected $extendedSummaryOperations = array(
-		'WhSumOperation',
-		'WhCountOfTypeOperation',
-		'WhPercentOfTypeOperation',
-		'WhPercentOfTypeEasyPieOperation',
-		'WhPercentOfTypeGooglePieOperation'
+		'yiiwheels.widgets.grid.operations.WhSumOperation',
+		'yiiwheels.widgets.grid.operations.WhCountOfTypeOperation',
+		'yiiwheels.widgets.grid.operations.WhPercentOfTypeOperation',
+		'yiiwheels.widgets.grid.operations.WhPercentOfTypeEasyPieOperation',
+		'yiiwheels.widgets.grid.operations.WhPercentOfTypeGooglePieOperation'
 	);
 
 	/**
-	 *### .init()
-	 *
 	 * Widget initialization
 	 */
 	public function init()
 	{
-
 		if (preg_match(
 				'/extendedsummary/i',
 				$this->template
@@ -198,52 +140,20 @@ class WhGridView extends TbGridView
 			$this->template .= "\n{extendedSummaryContent}";
 			$this->displayExtendedSummary = true;
 		}
-		if (!empty($this->chartOptions) && @$this->chartOptions['data'] && $this->dataProvider->getItemCount()) {
-			$this->displayChart = true;
-		}
+
+		$this->attachBehavior('ywplugin', array('class' => 'yiiwheels.behaviors.WhPlugin'));
+		$this->attachBehavior('ywchart', array('class' => 'yiiwheels.widgets.grid.behaviors.WhChart'));
 
 		parent::init();
 	}
 
 	/**
-	 *### .renderContent()
-	 *
 	 * Renders grid content
 	 */
 	public function renderContent()
 	{
 		parent::renderContent();
 		$this->registerCustomClientScript();
-	}
-
-	/**
-	 * Renders the key values of the data in a hidden tag.
-	 */
-	public function renderKeys()
-	{
-		$data = $this->dataProvider->getData();
-
-		if (!$this->sortableRows || (isset($data[0]) && !$this->getAttribute($data[0], (string)$this->sortableAttribute))) {
-			parent::renderKeys();
-		}
-
-		echo CHtml::openTag(
-			'div',
-			array(
-				'class' => 'keys',
-				'style' => 'display:none',
-				'title' => Yii::app()->getRequest()->getUrl(),
-			)
-		);
-		foreach ($data as $d) {
-			echo CHtml::tag(
-				'span',
-				array('data-order' => $this->getAttribute($d, $this->sortableAttribute)),
-				CHtml::encode($this->getPrimaryKey($d))
-			);
-		}
-		echo "</div>\n";
-		return true;
 	}
 
 	/**
@@ -320,151 +230,6 @@ class WhGridView extends TbGridView
 			}
 			echo "</tfoot>\n";
 		}
-	}
-
-
-	/**
-	 * Renders grid/chart control buttons to switch between both components
-	 */
-	public function renderChartControlButtons()
-	{
-		echo '<div class="row">';
-		echo TbHtml::buttonGroup(array(
-			array(
-				'label' => Yii::t('zii', 'Display Grid'),
-				'url' => '#',
-				'htmlOptions' => array('class' => 'active ' . $this->getId() . '-grid-control grid')
-			),
-			array(
-				'label' => Yii::t('zii', 'Display Chart'),
-				'url' => '#',
-				'htmlOptions' => array('class' => $this->getId() . '-grid-control chart')
-			),
-		), array('toggle' => TbHtml::BUTTON_TOGGLE_RADIO, 'style' => 'margin-bottom:5px'));
-		echo '</div>';
-
-	}
-
-	/**
-	 * Registers grid/chart control button script
-	 * @returns string the chart id
-	 */
-	public function registerChartControlButtonsScript()
-	{
-		// cleaning out most possible characters invalid as javascript variable identifiers.
-		$chartId = preg_replace('[-\\ ?]', '_', 'xyzChart' . $this->getId());
-
-		$this->componentsReadyScripts[] = '$(document).on("click",".' . $this->getId() . '-grid-control", function(){
-			if ($(this).hasClass("grid") && $("#' . $this->getId() . ' #' . $chartId . '").is(":visible"))
-			{
-				$("#' . $this->getId() . ' #' . $chartId . '").hide();
-				$("#' . $this->getId() . ' table.items").show();
-			}
-			if ($(this).hasClass("chart") && $("#' . $this->getId() . ' table.items").is(":visible"))
-			{
-				$("#' . $this->getId() . ' table.items").hide();
-				$("#' . $this->getId() . ' #' . $chartId . '").show();
-			}
-			return false;
-		});';
-
-		return $chartId;
-	}
-
-	/**
-	 * Renders a chart based on the data series specified
-	 * @throws CException
-	 */
-	public function renderChart()
-	{
-		if (!$this->displayChart || $this->dataProvider->getItemCount() <= 0) {
-			return null;
-		}
-
-		if (!isset($this->chartOptions['data']['series'])) {
-			throw new CException(Yii::t(
-				'zii',
-				'You need to set the "series" attribute in order to render a chart'
-			));
-		}
-
-		$configSeries = $this->chartOptions['data']['series'];
-		if (!is_array($configSeries)) {
-			throw new CException(Yii::t('zii', '"chartOptions.series" is expected to be an array.'));
-		}
-
-		if (!isset($this->chartOptions['config'])) {
-			$this->chartOptions['config'] = array();
-		}
-
-		$this->renderChartControlButtons();
-		$chartId = $this->registerChartControlButtonsScript();
-
-		// render Chart
-		// chart options
-		$data = $this->dataProvider->getData();
-		$count = count($data);
-		$seriesData = array();
-		$cnt = 0;
-		foreach ($configSeries as $set) {
-			$seriesData[$cnt] = array('name' => isset($set['name']) ? $set['name'] : null, 'data' => array());
-
-			for ($row = 0; $row < $count; ++$row) {
-				$column = $this->getColumnByName($set['attribute']);
-				if (!is_null($column) && $column->value !== null) {
-					$seriesData[$cnt]['data'][] = $this->evaluateExpression(
-						$column->value,
-						array('data' => $data[$row], 'row' => $row)
-					);
-				} else {
-					$value = CHtml::value($data[$row], $set['attribute']);
-					$seriesData[$cnt]['data'][] = is_numeric($value) ? (float)$value : $value;
-				}
-
-			}
-			++$cnt;
-		}
-
-		$options = CMap::mergeArray($this->chartOptions['config'], array('series' => $seriesData));
-
-		$this->chartOptions['htmlOptions'] = isset($this->chartOptions['htmlOptions'])
-			? $this->chartOptions['htmlOptions']
-			: array();
-
-		// sorry but use a class to provide styles, we need this
-		$this->chartOptions['htmlOptions']['style'] = 'display:none';
-
-		// build unique ID
-		// important!
-		echo '<div class="row-fluid">';
-		if ($this->ajaxUpdate !== false) {
-			if (isset($options['chart']) && is_array($options['chart'])) {
-				$options['chart']['renderTo'] = $chartId;
-			} else {
-				$options['chart'] = array('renderTo' => $chartId);
-			}
-			$jsOptions = CJSON::encode($options);
-
-			if (isset($this->chartOptions['htmlOptions']['data-config'])) {
-				unset($this->chartOptions['htmlOptions']['data-config']);
-			}
-
-			echo "<div id='{$chartId}' " . CHtml::renderAttributes(
-					$this->chartOptions['htmlOptions']
-				) . " data-config='{$jsOptions}'></div>";
-
-			$this->componentsAfterAjaxUpdate[] = "highchart{$chartId} = new Highcharts.Chart($('#{$chartId}').data('config'));";
-		}
-		$configChart = array(
-			'class' => 'bootstrap.widgets.TbHighCharts',
-			'id' => $chartId,
-			'options' => $options,
-			'htmlOptions' => $this->chartOptions['htmlOptions']
-		);
-		$chart = Yii::createComponent($configChart);
-		$chart->init();
-		$chart->run();
-		echo '</div>';
 	}
 
 	/**
@@ -569,59 +334,6 @@ class WhGridView extends TbGridView
 			$this->componentsAfterAjaxUpdate[] = $fixedHeaderJs;
 		}
 
-		if ($this->sortableRows) {
-			$cs->registerCoreScript('jquery.ui');
-			$cs->registerScriptFile($assetsUrl . '/js/jquery.sortable.gridview.js', CClientScript::POS_END);
-
-			$afterSortableUpdate = '';
-			if ($this->afterSortableUpdate !== null) {
-				if (!($this->afterSortableUpdate instanceof CJavaScriptExpression) && strpos(
-						$this->afterSortableUpdate,
-						'js:'
-					) !== 0
-				) {
-					$afterSortableUpdate = new CJavaScriptExpression($this->afterSortableUpdate);
-				} else {
-					$afterSortableUpdate = $this->afterSortableUpdate;
-				}
-			}
-
-			$this->selectableRows = 1;
-
-			if ($this->sortableAjaxSave && $this->sortableAction !== null) {
-				$sortableAction = Yii::app()->createUrl(
-					$this->sortableAction,
-					array('sortableAttribute' => $this->sortableAttribute)
-				);
-			} else {
-				$sortableAction = '';
-			}
-
-			$afterSortableUpdate = CJavaScript::encode($afterSortableUpdate);
-			$this->componentsReadyScripts[] = "$.fn.yiiGridView.sortable('{$this->id}', '{$sortableAction}', {$afterSortableUpdate});";
-			$this->componentsAfterAjaxUpdate[] = "$.fn.yiiGridView.sortable('{$this->id}', '{$sortableAction}', {$afterSortableUpdate});";
-		}
-
-		if ($this->selectableCells) {
-			$cs->registerCoreScript('jquery.ui');
-			$cs->registerScriptFile($assetsUrl . '/js/jquery.selectable.gridview.js', CClientScript::POS_END);
-
-			$afterSelectableCells = '';
-			if ($this->afterSelectableCells !== null) {
-				echo strpos($this->afterSelectableCells, 'js:');
-				if (!($this->afterSelectableCells instanceof CJavaScriptExpression) &&
-					strpos($this->afterSelectableCells, 'js:') !== 0
-				) {
-					$afterSelectableCells = new CJavaScriptExpression($this->afterSelectableCells);
-				} else {
-					$afterSelectableCells = $this->afterSelectableCells;
-				}
-			}
-			$afterSelectableCells = CJavaScript::encode($afterSelectableCells);
-			$this->componentsReadyScripts[] = "$.fn.yiiGridView.selectable('{$this->id}','{$this->selectableCellsFilter}',{$afterSelectableCells});";
-			$this->componentsAfterAjaxUpdate[] = "$.fn.yiiGridView.selectable('{$this->id}','{$this->selectableCellsFilter}', {$afterSelectableCells});";
-		}
-
 		$cs->registerScript(__CLASS__ . '#Wh' . $this->id,
 			'$grid = $("#' . $this->id . '");' .
 			$fixedHeaderJs . '
@@ -659,6 +371,33 @@ class WhGridView extends TbGridView
 }
 });'
 		);
+	}
+
+	/**
+	 * Helper function to get a column by its name
+	 * @param string $name
+	 * @return CDataColumn|null
+	 */
+	public function getColumnByName($name)
+	{
+		foreach ($this->columns as $column) {
+			if (strcmp($column->name, $name) === 0) {
+				return $column;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Creates column objects and initializes them.
+	 */
+	protected function initColumns()
+	{
+		parent::initColumns();
+		if($this->responsiveTable) {
+			$this->attachBehavior('ywresponsive', array('class' => 'yiiwheels.widgets.grid.behaviors.WhResponsive'));
+			$this->writeResponsiveCss($this->columns, $this->id);
+		}
 	}
 
 	/**
@@ -716,21 +455,6 @@ class WhGridView extends TbGridView
 			$this->extendedSummaryTypes[$name]->init();
 		}
 		return $this->extendedSummaryTypes[$name];
-	}
-
-	/**
-	 * Helper function to get a column by its name
-	 * @param string $name
-	 * @return CDataColumn|null
-	 */
-	protected function getColumnByName($name)
-	{
-		foreach ($this->columns as $column) {
-			if (strcmp($column->name, $name) === 0) {
-				return $column;
-			}
-		}
-		return null;
 	}
 
 }

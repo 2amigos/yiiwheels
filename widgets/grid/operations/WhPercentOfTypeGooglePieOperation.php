@@ -13,7 +13,7 @@
  */
 Yii::import('yiiwheels.widgts.grid.operations.WhPercentOfTypeOperation');
 
-class TbPercentOfTypeGooglePieOperation extends WhPercentOfTypeOperation
+class WhPercentOfTypeGooglePieOperation extends WhPercentOfTypeOperation
 {
 	/**
 	 * @var string $chartCssClass the class name of the layer holding the chart
