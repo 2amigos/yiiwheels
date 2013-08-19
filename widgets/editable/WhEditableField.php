@@ -145,10 +145,10 @@ class WhEditableField extends WhEditable
 				'Select' => array('select', 'date'),
 				'Check' => array('checklist')
 			);
-			$title = Yii::t('EditableField.editable', 'Enter');
+			$title = Yii::t('WhEditableField.editable', 'Enter');
 			foreach ($titles as $t => $types) {
 				if (in_array($this->type, $types)) {
-					$title = Yii::t('EditableField.editable', $t);
+					$title = Yii::t('WhEditableField.editable', $t);
 				}
 			}
 			$this->title = $title . ' ' . $staticModel->getAttributeLabel($this->attribute);
