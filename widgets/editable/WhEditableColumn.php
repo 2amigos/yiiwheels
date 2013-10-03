@@ -49,7 +49,7 @@ class WhEditableColumn extends CDataColumn
 		$isModel = $data instanceOf CModel;
 
 		if ($isModel) {
-			$widgetClass = 'EditableField';
+			$widgetClass = 'WhEditableField';
 			$options = array(
 				'model' => $data,
 				'attribute' => empty($this->editable['attribute']) ? $this->name : $this->editable['attribute'],
