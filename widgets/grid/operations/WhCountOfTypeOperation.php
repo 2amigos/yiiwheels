@@ -12,7 +12,7 @@
  * @package YiiWheels.widgets.grid.operations
  * @uses YiiWheels.widgets.grid.operations.WhOperation
  */
-Yii::import('yiiwheels.widgts.grid.operations.WhOperation');
+Yii::import('yiiwheels.widgets.grid.operations.WhOperation');
 
 class WhCountOfTypeOperation extends WhOperation
 {
