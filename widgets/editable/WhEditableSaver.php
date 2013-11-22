@@ -14,6 +14,8 @@
  * @copyright Copyright &copy; Vitaliy Potapov 2012
  * @version 1.3.1
  */
+Yii::import('yiiwheels.widgets.editable.WhEditableField');
+
 class WhEditableSaver extends CComponent
 {
     /**
@@ -109,7 +111,7 @@ class WhEditableSaver extends CComponent
         $this->model = new $this->modelClass();
         
         $isFormModel = $this->model instanceOf CFormModel;
-        $isMongo = EditableField::isMongo($this->model);
+        $isMongo = WhEditableField::isMongo($this->model);
         
         if (empty($this->primaryKey) && !$isFormModel) {
             throw new CException(Yii::t('EditableSaver.editable','Property "primaryKey" should be defined.'));
@@ -132,7 +134,7 @@ class WhEditableSaver extends CComponent
         
         //resolve model only for mongo! we should check attribute safety
         if($isMongo) {
-			$resolved = EditableField::resolveModels($this->model, $this->attribute);
+			$resolved = WhEditableField::resolveModels($this->model, $this->attribute);
 			$this->model = $resolved['model']; //can be related model now
 			$this->attribute = $resolved['attribute'];
 			$staticModel = $resolved['staticModel'];	        	
