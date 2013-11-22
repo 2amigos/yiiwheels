@@ -48,7 +48,7 @@ class WhEditableColumn extends CDataColumn
 		$isModel = $data instanceOf CModel;
 
 		if ($isModel) {
-			$widgetClass = 'EditableField';
+			$widgetClass = 'WhEditableField';
 			$options = array(
 				'model' => $data,
 				'attribute' => empty($this->editable['attribute']) ? $this->name : $this->editable['attribute'],
@@ -109,10 +109,6 @@ class WhEditableColumn extends CDataColumn
 	 */
 	protected function renderHeaderCellContent()
 	{
-		if (yii::app()->editable->form != EditableConfig::FORM_BOOTSTRAP) {
-			parent::renderHeaderCellContent();
-			return;
-		}
 
 		if ($this->grid->enableSorting && $this->sortable && $this->name !== null) {
 			$sort = $this->grid->dataProvider->getSort();
@@ -138,11 +134,6 @@ class WhEditableColumn extends CDataColumn
 	 */
 	public function renderFilterCell()
 	{
-		if (yii::app()->editable->form != EditableConfig::FORM_BOOTSTRAP) {
-			parent::renderFilterCell();
-			return;
-		}
-
 		echo '<td><div class="filter-container">';
 		$this->renderFilterCellContent();
 		echo '</div></td>';
