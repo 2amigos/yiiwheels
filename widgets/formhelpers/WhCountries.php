@@ -122,7 +122,25 @@ class WhCountries extends CInputWidget
 		if (isset($this->pluginOptions['flags']) && $this->pluginOptions['flags'] == true) {
 			$cs->registerCssFile($assetsUrl . '/css/bootstrap-formhelpers-countries.flags.css');
 		}
-		$cs->registerScriptFile($assetsUrl . '/js/bootstrap-formhelpers-countries.en_US.js');
+		
+		/* map available locales into iso-code */
+		$locale = array(
+			'US'=>'en_US',
+			'DE'=>'de_DE',
+			'ES'=>'es_ES',
+			'IT'=>'it_IT',
+			'BR'=>'pt_BR',
+			'CN'=>'zh_CN',
+			'TW'=>'zh_TW',
+			);
+
+		/* register translation file according to chosen locale, fallback 'US' */
+		if(isset($this->pluginOptions['country']) && isset($locale[$this->pluginOptions['country']])){
+			$cs->registerScriptFile($assetsUrl . '/js/lang/'.$locale[$this->pluginOptions['country']].'/bootstrap-formhelpers-countries.'.$locale[$this->pluginOptions['country']].'.js');
+		} else {
+			$cs->registerScriptFile($assetsUrl . '/js/lang/en_US/bootstrap-formhelpers-countries.en_US.js');
+		}
+		$cs->registerScriptFile($assetsUrl . '/js/bootstrap-formhelpers-countries.js');
 		$cs->registerScriptFile($assetsUrl . '/js/bootstrap-formhelpers-countries.js');
 
 		/* initialize plugin */
