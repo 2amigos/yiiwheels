@@ -110,10 +110,6 @@ class WhEditableColumn extends CDataColumn
 	 */
 	protected function renderHeaderCellContent()
 	{
-		/*if (yii::app()->editable->form != EditableConfig::FORM_BOOTSTRAP) {
-			parent::renderHeaderCellContent();
-			return;
-		}*/
 
 		if ($this->grid->enableSorting && $this->sortable && $this->name !== null) {
 			$sort = $this->grid->dataProvider->getSort();
@@ -139,10 +135,6 @@ class WhEditableColumn extends CDataColumn
 	 */
 	public function renderFilterCell()
 	{
-		/*if (yii::app()->editable->form != EditableConfig::FORM_BOOTSTRAP) {
-			parent::renderFilterCell();
-			return;
-		}*/
 
 		echo '<td><div class="filter-container">';
 		$this->renderFilterCellContent();
