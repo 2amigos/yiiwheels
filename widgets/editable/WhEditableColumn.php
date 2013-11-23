@@ -14,7 +14,7 @@
  * @copyright Copyright &copy; Vitaliy Potapov 2012
  * @version 1.3.1
  */
-
+Yii::import('yiiwheels.widgets.editable.WhEditable');
 Yii::import('yiiwheels.widgets.editable.WhEditableField');
 Yii::import('zii.widgets.grid.CDataColumn');
 
