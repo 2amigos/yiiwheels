@@ -64,9 +64,9 @@ class WhHtml5Editor extends CInputWidget
 
         list($name, $id) = $this->resolveNameID();
 
-        $this->registerClientScript($id);
+		$this->htmlOptions['id'] = $id;
 
-        $this->htmlOptions['id'] = $id;
+        $this->registerClientScript($id);
 
         if (!array_key_exists('style', $this->htmlOptions))
             $this->htmlOptions['style'] = "width:{$this->width};height:{$this->height};";
@@ -79,9 +79,8 @@ class WhHtml5Editor extends CInputWidget
 
     /**
      * Register required script files
-     * @param string $id
      */
-    public function registerClientScript($id)
+    public function registerClientScript()
     {
         /* publish assets dir */
         $path      = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'assets';
