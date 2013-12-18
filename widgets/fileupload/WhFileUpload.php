@@ -147,8 +147,8 @@ class WhFileUpload extends CJuiInputWidget
             $this->getYiiWheels()->registerAssetJs("bootstrap-image-gallery.min.js", CClientScript::POS_END);
         }
         //The Iframe Transport is required for browsers without support for XHR file uploads
-        $cs->registerScriptFile($assetsUrl . '/js/jquery.iframe-transport.js');
-        $cs->registerScriptFile($assetsUrl . '/js/jquery.fileupload.js');
+        $cs->registerScriptFile($assetsUrl . '/js/jquery.iframe-transport.js', CClientScript::POS_END);
+        $cs->registerScriptFile($assetsUrl . '/js/jquery.fileupload.js', CClientScript::POS_END);
 
         // The File Upload image processing plugin
         if ($this->imageProcessing) {
