@@ -126,6 +126,7 @@ class WhGallery extends CWidget
 
 		$cs->registerScriptFile($assetsUrl . '/js/blueimp-gallery.min.js', CClientScript::POS_END);
 		$cs->registerScriptFile($assetsUrl . '/js/blueimp-gallery-indicator.js', CClientScript::POS_END);
+		$cs->registerCssFile($assetsUrl . '/css/blueimp-gallery.min.css');
 	}
 
 	/**
