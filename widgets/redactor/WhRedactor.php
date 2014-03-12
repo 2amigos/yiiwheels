@@ -110,7 +110,7 @@ class WhRedactor extends CInputWidget
     {
         if (isset($this->pluginOptions['plugins'])) {
             $ds          = DIRECTORY_SEPARATOR;
-            $pluginsPath = __DIR__ . $ds . 'assets' . $ds . 'js' . $ds . 'plugins';
+            $pluginsPath = __DIR__ . $ds . 'assets' . $ds . 'js' . $ds . 'plugins' . $ds;
             $pluginsUrl  = $assetsUrl . '/js/plugins/';
             $scriptTypes = array('css', 'js');
 
