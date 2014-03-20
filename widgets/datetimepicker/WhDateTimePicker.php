@@ -118,7 +118,7 @@ class WhDateTimePicker extends CInputWidget
 		if (isset($this->pluginOptions['language'])) {
 			$cs->registerScriptFile(
 				$assetsUrl . '/js/locales/bootstrap-datetimepicker.' . $this->pluginOptions['language'] . '.js'
-			);
+			, CClientScript::POS_END);
 		}
 		/* initialize plugin */
 		/* initialize plugin */
