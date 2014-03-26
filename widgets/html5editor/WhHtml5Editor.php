@@ -64,9 +64,9 @@ class WhHtml5Editor extends CInputWidget
 
         list($name, $id) = $this->resolveNameID();
 
-		$this->htmlOptions['id'] = $id;
+        $this->htmlOptions['id'] = $id;
 
-        $this->registerClientScript($id);
+        $this->registerClientScript();
 
         if (!array_key_exists('style', $this->htmlOptions))
             $this->htmlOptions['style'] = "width:{$this->width};height:{$this->height};";
