@@ -123,8 +123,8 @@
         if (a === b) return true;
         if (a === undefined || b === undefined) return false;
         if (a === null || b === null) return false;
-        if (a.constructor === String) return a === b + '';
-        if (b.constructor === String) return b === a + '';
+        if (a.constructor === String) return a+'' === b+''; // a+'' - in case 'a' is a String object
+			     if (b.constructor === String) return b+'' === a+''; // b+'' - in case 'b' is a String object
         return false;
     }
 
