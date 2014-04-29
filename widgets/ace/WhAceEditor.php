@@ -121,7 +121,12 @@ class WhAceEditor extends CInputWidget
         echo $selector . '= ace.edit("' . $id . '");' . PHP_EOL;
         echo $selector . '.setTheme("ace/theme/' . $this->theme . '");' . PHP_EOL;
         echo $selector . '.getSession().setMode("ace/mode/' . $this->mode . '");' . PHP_EOL;
-
+        echo $selector . '.setValue($("#'.$this->htmlOptions['textareaId'].'").val());' . PHP_EOL;
+        echo $selector . '.getSession().on("change", function(){
+                var theVal = ' . $selector . '.getSession().getValue();
+                $("#'.$this->htmlOptions['textareaId'].'").val(theVal);
+            });';
+            
         if (!empty($this->events) && is_array($this->events)) {
             foreach ($this->events as $name => $handler) {
                 $handler = ($handler instanceof CJavaScriptExpression)
