@@ -130,6 +130,8 @@
                     if (base.isCloneVisible && (newLeft === base.leftOffset) && (newTopOffset === base.topOffset)) {
                         return;
                     }
+                    //Force re-update of columns width
+                    base.updateWidth();
                     filters = $('tr.filters', base.$originalHeader);
                     if(filters.length) {
                         filters.insertAfter(base.$clonedHeader.children().eq(0));
