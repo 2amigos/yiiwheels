@@ -86,16 +86,16 @@ class WhDateTimePicker extends CInputWidget
 			$options['id'] = $id . '_datetimepicker';
 			TbHtml::addCssClass('input-append', $options);
 
-			echo CHtml::openTag('div', $options);
+			echo TbHtml::openTag('div', $options);
 			if ($this->hasModel()) {
-				echo CHtml::activeTextField($this->model, $this->attribute, $this->htmlOptions);
+				echo TbHtml::activeTextField($this->model, $this->attribute, $this->htmlOptions);
 			} else {
-				echo CHtml::textField($name, $this->value, $this->htmlOptions);
+				echo TbHtml::textField($name, $this->value, $this->htmlOptions);
 			}
-			echo CHtml::openTag('span', array('class' => 'add-on'));
+			echo TbHtml::openTag('span', array('class' => 'add-on'));
 			echo '<i data-time-icon="' . $this->iconTime . '" data-date-icon="' . $this->iconDate . '"></i>';
-			echo CHtml::closeTag('span');
-			echo CHtml::closeTag('div');
+			echo TbHtml::closeTag('span');
+			echo TbHtml::closeTag('div');
 		}
 	}
 
