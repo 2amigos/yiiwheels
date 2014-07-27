@@ -93,6 +93,8 @@ class WhAceEditor extends CInputWidget
         }
 
         $this->htmlOptions = $tagOptions;
+        if (!isset($this->htmlOptions['textareaId']))
+            $this->htmlOptions['textareaId'] = $id;
     }
 
     /**
