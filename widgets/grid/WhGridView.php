@@ -265,14 +265,14 @@ class WhGridView extends TbGridView
 			}
 		}
 
-		echo CHtml::openTag('tr', $htmlOptions);
+		echo TbHtml::openTag('tr', $htmlOptions);
 		foreach ($this->columns as $column) {
 			echo $this->displayExtendedSummary && !empty($this->extendedSummary['columns']) ? $this->parseColumnValue(
 				$column,
 				$row
 			) : $column->renderDataCell($row);
 		}
-		echo CHtml::closeTag('tr');
+		echo TbHtml::closeTag('tr');
 	}
 
 	/**
@@ -285,7 +285,7 @@ class WhGridView extends TbGridView
 		} else {
 			$this->extendedSummaryOptions['class'] .= ' ' . $this->extendedSummaryCssClass;
 		}
-		echo '<div ' . CHtml::renderAttributes($this->extendedSummaryOptions) . '></div>';
+		echo '<div ' . TbHtml::renderAttributes($this->extendedSummaryOptions) . '></div>';
 	}
 
 	/**
