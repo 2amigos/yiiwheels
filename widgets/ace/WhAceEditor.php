@@ -120,7 +120,7 @@ class WhAceEditor extends CInputWidget
 
         echo $selector . '= ace.edit("' . $id . '");' . PHP_EOL;
         echo $selector . '.setTheme("ace/theme/' . $this->theme . '");' . PHP_EOL;
-        echo $selector . '.getSession().setMode("ace/mode/' . $this->mode . '");' . PHP_EOL;
+        echo $selector . '.getSession().setMode('.(is_array($this->mode) ? CJavaScript::encode($this->mode) : '"ace/mode/'.$this->mode.'"').');' . PHP_EOL;
         echo $selector . '.setValue($("#'.$this->htmlOptions['textareaId'].'").val());' . PHP_EOL;
         echo $selector . '.getSession().on("change", function(){
                 var theVal = ' . $selector . '.getSession().getValue();
@@ -136,6 +136,9 @@ class WhAceEditor extends CInputWidget
                 echo $id . ".getSession().on('{$name}', {$handler});" . PHP_EOL;
             }
         }
+        
+        if (!empty($this->pluginOptions))
+            echo $selector . '.setOptions('.CJavaScript::encode($this->pluginOptions).')';
 
         $cs->registerScript(uniqid(__CLASS__ . '#ReadyJS' . $id, true), ob_get_clean());
     }
