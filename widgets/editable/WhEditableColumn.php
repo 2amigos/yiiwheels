@@ -135,7 +135,6 @@ class WhEditableColumn extends CDataColumn
 	 */
 	public function renderFilterCell()
 	{
-
 		echo '<td><div class="filter-container">';
 		$this->renderFilterCellContent();
 		echo '</div></td>';

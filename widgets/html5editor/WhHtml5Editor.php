@@ -42,6 +42,20 @@ class WhHtml5Editor extends CInputWidget
      */
     public $height = '400px';
 
+    public function init()
+    {
+    
+    	$this->attachBehavior('ywplugin', array('class' => 'yiiwheels.behaviors.WhPlugin'));
+    
+    	if (!$style = TbArray::popValue('style', $this->htmlOptions, '')) {
+    		$this->htmlOptions['style'] = $style;
+    	}
+    
+    	$width                      = TbArray::getValue('width', $this->htmlOptions, '100%');
+    	$height                     = TbArray::popValue('height', $this->htmlOptions, '450px');
+    	$this->htmlOptions['style'] = "width:{$width};height:{$height};" . $this->htmlOptions['style'];
+    }
+
     /**
      * Display editor
      */
