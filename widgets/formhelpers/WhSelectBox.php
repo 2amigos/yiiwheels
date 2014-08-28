@@ -95,7 +95,7 @@ class WhSelectBox extends CInputWidget
 		foreach($this->data as $key=>$item) {
 			$items[] = CHtml::tag('a', array('tabindex' => '-1', 'href' => '#', 'data-option' => $key), $item);
 		}
-		echo CHtml::tag('ul', array('role'=>'options'), '<li>' . implode('</li><li>', $items) . '</i>');
+		echo CHtml::tag('ul', array('role'=>'options'), '<li>' . implode('</li><li>', $items) . '</li>');
 		echo CHtml::closeTag('div');
 
 		echo CHtml::closeTag('div');
