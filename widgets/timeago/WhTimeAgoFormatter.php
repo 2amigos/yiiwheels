@@ -1,11 +1,15 @@
 <?php
 /**
+ * @copyright Copyright (c) 2013 2amigOS! Consulting Group LLC
+ * @link http://2amigos.us
+ * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+ */
+
+/**
  * WhTimeAgoFormatter class
  *
  * @author Alex G <gubarev.alex@gmail.com>
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
- * @copyright Copyright &copy; 2amigos.us 2013-
- * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets.timeago
  */
 class WhTimeAgoFormatter extends CFormatter
@@ -40,6 +44,7 @@ class WhTimeAgoFormatter extends CFormatter
 
     /**
      * Includes file with locale-specific data array. When locale isnt exists used default 'en' locale
+     *
      * @param string $locale locale name (like 'ru', 'en_short' etc.)
      */
     private function setLocale($locale)
@@ -51,7 +56,7 @@ class WhTimeAgoFormatter extends CFormatter
 
         if (!file_exists($path)) {
             $this->locale = 'en';
-            $path         = __DIR__ . DIRECTORY_SEPARATOR .
+            $path = __DIR__ . DIRECTORY_SEPARATOR .
                 'assets' . DIRECTORY_SEPARATOR .
                 'php' . DIRECTORY_SEPARATOR .
                 'locale' . DIRECTORY_SEPARATOR . $this->locale . '.php';
@@ -61,7 +66,9 @@ class WhTimeAgoFormatter extends CFormatter
 
     /**
      * Formats value in timeago formatted string
+     *
      * @param mixed $value timestamp, DateTime or date-formatted string
+     *
      * @return string timeago formatted string
      */
     public function formatTimeago($value)
@@ -78,7 +85,9 @@ class WhTimeAgoFormatter extends CFormatter
 
     /**
      * Converts time delta to timeago formatted string
+     *
      * @param integer $seconds time delta in seconds
+     *
      * @return string timeago formatted string
      */
     public function inWords($seconds)
@@ -93,9 +102,9 @@ class WhTimeAgoFormatter extends CFormatter
         $seconds = abs($seconds);
 
         $minutes = $seconds / 60;
-        $hours   = $minutes / 60;
-        $days    = $hours / 24;
-        $years   = $days / 365;
+        $hours = $minutes / 60;
+        $days = $hours / 24;
+        $years = $days / 365;
 
         $separator = $this->data['wordSeparator'] === null ? " " : $this->data['wordSeparator'];
 
@@ -129,10 +138,10 @@ class WhTimeAgoFormatter extends CFormatter
 
         for ($i = 0; $i < $count = count($wordsConds); ++$i) {
             if ($wordsConds[$i]) {
-                $key    = $wordResults[$i][0];
+                $key = $wordResults[$i][0];
                 $number = $wordResults[$i][1];
                 if (is_array($this->data[$key]) && is_callable($this->data['rules'])) {
-                    $n       = call_user_func($this->data['rules'], $wordResults[$i][1]);
+                    $n = call_user_func($this->data['rules'], $wordResults[$i][1]);
                     $message = $this->data[$key][$n];
                 } else {
                     $message = $this->data[$key];

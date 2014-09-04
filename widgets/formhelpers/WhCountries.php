@@ -1,17 +1,21 @@
 <?php
 /**
+ * @copyright Copyright (c) 2013 2amigOS! Consulting Group LLC
+ * @link http://2amigos.us
+ * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+ */
+
+Yii::import('bootstrap.helpers.TbArray');
+Yii::import('bootstrap.helpers.TbHtml');
+
+/**
  * WhCountries widget class
  *
- * @author Antonio Ramirez <amigo.cobos@gmail.com>
- * @copyright Copyright &copy; 2amigos.us 2013-
- * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+* @author Antonio Ramirez <amigo.cobos@gmail.com>
  * @package YiiWheels.widgets.formhelpers
  * @uses YiiStrap.helpers.TbArray
  * @uses YiiStrap.helpers.TbHtml
  */
-Yii::import('bootstrap.helpers.TbArray');
-Yii::import('bootstrap.helpers.TbHtml');
-
 class WhCountries extends CInputWidget
 {
     /**
@@ -76,16 +80,16 @@ class WhCountries extends CInputWidget
                 CMap::mergeArray(
                     $this->helperOptions,
                     array(
-                        'class'          => 'yiiwheels.widgets.formhelpers.WhSelectBox',
-                        'htmlOptions'    => $this->htmlOptions,
-                        'model'          => $this->model,
-                        'attribute'      => $this->attribute,
-                        'name'           => $this->name,
-                        'value'          => $this->value,
+                        'class' => 'yiiwheels.widgets.formhelpers.WhSelectBox',
+                        'htmlOptions' => $this->htmlOptions,
+                        'model' => $this->model,
+                        'attribute' => $this->attribute,
+                        'name' => $this->name,
+                        'value' => $this->value,
                         'wrapperOptions' => array(
-                            'class'        => 'bfh-countries',
+                            'class' => 'bfh-countries',
                             'data-country' => $this->hasModel() ? $this->model->{$this->attribute} : $this->value,
-                            'data-flags'   => isset($this->pluginOptions['flags']) && $this->pluginOptions['flags']
+                            'data-flags' => isset($this->pluginOptions['flags']) && $this->pluginOptions['flags']
                                     ? 'true'
                                     : 'false',
                         )
@@ -117,7 +121,7 @@ class WhCountries extends CInputWidget
     public function registerClientScript()
     {
         /* publish assets dir */
-        $path      = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'assets';
+        $path = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'assets';
         $assetsUrl = $this->getAssetsUrl($path);
 
         /* @var $cs CClientScript */

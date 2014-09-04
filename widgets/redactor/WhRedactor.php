@@ -1,15 +1,19 @@
 <?php
 /**
+ * @copyright Copyright (c) 2013 2amigOS! Consulting Group LLC
+ * @link http://2amigos.us
+ * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+ */
+
+Yii::import('bootstrap.helpers.TbArray');
+
+/**
  * WhRedactor class
  *
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
- * @copyright Copyright &copy; 2amigos.us 2013-
- * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets.redactor
  * @uses YiiStrap.helpers.TbArray
  */
-Yii::import('bootstrap.helpers.TbArray');
-
 class WhRedactor extends CInputWidget
 {
     /**
@@ -36,8 +40,8 @@ class WhRedactor extends CInputWidget
             $this->htmlOptions['style'] = $style;
         }
 
-        $width                      = TbArray::getValue('width', $this->htmlOptions, '100%');
-        $height                     = TbArray::popValue('height', $this->htmlOptions, '450px');
+        $width = TbArray::getValue('width', $this->htmlOptions, '100%');
+        $height = TbArray::popValue('height', $this->htmlOptions, '450px');
         $this->htmlOptions['style'] = "width:{$width};height:{$height};" . $this->htmlOptions['style'];
     }
 
@@ -75,7 +79,7 @@ class WhRedactor extends CInputWidget
     public function registerClientScript()
     {
         /* publish assets dir */
-        $path      = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'assets';
+        $path = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'assets';
         $assetsUrl = $this->getAssetsUrl($path);
 
         /* @var $cs CClientScript */
@@ -109,9 +113,9 @@ class WhRedactor extends CInputWidget
     protected function registerPlugins($assetsUrl)
     {
         if (isset($this->pluginOptions['plugins'])) {
-            $ds          = DIRECTORY_SEPARATOR;
+            $ds = DIRECTORY_SEPARATOR;
             $pluginsPath = __DIR__ . $ds . 'assets' . $ds . 'js' . $ds . 'plugins' . $ds;
-            $pluginsUrl  = $assetsUrl . '/js/plugins/';
+            $pluginsUrl = $assetsUrl . '/js/plugins/';
             $scriptTypes = array('css', 'js');
 
             foreach ($this->pluginOptions['plugins'] as $pluginName) {
@@ -119,9 +123,9 @@ class WhRedactor extends CInputWidget
                     if (@file_exists($pluginsPath . $pluginName . $ds . $pluginName . '.' . $type)) {
                         Yii::app()->clientScript->registerScriptFile(
                             $pluginsUrl . '/' .
-                                $pluginName . '/' .
-                                $pluginName . '.' .
-                                $type
+                            $pluginName . '/' .
+                            $pluginName . '.' .
+                            $type
                         );
                     }
                 }

@@ -1,82 +1,90 @@
 <?php
 /**
+ * @copyright Copyright (c) 2013 2amigOS! Consulting Group LLC
+ * @link http://2amigos.us
+ * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+ */
+
+
+Yii::import('bootstrap.helpers.TbArray');
+Yii::import('bootstrap.helpers.TbHtml');
+
+/**
  * WhTimePickerHelper widget class
  *
- * @author Antonio Ramirez <amigo.cobos@gmail.com>
- * @copyright Copyright &copy; 2amigos.us 2013-
- * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+* @author Antonio Ramirez <amigo.cobos@gmail.com>
  * @package YiiWheels.widgets.formhelpers
  * @uses YiiStrap.helpers.TbArray
  * @uses YiiStrap.helpers.TbHtml
  */
-Yii::import('bootstrap.helpers.TbArray');
-Yii::import('bootstrap.helpers.TbHtml');
-
 class WhTimePickerHelper extends CInputWidget
 {
 
-	/**
-	 * @var array options of the input
-	 */
-	public $inputOptions = array();
+    /**
+     * @var array options of the input
+     */
+    public $inputOptions = array();
 
-	/**
-	 * @var array
-	 */
-	public $pluginOptions = array();
+    /**
+     * @var array
+     */
+    public $pluginOptions = array();
 
 
-	/**
-	 * Widget's initialization method
-	 * @throws CException
-	 */
-	public function init()
-	{
+    /**
+     * Widget's initialization method
+     * @throws CException
+     */
+    public function init()
+    {
 
-		$this->attachBehavior('ywplugin', array('class' => 'yiiwheels.behaviors.WhPlugin'));
+        $this->attachBehavior('ywplugin', array('class' => 'yiiwheels.behaviors.WhPlugin'));
 
-		TbHtml::addCssClass('bfh-timepicker', $this->htmlOptions);
-		$this->htmlOptions['data-time'] = $this->hasModel()
-			? $this->model->{$this->attribute}
-			: $this->value;
+        TbHtml::addCssClass('bfh-timepicker', $this->htmlOptions);
+        $this->htmlOptions['data-time'] = $this->hasModel()
+            ? $this->model->{$this->attribute}
+            : $this->value;
 
-		$this->inputOptions['readonly'] = true;
-	}
+        $this->inputOptions['readonly'] = true;
+    }
 
-	/**
-	 * Runs the widget.
-	 */
-	public function run()
-	{
-		$this->renderField();
-		$this->registerClientScript();
-	}
+    /**
+     * Runs the widget.
+     */
+    public function run()
+    {
+        $this->renderField();
+        $this->registerClientScript();
+    }
 
-	/**
-	 * Renders the input file field
-	 */
-	public function renderField()
-	{
+    /**
+     * Renders the input file field
+     */
+    public function renderField()
+    {
 
-		list($name, $id) = $this->resolveNameID();
+        list($name, $id) = $this->resolveNameID();
 
-		TbArray::defaultValue('id', $id, $this->htmlOptions);
-		TbArray::defaultValue('name', $name, $this->htmlOptions);
+        TbArray::defaultValue('id', $id, $this->htmlOptions);
+        TbArray::defaultValue('name', $name, $this->htmlOptions);
 
-		echo CHtml::openTag('div', $this->htmlOptions);
-		echo CHtml::openTag('div', array(
-			'class' => 'input-prepend bfh-timepicker-toggle',
-			'data-toggle' => 'bfh-timepicker'
-		));
-		echo CHtml::tag('span', array('class' => 'add-on'), TbHtml::icon(TbHtml::ICON_TIME));
-		if ($this->hasModel()) {
-			echo CHtml::activeTextField($this->model, $this->attribute, $this->inputOptions);
-		} else {
-			echo CHtml::textField($name, $this->value, $this->inputOptions);
-		}
-		echo CHtml::closeTag('div');
+        echo CHtml::openTag('div', $this->htmlOptions);
+        echo CHtml::openTag(
+            'div',
+            array(
+                'class' => 'input-prepend bfh-timepicker-toggle',
+                'data-toggle' => 'bfh-timepicker'
+            )
+        );
+        echo CHtml::tag('span', array('class' => 'add-on'), TbHtml::icon(TbHtml::ICON_TIME));
+        if ($this->hasModel()) {
+            echo CHtml::activeTextField($this->model, $this->attribute, $this->inputOptions);
+        } else {
+            echo CHtml::textField($name, $this->value, $this->inputOptions);
+        }
+        echo CHtml::closeTag('div');
 
-		echo '<div class="bfh-timepicker-popover">
+        echo '<div class="bfh-timepicker-popover">
 				<table class="table">
 				<tbody>
 					<tr>
@@ -95,27 +103,27 @@ class WhTimePickerHelper extends CInputWidget
 				</tbody>
 				</table>
 			</div>';
-		echo CHtml::closeTag('div');
-	}
+        echo CHtml::closeTag('div');
+    }
 
-	/**
-	 * Registers client script
-	 */
-	public function registerClientScript()
-	{
-		/* publish assets dir */
-		$path = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'assets';
-		$assetsUrl = $this->getAssetsUrl($path);
+    /**
+     * Registers client script
+     */
+    public function registerClientScript()
+    {
+        /* publish assets dir */
+        $path = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'assets';
+        $assetsUrl = $this->getAssetsUrl($path);
 
-		/* @var $cs CClientScript */
-		$cs = Yii::app()->getClientScript();
+        /* @var $cs CClientScript */
+        $cs = Yii::app()->getClientScript();
 
-		$cs->registerCssFile($assetsUrl . '/css/bootstrap-formhelpers.css');
-		$cs->registerScriptFile($assetsUrl . '/js/bootstrap-formhelpers-timepicker.js');
+        $cs->registerCssFile($assetsUrl . '/css/bootstrap-formhelpers.css');
+        $cs->registerScriptFile($assetsUrl . '/js/bootstrap-formhelpers-timepicker.js');
 
-		/* initialize plugin */
-		// $selector = '#' . TbArray::getValue('id', $this->htmlOptions, $this->getId());
-		// $this->getApi()->registerPlugin('bfhdatepicker', $selector, $this->pluginOptions);
+        /* initialize plugin */
+        // $selector = '#' . TbArray::getValue('id', $this->htmlOptions, $this->getId());
+        // $this->getApi()->registerPlugin('bfhdatepicker', $selector, $this->pluginOptions);
 
-	}
+    }
 }

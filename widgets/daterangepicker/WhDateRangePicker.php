@@ -1,17 +1,22 @@
 <?php
 /**
+ * @copyright Copyright (c) 2013 2amigOS! Consulting Group LLC
+ * @link http://2amigos.us
+ * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+ */
+
+
+Yii::import('bootstrap.helpers.TbArray');
+
+/**
  * WhDateRangePicker widget class
  * A simple implementation for date range picker for Twitter Bootstrap
  * @see <http://www.dangrossman.info/2012/08/20/a-date-range-picker-for-twitter-bootstrap/>
  *
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
- * @copyright Copyright &copy; 2amigos.us 2013-
- * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets.daterangepicker
  * @uses YiiStrap.helpers.TbArray
  */
-Yii::import('bootstrap.helpers.TbArray');
-
 class WhDateRangePicker extends CInputWidget
 {
 
@@ -110,7 +115,7 @@ class WhDateRangePicker extends CInputWidget
     public function registerClientScript()
     {
         /* publish assets dir */
-        $path      = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'assets';
+        $path = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'assets';
         $assetsUrl = $this->getAssetsUrl($path);
 
         /* register required moment.js */
@@ -134,9 +139,9 @@ class WhDateRangePicker extends CInputWidget
         $cs->registerScript(
             __CLASS__ . '#' . $this->getId(),
             '$("' . $selector . '").daterangepicker(' .
-                CJavaScript::encode($this->pluginOptions) .
-                ($callback ? ', ' . CJavaScript::encode($callback) : '') .
-                ');'
+            CJavaScript::encode($this->pluginOptions) .
+            ($callback ? ', ' . CJavaScript::encode($callback) : '') .
+            ');'
         );
     }
 }

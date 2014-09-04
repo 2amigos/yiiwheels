@@ -1,17 +1,19 @@
 <?php
 /**
- * WhDetailView widget class
- *
- * @author Antonio Ramirez <amigo.cobos@gmail.com>
- * @copyright Copyright &copy; 2amigos.us 2013-
+ * @copyright Copyright (c) 2013 2amigOS! Consulting Group LLC
+ * @link http://2amigos.us
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
- * @package YiiWheels.widgets.detail
- * @uses YiiStrap.helpers.TbHtml
  */
-
 Yii::import('bootstrap.helpers.TbHtml');
 Yii::import('zii.widgets.CDetailView');
 
+/**
+ * WhDetailView widget class
+ *
+ * @author Antonio Ramirez <amigo.cobos@gmail.com>
+ * @package YiiWheels.widgets.detail
+ * @uses YiiStrap.helpers.TbHtml
+ */
 class WhDetailView extends CDetailView
 {
 

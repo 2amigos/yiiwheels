@@ -1,14 +1,17 @@
 <?php
 /**
+ * @copyright Copyright (c) 2013 2amigOS! Consulting Group LLC
+ * @link http://2amigos.us
+ * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+ */
+
+/**
  * WhVisualizationChart widget class
  * A simple implementation for for Google
  *
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
- * @copyright Copyright &copy; 2amigos.us 2013-
- * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets.google
  */
-
 class WhVisualizationChart extends CWidget
 {
     /**
@@ -44,10 +47,10 @@ class WhVisualizationChart extends CWidget
      */
     public function run()
     {
-        $id                      = $this->getId();
+        $id = $this->getId();
         // if no container is set, it will create one
         if ($this->containerId == null) {
-            $this->htmlOptions['id'] = 'div-chart'.$id;
+            $this->htmlOptions['id'] = 'div-chart' . $id;
             $this->containerId = $this->htmlOptions['id'];
             echo '<div ' . CHtml::renderAttributes($this->htmlOptions) . '></div>';
         }
@@ -59,8 +62,8 @@ class WhVisualizationChart extends CWidget
      */
     public function registerClientScript()
     {
-        $id        = $this->getId();
-        $jsData    = CJavaScript::jsonEncode($this->data);
+        $id = $this->getId();
+        $jsData = CJavaScript::jsonEncode($this->data);
         $jsOptions = CJavaScript::jsonEncode($this->options);
 
         $script = '

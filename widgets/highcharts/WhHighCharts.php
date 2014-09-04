@@ -1,5 +1,12 @@
 <?php
 /**
+ * @copyright Copyright (c) 2013 2amigOS! Consulting Group LLC
+ * @link http://2amigos.us
+ * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+ */
+Yii::import('bootstrap.helpers.TbArray');
+
+/**
  * WhHighCharts widget class
  *
  * WhHighCharts is a layer of the amazing {@link http://www.highcharts.com/ Highcharts}
@@ -27,13 +34,9 @@
  * {@link http://www.hightcharts.com/ Highcharts site}
  *
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
- * @copyright Copyright &copy; 2amigos.us 2013-
- * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets.highcharts
  * @uses YiiStrap.helpers.TbArray
  */
-Yii::import('bootstrap.helpers.TbArray');
-
 class WhHighCharts extends CWidget
 {
     /**
@@ -82,7 +85,7 @@ class WhHighCharts extends CWidget
     protected function registerClientScript()
     {
         /* publish assets dir */
-        $path      = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'assets';
+        $path = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'assets';
         $assetsUrl = $this->getAssetsUrl($path);
 
         /* @var $cs CClientScript */

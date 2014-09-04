@@ -1,18 +1,22 @@
 <?php
 /**
+ * @copyright Copyright (c) 2013 2amigOS! Consulting Group LLC
+ * @link http://2amigos.us
+ * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+ */
+
+Yii::import('bootstrap.widgets.TbDataColumn');
+
+/**
  * WhRelationalColumn class
  *
  * Displays a clickable column that will make an ajax request and display its resulting data
  * into a new row.
  *
- * @author Antonio Ramirez <amigo.cobos@gmail.com>
- * @copyright Copyright &copy; 2amigos.us 2013-
- * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+* @author Antonio Ramirez <amigo.cobos@gmail.com>
  * @package YiiWheels.widgets.grid
  * @uses Yiistrap.widgets.TbDataColumn
  */
-Yii::import('bootstrap.widgets.TbDataColumn');
-
 class WhRelationalColumn extends TbDataColumn
 {
     /**
@@ -70,7 +74,7 @@ class WhRelationalColumn extends TbDataColumn
         if (empty($this->url))
             $this->url = Yii::app()->getRequest()->requestUri;
 
-		$this->attachBehavior('ywplugin', array('class' => 'yiiwheels.behaviors.WhPlugin'));
+        $this->attachBehavior('ywplugin', array('class' => 'yiiwheels.behaviors.WhPlugin'));
         $this->registerClientScript();
     }
 
@@ -78,11 +82,12 @@ class WhRelationalColumn extends TbDataColumn
      * Overrides CDataColumn renderDataCell in order to wrap up its content with the object that will be used as a
      * trigger.
      * Important: Making use of links as a content for this of column is an error.
+     *
      * @param int $row
      */
     public function renderDataCell($row)
     {
-        $data    = $this->grid->dataProvider->data[$row];
+        $data = $this->grid->dataProvider->data[$row];
         $options = $this->htmlOptions;
         if ($this->cssClassExpression !== null) {
             $class = $this->evaluateExpression($this->cssClassExpression, array('row' => $row, 'data' => $data));
@@ -101,7 +106,9 @@ class WhRelationalColumn extends TbDataColumn
     /**
      * Helper function to return the primary key of the $data
      *  * IMPORTANT: composite keys on CActiveDataProviders will return the keys joined by comma
+     *
      * @param CActiveRecord $data
+     *
      * @return null|string
      */
     protected function getPrimaryKey($data)
@@ -124,12 +131,12 @@ class WhRelationalColumn extends TbDataColumn
      */
     public function registerClientScript()
     {
-		$path = __DIR__ . DIRECTORY_SEPARATOR . 'assets';
-		$assetsUrl = $this->getAssetsUrl($path);
+        $path = __DIR__ . DIRECTORY_SEPARATOR . 'assets';
+        $assetsUrl = $this->getAssetsUrl($path);
 
         /** @var $cs CClientScript */
         $cs = Yii::app()->getClientScript();
-		$cs->registerCssFile($assetsUrl . '/css/bootstrap-relational.css');
+        $cs->registerCssFile($assetsUrl . '/css/bootstrap-relational.css');
 
         if ($this->afterAjaxUpdate !== null) {
             if ((!$this->afterAjaxUpdate instanceof CJavaScriptExpression) && strpos(
@@ -142,14 +149,14 @@ class WhRelationalColumn extends TbDataColumn
             $this->afterAjaxUpdate = 'js:$.noop';
 
         $this->ajaxErrorMessage = CHtml::encode($this->ajaxErrorMessage);
-        $afterAjaxUpdate        = CJavaScript::encode($this->afterAjaxUpdate);
-        $span                   = count($this->grid->columns);
-        $loadingPic             = CHtml::image(Yii::app()->yiiwheels->getAssetsUrl() . '/img/loading.gif');
-        $cache                  = $this->cacheData ? 'true' : 'false';
-        $data                   = !empty($this->submitData) && is_array(
+        $afterAjaxUpdate = CJavaScript::encode($this->afterAjaxUpdate);
+        $span = count($this->grid->columns);
+        $loadingPic = CHtml::image(Yii::app()->yiiwheels->getAssetsUrl() . '/img/loading.gif');
+        $cache = $this->cacheData ? 'true' : 'false';
+        $data = !empty($this->submitData) && is_array(
             $this->submitData
         ) ? $this->submitData : 'js:{}';
-        $data                   = CJavascript::encode($data);
+        $data = CJavascript::encode($data);
 
         $js = <<<EOD
 $(document).on('click','.{$this->cssClass}', function(){

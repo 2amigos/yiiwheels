@@ -1,17 +1,21 @@
 <?php
 /**
+ * @copyright Copyright (c) 2013 2amigOS! Consulting Group LLC
+ * @link http://2amigos.us
+ * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+ */
+
+Yii::import('bootstrap.helpers.TbArray');
+
+/**
  * WhDateRangePicker widget class
  * Implementation of jQRangeSlider. A powerful slider for selecting value ranges, supporting dates and more.
  * @see http://ghusse.github.io/jQRangeSlider
  *
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
- * @copyright Copyright &copy; 2amigos.us 2013-
- * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets.rangeslider
  * @uses YiiStrap.helpers.TbArray
  */
-Yii::import('bootstrap.helpers.TbArray');
-
 class WhRangeSlider extends CInputWidget
 {
 
@@ -82,7 +86,7 @@ class WhRangeSlider extends CInputWidget
      * Example:
      * ```
      *   'formater'=>'js:function(val){
-    var value = Math.round(val * 5) / 5,
+     * var value = Math.round(val * 5) / 5,
      *      decimal = value - Math.round(val);
      *      return decimal == 0 ? value.toString() + ".0" : value.toString();
      *   }'
@@ -239,8 +243,7 @@ class WhRangeSlider extends CInputWidget
 
         $this->checkOptionAttribute($this->theme, array('iThing', 'classic'), 'theme');
 
-        if($this->wheelMode)
-        {
+        if ($this->wheelMode) {
             $this->checkOptionAttribute($this->wheelMode, array('zoom', 'scroll'), 'wheelMode');
         }
         $this->attachBehavior('ywplugin', array('class' => 'yiiwheels.behaviors.WhPlugin'));
@@ -328,17 +331,17 @@ class WhRangeSlider extends CInputWidget
      */
     protected function buildOptions()
     {
-        $options       = array(
-            'arrows'      => $this->arrows,
-            'delayOut'    => $this->delayOut,
-            'durationIn'  => $this->durationIn,
+        $options = array(
+            'arrows' => $this->arrows,
+            'delayOut' => $this->delayOut,
+            'durationIn' => $this->durationIn,
             'durationOut' => $this->durationOut,
             'valueLabels' => $this->valueLabels,
-            'formatter'   => $this->formatter,
-            'step'        => $this->step,
-            'wheelMode'   => $this->wheelMode,
-            'wheelSpeed'  => $this->wheelSpeed,
-            'type'        => ($this->type == 'dateRange' ? null : $this->inputType)
+            'formatter' => $this->formatter,
+            'step' => $this->step,
+            'wheelMode' => $this->wheelMode,
+            'wheelSpeed' => $this->wheelSpeed,
+            'type' => ($this->type == 'dateRange' ? null : $this->inputType)
         );
         $this->options = array_filter($options);
 
@@ -369,15 +372,16 @@ class WhRangeSlider extends CInputWidget
 
     /**
      * Checks whether the option set is supported by the plugin
+     *
      * @param mixed $attribute attribute
      * @param array $availableOptions the possible values
      * @param string $name the name of the attribute
+     *
      * @throws CException
      */
     protected function checkOptionAttribute($attribute, $availableOptions, $name)
     {
-        if(!in_array($attribute, $availableOptions))
-        {
+        if (!in_array($attribute, $availableOptions)) {
             throw new CException(Yii::t(
                 'zii',
                 'Unsupported "{attribute}" setting.',

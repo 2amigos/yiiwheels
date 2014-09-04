@@ -1,5 +1,13 @@
 <?php
 /**
+ * @copyright Copyright (c) 2013 2amigOS! Consulting Group LLC
+ * @link http://2amigos.us
+ * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+ */
+
+Yii::import('bootstrap.helpers.TbArray');
+
+/**
  * WhHtml5Editor widget
  *
  * Implements the bootstrap-wysihtml5 editor
@@ -7,13 +15,9 @@
  * @see https://github.com/jhollingworth/bootstrap-wysihtml5
  *
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
- * @copyright Copyright &copy; 2amigos.us 2013-
- * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets.highcharts
  * @uses YiiStrap.helpers.TbArray
  */
-Yii::import('bootstrap.helpers.TbArray');
-
 class WhHtml5Editor extends CInputWidget
 {
     /**
@@ -44,16 +48,16 @@ class WhHtml5Editor extends CInputWidget
 
     public function init()
     {
-    
-    	$this->attachBehavior('ywplugin', array('class' => 'yiiwheels.behaviors.WhPlugin'));
-    
-    	if (!$style = TbArray::popValue('style', $this->htmlOptions, '')) {
-    		$this->htmlOptions['style'] = $style;
-    	}
-    
-    	$width                      = TbArray::getValue('width', $this->htmlOptions, '100%');
-    	$height                     = TbArray::popValue('height', $this->htmlOptions, '450px');
-    	$this->htmlOptions['style'] = "width:{$width};height:{$height};" . $this->htmlOptions['style'];
+
+        $this->attachBehavior('ywplugin', array('class' => 'yiiwheels.behaviors.WhPlugin'));
+
+        if (!$style = TbArray::popValue('style', $this->htmlOptions, '')) {
+            $this->htmlOptions['style'] = $style;
+        }
+
+        $width = TbArray::getValue('width', $this->htmlOptions, '100%');
+        $height = TbArray::popValue('height', $this->htmlOptions, '450px');
+        $this->htmlOptions['style'] = "width:{$width};height:{$height};" . $this->htmlOptions['style'];
     }
 
     /**
@@ -83,7 +87,7 @@ class WhHtml5Editor extends CInputWidget
     public function registerClientScript()
     {
         /* publish assets dir */
-        $path      = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'assets';
+        $path = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'assets';
         $assetsUrl = $this->getAssetsUrl($path);
 
         /* @var $cs CClientScript */

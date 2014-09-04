@@ -1,5 +1,11 @@
 <?php
 /**
+ * @copyright Copyright (c) 2013 2amigOS! Consulting Group LLC
+ * @link http://2amigos.us
+ * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+ */
+
+/**
  * WhModal class file.
  *
  * Bootstrap modal + modal manager wrapper in order to use the modalmanager and easy the task of rendering a modal
@@ -7,11 +13,8 @@
  *
  * @see http://jschr.github.com/bootstrap-modal/
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
- * @copyright Copyright &copy; 2amigos.us 2013-
- * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets.modal
  */
-
 class WhModal extends TbModal
 {
 

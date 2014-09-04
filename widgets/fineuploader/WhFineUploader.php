@@ -1,15 +1,19 @@
 <?php
 /**
+ * @copyright Copyright (c) 2013 2amigOS! Consulting Group LLC
+ * @link http://2amigos.us
+ * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+ */
+
+Yii::import('bootstrap.helpers.TbArray');
+
+/**
  * WhFineUploader widget class
  * Inspired by https://github.com/anggiaj/EFineUploader
- * @author Antonio Ramirez <amigo.cobos@gmail.com>
- * @copyright Copyright &copy; 2amigos.us 2013-
- * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+* @author Antonio Ramirez <amigo.cobos@gmail.com>
  * @package YiiWheels.widgets.fileuploader
  * @uses YiiStrap.helpers.TbArray
  */
-Yii::import('bootstrap.helpers.TbArray');
-
 class WhFineUploader extends CInputWidget
 {
     /**
@@ -87,7 +91,7 @@ class WhFineUploader extends CInputWidget
     public function registerClientScript()
     {
         /* publish assets dir */
-        $path      = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'assets';
+        $path = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'assets';
         $assetsUrl = $this->getAssetsUrl($path);
 
         /* @var $cs CClientScript */
@@ -122,21 +126,21 @@ class WhFineUploader extends CInputWidget
 
 
         $this->defaultOptions = array(
-            'request'    => array(
-                'endpoint'  => $this->uploadAction,
+            'request' => array(
+                'endpoint' => $this->uploadAction,
                 'inputName' => $name,
             ),
             'validation' => $this->getValidator(),
-            'messages'   => array(
-                'typeError'    => Yii::t('zii', '{file} has an invalid extension. Valid extension(s): {extensions}.'),
-                'sizeError'    => Yii::t('zii', '{file} is too large, maximum file size is {sizeLimit}.'),
+            'messages' => array(
+                'typeError' => Yii::t('zii', '{file} has an invalid extension. Valid extension(s): {extensions}.'),
+                'sizeError' => Yii::t('zii', '{file} is too large, maximum file size is {sizeLimit}.'),
                 'minSizeError' => Yii::t('zii', '{file} is too small, minimum file size is {minSizeLimit}.'),
-                'emptyError:'  => Yii::t('zii', '{file} is empty, please select files again without it.'),
+                'emptyError:' => Yii::t('zii', '{file} is empty, please select files again without it.'),
                 'noFilesError' => Yii::t('zii', 'No files to upload.'),
-                'onLeave'      => Yii::t(
-                    'zii',
-                    'The files are being uploaded, if you leave now the upload will be cancelled.'
-                )
+                'onLeave' => Yii::t(
+                        'zii',
+                        'The files are being uploaded, if you leave now the upload will be cancelled.'
+                    )
             ),
         );
     }
@@ -163,8 +167,8 @@ class WhFineUploader extends CInputWidget
                 if (is_a($validator, 'CFileValidator')) {
                     $ret = array(
                         'allowedExtensions' => explode(',', str_replace(' ', '', $validator->types)),
-                        'sizeLimit'         => $validator->maxSize,
-                        'minSizeLimit'      => $validator->minSize,
+                        'sizeLimit' => $validator->maxSize,
+                        'minSizeLimit' => $validator->minSize,
                     );
                     break;
                 }
