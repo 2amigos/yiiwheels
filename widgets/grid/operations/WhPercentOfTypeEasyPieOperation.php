@@ -5,7 +5,7 @@
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  */
 
-Yii::import('yiiwheels.widgts.grid.operations.WhPercentOfTypeOperation');
+Yii::import('yiiwheels.widgets.grid.operations.WhPercentOfTypeOperation');
 
 /**
  *
