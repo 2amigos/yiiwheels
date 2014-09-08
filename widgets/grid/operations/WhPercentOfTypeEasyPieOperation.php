@@ -11,7 +11,7 @@
  * @package YiiWheels.widgets.grid.operations
  * @uses Yiistrap.widgets.WhPercentOfTypeOperation
  */
-Yii::import('yiiwheels.widgts.grid.operations.WhPercentOfTypeOperation');
+Yii::import('yiiwheels.widgets.grid.operations.WhPercentOfTypeOperation');
 
 class WhPercentOfTypeEasyPieOperation extends WhPercentOfTypeOperation
 {
