@@ -1,19 +1,26 @@
 <?php
- /**
- * 
- * WhInputWidget.php
- *
- * Date: 06/09/14
- * Time: 13:48
- * @author Antonio Ramirez <amigo.cobos@gmail.com>
- * @link http://www.ramirezcobos.com/
- * @link http://www.2amigos.us/
+/**
+ * @copyright Copyright (c) 2014 2amigOS! Consulting Group LLC
+ * @link http://2amigos.us
+ * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  */
+
 
 Yii::import('bootstrap.helpers.TbArray');
 Yii::import('bootstrap.helpers.TbHtml');
 
-class WhInputWidget extends CInputWidget {
+/**
+ *
+ * WhInputWidget widget class
+ * Base class for Bootstrap Helpers Input type widgets
+ *
+ * @author Antonio Ramirez <amigo.cobos@gmail.com>
+ * @link http://www.ramirezcobos.com/
+ * @link http://www.2amigos.us/
+ * @package YiiWheels.widgets.bootstrap-form-helpers
+ */
+class WhInputWidget extends CInputWidget
+{
     /**
      * @var array the options for the Bootstrap FormHelper plugin.
      */
@@ -31,9 +38,13 @@ class WhInputWidget extends CInputWidget {
      * @var string in case you add your own language file.
      */
     public $languagePath;
-    public $readOnly = false;
     /**
-     * @inheritdoc
+     * @var bool whether to display the plugin as readonly or not
+     */
+    public $readOnly = false;
+
+    /**
+     * Initializes the widget
      */
     public function init()
     {
@@ -65,7 +76,9 @@ class WhInputWidget extends CInputWidget {
 
     /**
      * Converts client options to HTML5 data- attributes.
+     *
      * @param array $options the options to convert
+     *
      * @return array
      */
     protected function asDataAttributes($options)
@@ -79,6 +92,7 @@ class WhInputWidget extends CInputWidget {
 
     /**
      * Registers a specific Bootstrap plugin and the related events
+     *
      * @param string $name the name of the Bootstrap helper plugin
      */
     protected function registerPlugin($name)
@@ -91,7 +105,7 @@ class WhInputWidget extends CInputWidget {
         $cs->registerCssFile($assetsUrl . "/css/bootstrap-formhelpers.min.css");
         $cs->registerScriptFile($assetsUrl . "/js/bootstrap-formhelpers.min.js", CClientScript::POS_END);
 
-        if($this->language) {
+        if ($this->language) {
             $fname = "bootstrap-formhelpers-" . (substr($name, 3)) . ".{$this->language}.js";
             $languageFile = $this->languagePath ? : $assetsUrl . "/i18n/{$this->language}/{$fname}";
             $cs->registerScriptFile($languageFile);
@@ -109,8 +123,7 @@ class WhInputWidget extends CInputWidget {
                 $js[] = "jQuery('#$id').on('$event', $handler);";
             }
         }
-        if(count($js))
-        {
+        if (count($js)) {
             $cs->registerScript($id, implode("\n", $js));
         }
     }

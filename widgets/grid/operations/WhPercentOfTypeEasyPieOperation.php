@@ -6,8 +6,7 @@
  * Displays an chart based on jquery.easy.pie plugin
  *
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
- * @copyright Copyright &copy; 2amigos.us 2013-
- * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+
  * @package YiiWheels.widgets.grid.operations
  * @uses Yiistrap.widgets.WhPercentOfTypeOperation
  */

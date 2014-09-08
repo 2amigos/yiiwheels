@@ -1,17 +1,21 @@
 <?php
 /**
+ * @copyright Copyright (c) 2014 2amigOS! Consulting Group LLC
+ * @link http://2amigos.us
+ * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+ */
+
+Yii::import('bootstrap.helpers.TbArray');
+
+/**
  * WhDateRangePicker widget class
  * Implementation of jQRangeSlider. A powerful slider for selecting value ranges, supporting dates and more.
  * @see http://ghusse.github.io/jQRangeSlider
  *
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
- * @copyright Copyright &copy; 2amigos.us 2013-
- * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets.rangeslider
  * @uses YiiStrap.helpers.TbArray
  */
-Yii::import('bootstrap.helpers.TbArray');
-
 class WhRangeSlider extends CInputWidget
 {
 
@@ -369,8 +373,7 @@ class WhRangeSlider extends CInputWidget
                 )
             );
         }
-        if(!empty($this->pluginOptions))
-        {
+        if (!empty($this->pluginOptions)) {
             $this->options = CMap::mergeArray($this->pluginOptions, $this->options);
         }
     }

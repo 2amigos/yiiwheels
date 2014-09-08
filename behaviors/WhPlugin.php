@@ -1,5 +1,11 @@
 <?php
 /**
+ * @copyright Copyright (c) 2014 2amigOS! Consulting Group LLC
+ * @link http://2amigos.us
+ * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+ */
+
+/**
  * WhPlugin class file.
  * Extends the plugins with common shared methods.
  *
@@ -17,8 +23,10 @@ class WhPlugin extends CBehavior
     protected static $_wheels;
 
     /**
-     * Returns
-     * @param $path
+     * Returns the assets url
+     *
+     * @param string $path
+     *
      * @return mixed
      */
     public function getAssetsUrl($path)
@@ -35,6 +43,7 @@ class WhPlugin extends CBehavior
     }
 
     /**
+     * Returns Bootstrap TbApi component
      * @return TbApi
      */
     public function getApi()

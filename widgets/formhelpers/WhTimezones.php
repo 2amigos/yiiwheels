@@ -1,16 +1,21 @@
 <?php
 /**
- *
- * WhCountries.php
- *
- * Date: 06/09/14
- * Time: 14:17
- * @author Antonio Ramirez <amigo.cobos@gmail.com>
- * @link http://www.ramirezcobos.com/
- * @link http://www.2amigos.us/
+ * @copyright Copyright (c) 2014 2amigOS! Consulting Group LLC
+ * @link http://2amigos.us
+ * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  */
 Yii::import('yiiwheels.widgets.formhelpers.WhDropDownInputWidget');
 
+/**
+ * WhTimezones widget class
+ *
+ * Implements Bootstrap Form Helper timezones picker plugin
+ *
+ * @author Antonio Ramirez <amigo.cobos@gmail.com>
+ * @link http://www.ramirezcobos.com/
+ * @link http://www.2amigos.us/
+ * @package YiiWheels.widgets.bootstrap-form-helpers
+ */
 class WhTimezones extends WhDropDownInputWidget
 {
 
@@ -20,6 +25,11 @@ class WhTimezones extends WhDropDownInputWidget
      */
     public $country;
 
+
+    /**
+     * @inheritdoc
+     * @throws CException
+     */
     public function init()
     {
         if (empty($this->country) && !isset($this->pluginOptions['country'])) {
@@ -35,12 +45,14 @@ class WhTimezones extends WhDropDownInputWidget
         unset($this->htmlOptions['data-name']);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function run()
     {
-        if(!$this->readOnly) {
+        if (!$this->readOnly) {
             echo $this->dropDownList();
-        } else
-        {
+        } else {
             echo CHtml::tag('span', $this->htmlOptions, '');
         }
 

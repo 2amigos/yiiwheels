@@ -1,20 +1,26 @@
 <?php
 /**
+ * @copyright Copyright (c) 2014 2amigOS! Consulting Group LLC
+ * @link http://2amigos.us
+ * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+ */
+
+Yii::import('bootstrap.helpers.TbArray');
+
+/**
  * WhBasicFileUpload widget class
  *
+ * Implements [BlueImp Basic JQuery Uploader](http://blueimp.github.io/jQuery-File-Upload/basic.html).
+ *
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
- * @copyright Copyright &copy; 2amigos.us 2013-
- * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets.fileupload
  * @uses YiiStrap.helpers.TbArray
  */
-Yii::import('bootstrap.helpers.TbArray');
-
 class WhBasicFileUpload extends CInputWidget
 {
     /**
      * Editor options that will be passed to the editor
-     * @see http://imperavi.com/redactor/docs/
+     * @see http://blueimp.github.io/jQuery-File-Upload/basic.html
      */
     public $pluginOptions = array();
 

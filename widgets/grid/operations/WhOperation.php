@@ -6,8 +6,7 @@
  * Abstract class where all types of column operations extend from
  *
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
- * @copyright Copyright &copy; 2amigos.us 2013-
- * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+
  * @package YiiWheels.widgets.grid.operations
  */
 abstract class WhOperation extends CWidget

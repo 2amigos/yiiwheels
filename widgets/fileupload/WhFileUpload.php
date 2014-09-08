@@ -1,16 +1,22 @@
 <?php
 /**
- * WhFileUpload widget class
- *
- * @author Antonio Ramirez <amigo.cobos@gmail.com>
- * @copyright Copyright &copy; 2amigos.us 2013-
+ * @copyright Copyright (c) 2014 2amigOS! Consulting Group LLC
+ * @link http://2amigos.us
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
- * @package YiiWheels.widgets.fileupload
- * @uses YiiStrap.helpers.TbArray
  */
+
 Yii::import('bootstrap.helpers.TbArray');
 Yii::import('zii.widgets.jui.CJuiInputWidget');
 
+/**
+ * WhFileUpload widget class
+ *
+ * Implements [BlueImp UI JQuery Uploader](http://blueimp.github.io/jQuery-File-Upload/basic.html).
+ *
+ * @author Antonio Ramirez <amigo.cobos@gmail.com>
+ * @package YiiWheels.widgets.fileupload
+ * @uses YiiStrap.helpers.TbArray
+ */
 class WhFileUpload extends CJuiInputWidget
 {
     /**

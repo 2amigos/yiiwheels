@@ -6,8 +6,7 @@
  * Displays a total of specified column name
  *
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
- * @copyright Copyright &copy; 2amigos.us 2013-
- * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+
  * @package YiiWheels.widgets.grid.operations
  * @uses YiiWheels.widgets.grid.operations.WhOperation
  */
