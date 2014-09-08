@@ -81,6 +81,7 @@ class WhSparkLines extends CWidget
             : 'jquery.sparkline.min.js';
 
         $cs->registerScriptFile($assetsUrl . '/js/' . $script);
+        $cs->registerCssFile($assetsUrl . '/css/jquery.sparkline.css');
 
         /* initialize plugin */
         $selector = '#' . TbArray::getValue('id', $this->htmlOptions, $this->getId());
