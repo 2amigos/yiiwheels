@@ -35,7 +35,7 @@ class WhSelectBox extends WhInputWidget
     {
         $input[] = CHtml::openTag('div', $this->htmlOptions);
         foreach ($this->data as $key => $value) {
-            $input[] = CHtml::tag('div', ['data-value' => (string)$key], (string)$value);
+            $input[] = CHtml::tag('div', array('data-value' => (string)$key), (string)$value);
         }
         $input[] = CHtml::closeTag('div');
 

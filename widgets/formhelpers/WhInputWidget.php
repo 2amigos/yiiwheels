@@ -70,7 +70,7 @@ class WhInputWidget extends CInputWidget {
      */
     protected function asDataAttributes($options)
     {
-        $data = [];
+        $data = array();
         foreach ($options as $key => $value) {
             $data["data-$key"] = is_bool($value) ? ($value ? 'true' : 'false') : $value;
         }
