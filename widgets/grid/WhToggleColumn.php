@@ -247,7 +247,7 @@ function() {
         $function = CJavaScript::encode(TbArray::popValue('click', $this->toggleOptions, ''));
 
         $class = preg_replace('/\s+/', '.', $this->toggleOptions['htmlOptions']['class']);
-        $js[] = "$(document).on('click','#{$this->grid->id} a.{$class}',$function);";
+        $js[] = "$(document).off('click').on('click','#{$this->grid->id} a.{$class}',$function);";
 
         Yii::app()->getClientScript()->registerScript($this->name . '#ReadyJS', implode("\n", $js));
     }
