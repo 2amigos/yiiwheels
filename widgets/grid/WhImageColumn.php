@@ -81,7 +81,7 @@ class WhImageColumn extends CGridColumn
 				array('src' => 'http://placehold.it/' . $this->placeHoldItSize)
 			);
 		} elseif ($this->usePlaceKitten && !empty($this->placeKittenSize)) {
-			$content = CHtml::tag('img', array('src' => 'http://placekitten.com/' . $this->placeKittenSize));
+			$content = CHtml::tag('img', array('src' => 'http://placekitten.com/g/' . $this->placeKittenSize));
 		}
 		echo $content;
 	}
