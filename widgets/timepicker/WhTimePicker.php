@@ -1,19 +1,15 @@
 <?php
 /**
- * @copyright Copyright (c) 2013 2amigOS! Consulting Group LLC
- * @link http://2amigos.us
- * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
- */
-
-Yii::import('bootstrap.helpers.TbArray');
-
-/**
  * WhTimePicker widget class
  *
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
+ * @copyright Copyright &copy; 2amigos.us 2013-
+ * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets.timepicker
  * @uses YiiStrap.helpers.TbArray
  */
+Yii::import('bootstrap.helpers.TbArray');
+
 class WhTimePicker extends CInputWidget
 {
     /**
@@ -58,6 +54,8 @@ class WhTimePicker extends CInputWidget
     public function init()
     {
         $this->attachBehavior('ywplugin', array('class' => 'yiiwheels.behaviors.WhPlugin'));
+
+        TbHtml::addCssClass('form-control', $this->htmlOptions);
     }
 
     /**
@@ -81,24 +79,24 @@ class WhTimePicker extends CInputWidget
         TbArray::defaultValue('id', $id, $this->htmlOptions);
         TbArray::defaultValue('name', $name, $this->htmlOptions);
 
-        echo '<span class="bootstrap-timepicker">';
+        echo '<div class="input-group">';
+        echo '<div class="input-group-addon"><span class="glyphicon glyphicon-time"></span></div>';
         if ($this->hasModel()) {
             echo CHtml::activeTextField($this->model, $this->attribute, $this->htmlOptions);
         } else {
             echo CHtml::textField($name, $this->value, $this->htmlOptions, array('style' => 'width:100%'));
         }
-        echo '</span>';
+        echo '</div>';
     }
 
     /**
      * Registers required javascript files
-     *
      * @param $id
      */
     public function registerClientScript()
     {
         /* publish assets dir */
-        $path = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'assets';
+        $path      = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'assets';
         $assetsUrl = $this->getAssetsUrl($path);
 
         /* @var $cs CClientScript */

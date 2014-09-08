@@ -22,6 +22,7 @@ var defaultOptions = Highcharts.getOptions(),
 
 // set default options
 defaultPlotOptions.funnel = merge(defaultPlotOptions.pie, {
+	animation: false,
 	center: ['50%', '50%'],
 	width: '90%',
 	neckWidth: '30%',
@@ -73,7 +74,7 @@ seriesTypes.funnel = Highcharts.extendClass(seriesTypes.pie, {
 			cumulative = 0, // start at top
 			center = options.center,
 			centerX = getLength(center[0], plotWidth),
-			centerY = getLength(center[0], plotHeight),
+			centerY = getLength(center[1], plotHeight),
 			width = getLength(options.width, plotWidth),
 			tempWidth,
 			getWidthAt,

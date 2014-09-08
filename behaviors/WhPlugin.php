@@ -1,15 +1,10 @@
 <?php
 /**
- * @copyright Copyright (c) 2013 2amigOS! Consulting Group LLC
- * @link http://2amigos.us
- * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
- */
-
-/**
  * WhPlugin class file.
  * Extends the plugins with common shared methods.
  *
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
+ * @copyright Copyright &copy; Antonio Ramirez 2013-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package yiiwheels.behaviors
  */
@@ -23,9 +18,7 @@ class WhPlugin extends CBehavior
 
     /**
      * Returns
-     *
      * @param $path
-     *
      * @return mixed
      */
     public function getAssetsUrl($path)

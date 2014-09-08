@@ -1,136 +1,46 @@
 <?php
-/**
- * @copyright Copyright (c) 2013 2amigOS! Consulting Group LLC
- * @link http://2amigos.us
- * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
- */
-
-Yii::import('bootstrap.helpers.TbArray');
-Yii::import('bootstrap.helpers.TbHtml');
-
-/**
- * WhSelectBox widget class
+ /**
+ * 
+ * WhSelectBox.php
  *
-* @author Antonio Ramirez <amigo.cobos@gmail.com>
- * @package YiiWheels.widgets.formhelpers
- * @uses YiiStrap.helpers.TbArray
- * @uses YiiStrap.helpers.TbHtml
+ * Date: 06/09/14
+ * Time: 13:57
+ * @author Antonio Ramirez <amigo.cobos@gmail.com>
+ * @link http://www.ramirezcobos.com/
+ * @link http://www.2amigos.us/
  */
-class WhSelectBox extends CInputWidget
-{
+Yii::import('yiiwheels.widgets.formhelpers.WhInputWidget');
 
+class WhSelectBox extends WhInputWidget
+{
     /**
-     * @var array the data list to display
+     * @var array the array keys are option values, and the array values
+     * are the corresponding option labels.
      */
     public $data = array();
 
     /**
-     * @var string size. Valid values are:
-     *
-     * - input-mini
-     * - input-small
-     * - input-medium
-     * - input-large
-     * - input-xlarge
-     * - input-xxlarge
-     */
-    public $size = 'input-medium';
-
-    /**
-     * @var bool whether to display filter or not
-     */
-    public $displayFilter = true;
-
-    /**
-     * @var array the htmlOptions of the wrapper layer
-     */
-    public $wrapperOptions = array();
-
-    /**
-     * Widget's initialization method
-     * @throws CException
+     * @inheritdoc
      */
     public function init()
     {
-        $this->attachBehavior('ywplugin', array('class' => 'yiiwheels.behaviors.WhPlugin'));
+        parent::init();
+        TbHtml::addCssClass('bfh-selectbox', $this->htmlOptions);
     }
 
     /**
-     * Runs the widget.
+     * @inheritdoc
      */
     public function run()
     {
-        $this->renderField();
-        $this->registerClientScript();
-    }
-
-    /**
-     * Renders the input file field
-     */
-    public function renderField()
-    {
-        list($name, $id) = $this->resolveNameID();
-
-        TbArray::defaultValue('id', $id, $this->htmlOptions);
-        TbArray::defaultValue('name', $name, $this->htmlOptions);
-
-        TbHtml::addCssClass('bfh-selectbox', $this->wrapperOptions);
-        echo CHtml::openTag('div', $this->wrapperOptions);
-        if ($this->hasModel()) {
-            echo CHtml::activeHiddenField($this->model, $this->attribute, $this->htmlOptions);
-            $value = $this->model->{$this->attribute};
-            $valueText = $value && isset($this->data[$value]) ? $this->data[$value] : '&nbsp;';
-        } else {
-            echo CHtml::hiddenField($name, $this->value, $this->htmlOptions);
-            $value = $this->value;
-            $valueText = $value && isset($this->data[$value]) ? $this->data[$value] : '&nbsp;';
+        $input[] = CHtml::openTag('div', $this->htmlOptions);
+        foreach ($this->data as $key => $value) {
+            $input[] = CHtml::tag('div', ['data-value' => (string)$key], (string)$value);
         }
+        $input[] = CHtml::closeTag('div');
 
-        echo CHtml::openTag(
-            'a',
-            array(
-                'class' => 'bfh-selectbox-toggle',
-                'role' => 'button',
-                'data-toggle' => 'bfh-selectbox',
-                'href' => '#'
-            )
-        );
-        echo CHtml::tag(
-            'span',
-            array('class' => 'bfh-selectbox-option ' . $this->size, 'data-option' => $value),
-            $valueText
-        );
-        echo CHtml::tag('b', array('class' => 'caret'), '&nbsp;');
-        echo CHtml::closeTag('a');
+        echo implode("\n", $input);
 
-        echo CHtml::openTag('div', array('class' => 'bfh-selectbox-options'));
-        if ($this->displayFilter) {
-            echo '<input type="text" class="bfh-selectbox-filter">';
-        }
-        $items = array();
-        foreach ($this->data as $key => $item) {
-            $items[] = CHtml::tag('a', array('tabindex' => '-1', 'href' => '#', 'data-option' => $key), $item);
-        }
-        echo CHtml::tag('ul', array('role' => 'options'), '<li>' . implode('</li><li>', $items) . '</li>');
-        echo CHtml::closeTag('div');
-
-        echo CHtml::closeTag('div');
+        $this->registerPlugin('bfhselectbox');
     }
-
-    /**
-     * Registers client script
-     */
-    public function registerClientScript()
-    {
-        /* publish assets dir */
-        $path = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'assets';
-        $assetsUrl = $this->getAssetsUrl($path);
-
-        /* @var $cs CClientScript */
-        $cs = Yii::app()->getClientScript();
-
-        $cs->registerCssFile($assetsUrl . '/css/bootstrap-formhelpers.css');
-        $cs->registerScriptFile($assetsUrl . '/js/bootstrap-formhelpers-selectbox.js');
-
-    }
-}
+} 

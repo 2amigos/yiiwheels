@@ -1,20 +1,16 @@
 <?php
 /**
- * @copyright Copyright (c) 2013 2amigOS! Consulting Group LLC
- * @link http://2amigos.us
- * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
- */
-
-
-Yii::import('bootstrap.helpers.TbArray');
-
-/**
  * WhMultiSelect widget class
  *
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
+ * @copyright Copyright &copy; 2amigos.us 2013-
+ * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets.multiselect
  * @uses YiiStrap.helpers.TbArray
  */
+
+Yii::import('bootstrap.helpers.TbArray');
+
 class WhMultiSelect extends CInputWidget
 {
 
@@ -82,7 +78,7 @@ class WhMultiSelect extends CInputWidget
     public function registerClientScript()
     {
         /* publish assets dir */
-        $path = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'assets';
+        $path      = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'assets';
         $assetsUrl = $this->getAssetsUrl($path);
 
         /* @var $cs CClientScript */

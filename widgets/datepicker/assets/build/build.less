@@ -7,20 +7,21 @@
 // Variables and mixins copied from bootstrap 2.0.2
 
 // Variables
-@grayLight: #999;
-@grayLighter: #eee;
-@white: #fff;
-@linkColor: #08c;
-@btnPrimaryBackground: @linkColor;
-@orange: #f89406;
+@grayLight:             #999;
+@grayLighter:           #eee;
+@white:                 #fff;
+@linkColor:             #08c;
+@btnPrimaryBackground:  @linkColor;
+@orange:                #f89406;
+@baseLineHeight:        18px;
 
 // Mixins
 
 // Border Radius
 .border-radius(@radius: 5px) {
   -webkit-border-radius: @radius;
-  -moz-border-radius: @radius;
-  border-radius: @radius;
+     -moz-border-radius: @radius;
+          border-radius: @radius;
 }
 
 // Button backgrounds
@@ -38,14 +39,14 @@
 
 // Reset filters for IE
 .reset-filter() {
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
 }
 
 // Gradient Bar Colors for buttons and alerts
 .gradientBar(@primaryColor, @secondaryColor) {
   #gradient > .vertical(@primaryColor, @secondaryColor);
   border-color: @secondaryColor @secondaryColor darken(@secondaryColor, 15%);
-  border-color: rgba(0, 0, 0, .1) rgba(0, 0, 0, .1) fadein(rgba(0, 0, 0, .1), 15%);
+  border-color: rgba(0,0,0,.1) rgba(0,0,0,.1) fadein(rgba(0,0,0,.1), 15%);
 }
 
 // Gradients
@@ -63,4 +64,4 @@
   }
 }
 
-@import "../less/../less/datepicker";
+@import "../less/datepicker.less";

@@ -1,23 +1,19 @@
 <?php
 /**
- * @copyright Copyright (c) 2013 2amigOS! Consulting Group LLC
- * @link http://2amigos.us
- * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
- */
-
-Yii::import('bootstrap.helpers.TbArray');
-Yii::import('bootstrap.helpers.TbHtml');
-
-/**
  * WhSwitch widget class
  *
  * @see https://github.com/nostalgiaz/bootstrap-switch
  *
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
+ * @copyright Copyright &copy; 2amigos.us 2013-
+ * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets.switch
  * @uses YiiStrap.helpers.TbArray
  * @uses YiiStrap.helpers.TbHtml
  */
+Yii::import('bootstrap.helpers.TbArray');
+Yii::import('bootstrap.helpers.TbHtml');
+
 class WhSwitch extends CInputWidget
 {
     /**
@@ -70,11 +66,6 @@ class WhSwitch extends CInputWidget
      */
     public $debugMode = false;
 
-    /**
-     * @var array the switch plugin options.
-     */
-    protected $pluginOptions = array();
-
 
     /**
      * Initializes the widget.
@@ -85,21 +76,20 @@ class WhSwitch extends CInputWidget
         if (!in_array($this->inputType, array('radio', 'checkbox'))) {
             throw new CException(Yii::t('zii', '"inputType" attribute must be of type "radio" or "checkbox"'));
         }
-        if (!in_array($this->size, array('mini', 'small', 'large'))) {
+        if (!in_array($this->size, array('mini', 'small', 'normal', 'large'))) {
             throw new CException(Yii::t('zii', 'Unknown value for attribute "size".'));
         }
         $this->attachBehavior('ywplugin', array('class' => 'yiiwheels.behaviors.WhPlugin'));
 
-        TbHtml::addCssClass('make-switch', $this->pluginOptions);
-        TbHtml::addCssClass('switch-' . $this->size, $this->pluginOptions);
         if (!$this->animated) {
-            $this->pluginOptions['data-animated'] = 'false';
+            $this->htmlOptions['data-animate'] = 'false';
         }
-        $this->pluginOptions['data-on-label'] = $this->onLabel;
-        $this->pluginOptions['data-off-label'] = $this->offLabel;
-        $this->pluginOptions['data-text-label'] = $this->textLabel;
-        $this->pluginOptions['data-on'] = $this->onColor;
-        $this->pluginOptions['data-off'] = $this->offColor;
+        $this->htmlOptions['data-on-text'] = $this->onLabel;
+        $this->htmlOptions['data-off-text'] = $this->offLabel;
+        $this->htmlOptions['data-label-text'] = $this->textLabel;
+        $this->htmlOptions['data-on-color'] = $this->onColor;
+        $this->htmlOptions['data-off-color'] = $this->offColor;
+        $this->htmlOptions['data-size'] = $this->size;
     }
 
     /**
@@ -121,8 +111,6 @@ class WhSwitch extends CInputWidget
         TbArray::defaultValue('id', $id, $this->htmlOptions);
         TbArray::defaultValue('name', $name, $this->htmlOptions);
 
-        $this->pluginOptions['id'] = $this->htmlOptions['id'] . '_switch';
-        echo CHtml::openTag('div', $this->pluginOptions);
         if ($this->hasModel()) {
             echo $this->inputType == 'radio'
                 ? CHtml::activeRadioButton($this->model, $this->attribute, $this->htmlOptions)
@@ -132,7 +120,6 @@ class WhSwitch extends CInputWidget
                 ? CHtml::radioButton($this->name, $this->value, $this->htmlOptions)
                 : CHtml::checkBox($this->name, $this->value, $this->htmlOptions);
         }
-        echo CHtml::closeTag('div');
     }
 
     /**
@@ -144,6 +131,7 @@ class WhSwitch extends CInputWidget
         /* publish assets dir */
         $path = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'assets';
         $assetsUrl = $this->getAssetsUrl($path);
+        $id = TbArray::getValue('id', $this->htmlOptions);
 
         /* @var $cs CClientScript */
         $cs = Yii::app()->getClientScript();
@@ -154,12 +142,10 @@ class WhSwitch extends CInputWidget
 
         $cs->registerCssFile($assetsUrl . '/css/bootstrap-switch.css');
         $cs->registerScriptFile($assetsUrl . '/js/bootstrap-switch' . $min . '.js', CClientScript::POS_END);
+        $selector = '#' . $id;
 
-        if ($this->events) {
-            /* initialize plugin */
-            $selector = '#' . TbArray::getValue('id', $this->pluginOptions);
+        $this->getApi()->registerPlugin('bootstrapSwitch', $selector);
+        $this->getApi()->registerEvents($selector, $this->events);
 
-            $this->getApi()->registerEvents($selector, $this->events);
-        }
     }
 }

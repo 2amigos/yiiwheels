@@ -1,19 +1,15 @@
 <?php
 /**
- * @copyright Copyright (c) 2013 2amigOS! Consulting Group LLC
- * @link http://2amigos.us
- * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
- */
-
-Yii::import('bootstrap.helpers.TbArray');
-
-/**
  * WhSparkLines class
  *
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
+ * @copyright Copyright &copy; 2amigos.us 2013-
+ * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets.sparklines
  * @uses YiiStrap.helpers.TbArray
  */
+Yii::import('bootstrap.helpers.TbArray');
+
 class WhSparkLines extends CWidget
 {
     /**
@@ -74,7 +70,7 @@ class WhSparkLines extends CWidget
     public function registerClientScript()
     {
         /* publish assets dir */
-        $path = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'assets';
+        $path      = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'assets';
         $assetsUrl = $this->getAssetsUrl($path);
 
         /* @var $cs CClientScript */
@@ -89,7 +85,7 @@ class WhSparkLines extends CWidget
         /* initialize plugin */
         $selector = '#' . TbArray::getValue('id', $this->htmlOptions, $this->getId());
 
-        $data = CJavaScript::encode($this->data);
+        $data    = CJavaScript::encode($this->data);
         $options = CJavaScript::encode($this->pluginOptions);
 
         $cs->registerScript(__CLASS__ . '#' . $selector, "jQuery('{$selector}').sparkline({$data}, {$options});");

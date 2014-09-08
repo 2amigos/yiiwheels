@@ -1,21 +1,17 @@
 <?php
 /**
- * @copyright Copyright (c) 2013 2amigOS! Consulting Group LLC
- * @link http://2amigos.us
- * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
- */
-
-Yii::import('bootstrap.helpers.TbArray');
-
-/**
  * WhDateRangePicker widget class
  * Implementation of jQRangeSlider. A powerful slider for selecting value ranges, supporting dates and more.
  * @see http://ghusse.github.io/jQRangeSlider
  *
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
+ * @copyright Copyright &copy; 2amigos.us 2013-
+ * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets.rangeslider
  * @uses YiiStrap.helpers.TbArray
  */
+Yii::import('bootstrap.helpers.TbArray');
+
 class WhRangeSlider extends CInputWidget
 {
 
@@ -127,10 +123,10 @@ class WhRangeSlider extends CInputWidget
     public $inputType = 'text';
 
     /**
-     * @var string lets you specify a display mode for value labels: `hidden`, `shown`, or only shown when moving.
+     * @var string lets you specify a display mode for value labels: `hidden`, `show`, or only shown when moving.
      * Possible values are: show, hide and change.
      */
-    public $valueLabels = 'shown';
+    public $valueLabels = 'show';
 
     /**
      * @var string allows to use the mouse wheel to `scroll` (translate) or `zoom` (enlarge/shrink) the selected area in
@@ -225,6 +221,10 @@ class WhRangeSlider extends CInputWidget
     public $theme = 'iThing';
 
     /**
+     * @var array
+     */
+    public $pluginOptions = array();
+    /**
      * @var array the options to pass to the jQSlider
      */
     protected $options;
@@ -239,7 +239,7 @@ class WhRangeSlider extends CInputWidget
 
         $this->checkOptionAttribute($this->inputType, array('text', 'number'), 'inputType');
 
-        $this->checkOptionAttribute($this->valueLabels, array('shown', 'hidden'), 'valueLabels');
+        $this->checkOptionAttribute($this->valueLabels, array('show', 'hide', 'change'), 'valueLabels');
 
         $this->checkOptionAttribute($this->theme, array('iThing', 'classic'), 'theme');
 
@@ -314,8 +314,8 @@ class WhRangeSlider extends CInputWidget
             $orig = '';
         }
         $this->events['valuesChanged'] = "js: function(id, data) {
-			$inputValSet $orig
-		}";
+        $inputValSet $orig
+        }";
 
         ob_start();
         echo "jQuery('#slider_{$id}').{$this->type}Slider({$options})";
@@ -341,6 +341,7 @@ class WhRangeSlider extends CInputWidget
             'step' => $this->step,
             'wheelMode' => $this->wheelMode,
             'wheelSpeed' => $this->wheelSpeed,
+            'scales' => $this->scales,
             'type' => ($this->type == 'dateRange' ? null : $this->inputType)
         );
         $this->options = array_filter($options);
@@ -367,6 +368,10 @@ class WhRangeSlider extends CInputWidget
                     )
                 )
             );
+        }
+        if(!empty($this->pluginOptions))
+        {
+            $this->options = CMap::mergeArray($this->pluginOptions, $this->options);
         }
     }
 

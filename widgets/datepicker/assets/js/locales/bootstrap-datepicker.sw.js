@@ -3,8 +3,7 @@
  * Edwin Mugendi <https://github.com/edwinmugendi>
  * Source: http://scriptsource.org/cms/scripts/page.php?item_id=entry_detail&uid=xnfaqyzcku
  */
-;
-(function ($) {
+;(function($){
     $.fn.datepicker.dates['sw'] = {
         days: ["Jumapili", "Jumatatu", "Jumanne", "Jumatano", "Alhamisi", "Ijumaa", "Jumamosi", "Jumapili"],
         daysShort: ["J2", "J3", "J4", "J5", "Alh", "Ij", "J1", "J2"],

@@ -1,21 +1,17 @@
 <?php
 /**
- * @copyright Copyright (c) 2013 2amigOS! Consulting Group LLC
- * @link http://2amigos.us
- * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
- */
-
-Yii::import('bootstrap.helpers.TbArray');
-
-/**
  * WhTypeAhead widget class
  *
  * @see https://github.com/twitter/typeahead.js
  *
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
+ * @copyright Copyright &copy; 2amigos.us 2013-
+ * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets.typeahead
  * @uses YiiStrap.helpers.TbArray
  */
+Yii::import('bootstrap.helpers.TbArray');
+
 class WhTypeAhead extends CInputWidget
 {
 
@@ -56,6 +52,8 @@ class WhTypeAhead extends CInputWidget
 
         TbArray::defaultValue('id', $id, $this->htmlOptions);
         TbArray::defaultValue('name', $name, $this->htmlOptions);
+
+        TbHtml::addCssClass('form-control', $this->htmlOptions);
 
         if ($this->hasModel()) {
             echo CHtml::activeTextField($this->model, $this->attribute, $this->htmlOptions);

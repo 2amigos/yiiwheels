@@ -40,12 +40,13 @@
 }
 .bootstrap-widget-header .bootstrap-toolbar
 {
-    margin: 0 2px;
+    margin: -2px 2px 0px;
 }
 .bootstrap-widget-header .bootstrap-toolbar ul.dropdown-menu i
 {
     margin-left: -18px;
     margin-right: 1px;
+
 }
 .bootstrap-widget-header .bootstrap-toolbar > .btn,
 .bootstrap-widget-header .bootstrap-toolbar > .btn-group{
@@ -79,9 +80,9 @@
 .bootstrap-widget-header h3 {
 
     position: relative;
-    top: 2px;
     left: 10px;
-
+    margin-top: 10px;
+    margin-bottom: 0px;
     display: inline-block;
     margin-right: 3em;
 
