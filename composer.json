@@ -18,7 +18,7 @@
         }
     ],
     "require": {
-        "2amigos/yiistrap": "1.*"
+        "2amigos/yiistrap": "dev-master"
     },
     "require-dev": {
         "php": ">=5.3.0",
