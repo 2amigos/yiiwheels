@@ -127,10 +127,10 @@ class WhRangeSlider extends CInputWidget
     public $inputType = 'text';
 
     /**
-     * @var string lets you specify a display mode for value labels: `hidden`, `shown`, or only shown when moving.
+     * @var string lets you specify a display mode for value labels: `hide`, `show`, or only shown when moving.
      * Possible values are: show, hide and change.
      */
-    public $valueLabels = 'shown';
+    public $valueLabels = 'show';
 
     /**
      * @var string allows to use the mouse wheel to `scroll` (translate) or `zoom` (enlarge/shrink) the selected area in
@@ -239,7 +239,7 @@ class WhRangeSlider extends CInputWidget
 
         $this->checkOptionAttribute($this->inputType, array('text', 'number'), 'inputType');
 
-        $this->checkOptionAttribute($this->valueLabels, array('shown', 'hidden'), 'valueLabels');
+        $this->checkOptionAttribute($this->valueLabels, array('show', 'hide', 'change'), 'valueLabels');
 
         $this->checkOptionAttribute($this->theme, array('iThing', 'classic'), 'theme');
 
