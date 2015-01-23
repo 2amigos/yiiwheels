@@ -1661,11 +1661,11 @@
 				return;
 			e.preventDefault();
 			// component click requires us to explicitly show it
-			$this.datepicker('show');
+			$this.bdatepicker('show');
 		}
 	);
 	$(function(){
-		$('[data-provide="datepicker-inline"]').datepicker();
+		$('[data-provide="datepicker-inline"]').bdatepicker();
 	});
 
 }(window.jQuery));
