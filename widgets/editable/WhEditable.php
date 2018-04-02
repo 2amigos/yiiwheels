@@ -468,7 +468,7 @@ class WhEditable extends CWidget
         //i18n for `clear` in date and datetime
         if ($this->type == 'date' || $this->type == 'datetime') {
             if (!isset($this->options['clear'])) {
-                $this->options['clear'] = Yii::t('EditableField.editable', 'x clear');
+                $this->options['clear'] = Yii::t('WhEditableField.editable', 'x clear');
             }
         }
     }
