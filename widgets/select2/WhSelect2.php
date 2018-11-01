@@ -1,15 +1,19 @@
 <?php
 /**
+ * @copyright Copyright (c) 2013 2amigOS! Consulting Group LLC
+ * @link http://2amigos.us
+ * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+ */
+
+Yii::import('bootstrap.helpers.TbArray');
+
+/**
  * WhSelect2 widget class
  *
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
- * @copyright Copyright &copy; 2amigos.us 2013-
- * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets.select2
  * @uses YiiStrap.helpers.TbArray
  */
-Yii::import('bootstrap.helpers.TbArray');
-
 class WhSelect2 extends CInputWidget
 {
 
@@ -71,13 +75,13 @@ class WhSelect2 extends CInputWidget
 
         if ($this->hasModel()) {
             echo $this->asDropDownList ?
-                CHtml::activeDropDownList($this->model, $this->attribute, $this->data, $this->htmlOptions) :
-                CHtml::activeHiddenField($this->model, $this->attribute);
+                TbHtml::activeDropDownList($this->model, $this->attribute, $this->data, $this->htmlOptions) :
+                TbHtml::activeHiddenField($this->model, $this->attribute);
 
         } else {
             echo $this->asDropDownList ?
-                CHtml::dropDownList($this->name, $this->value, $this->data, $this->htmlOptions) :
-                CHtml::hiddenField($this->name, $this->value);
+                TbHtml::dropDownList($this->name, $this->value, $this->data, $this->htmlOptions) :
+                TbHtml::hiddenField($this->name, $this->value);
         }
     }
 
@@ -88,7 +92,7 @@ class WhSelect2 extends CInputWidget
     public function registerClientScript()
     {
         /* publish assets dir */
-        $path      = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'assets';
+        $path = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'assets';
         $assetsUrl = $this->getAssetsUrl($path);
 
         /* @var $cs CClientScript */

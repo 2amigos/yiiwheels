@@ -1,5 +1,6 @@
 [![2amigOS!](http://yiiwheels.2amigos.us/images/logo-navbar.png)](http://www.2amigos.us)
-=========
+=========  
+[![Latest Stable Version](https://poser.pugx.org/2amigos/yiiwheels/v/stable.svg)](https://packagist.org/packages/2amigos/yiiwheels) [![Total Downloads](https://poser.pugx.org/2amigos/yiiwheels/downloads.svg)](https://packagist.org/packages/2amigos/yii2-editable-widget) [![Latest Unstable Version](https://poser.pugx.org/2amigos/yiiwheels/v/unstable.svg)](https://packagist.org/packages/2amigos/yiiwheels) [![License](https://poser.pugx.org/2amigos/yiiwheels/license.svg)](https://packagist.org/packages/2amigos/yiiwheels)
 
 Yii Wheels (or Wheels) is an extended library for the [YiiStrap](http://getyiistrap.com) extension.
 

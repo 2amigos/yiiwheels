@@ -1,16 +1,20 @@
 <?php
 /**
- * WhMaskMoney widget class
- *
- * @author Antonio Ramirez <amigo.cobos@gmail.com>
- * @copyright Copyright &copy; 2amigos.us 2013-
+ * @copyright Copyright (c) 2013 2amigOS! Consulting Group LLC
+ * @link http://2amigos.us
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
- * @package YiiWheels.widgets.maskInput
- * @uses YiiStrap.helpers.TbHtml
  */
+
 
 Yii::import('bootstrap.helpers.TbArray');
 
+/**
+ * WhMaskMoney widget class
+ *
+ * @author Antonio Ramirez <amigo.cobos@gmail.com>
+ * @package YiiWheels.widgets.maskInput
+ * @uses YiiStrap.helpers.TbHtml
+ */
 class WhMaskInput extends CInputWidget
 {
 
@@ -65,7 +69,7 @@ class WhMaskInput extends CInputWidget
     public function registerClientScript()
     {
         /* publish assets dir */
-        $path      = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'assets';
+        $path = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'assets';
         $assetsUrl = $this->getAssetsUrl($path);
 
         /* @var $cs CClientScript */

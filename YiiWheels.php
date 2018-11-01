@@ -1,12 +1,16 @@
 <?php
 /**
+ * @copyright Copyright (c) 2013 2amigOS! Consulting Group LLC
+ * @link http://2amigos.us
+ * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+ */
+
+/**
  * YiiWheels class file.
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
- * @copyright Copyright &copy; 2amigos.us 2013-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package yiiwheels
  */
-
 class YiiWheels extends CApplicationComponent
 {
     /**
@@ -83,8 +87,8 @@ class YiiWheels extends CApplicationComponent
             return $this->_assetsUrl;
         } else {
             $forceCopyAssets = $this->getApi()->forceCopyAssets;
-            $path            = Yii::getPathOfAlias('yiiwheels');
-            $assetsUrl       = Yii::app()->assetManager->publish(
+            $path = Yii::getPathOfAlias('yiiwheels');
+            $assetsUrl = Yii::app()->assetManager->publish(
                 $path . DIRECTORY_SEPARATOR . 'assets',
                 false,
                 -1,
@@ -97,8 +101,10 @@ class YiiWheels extends CApplicationComponent
 
     /**
      * Register a specific js file in the asset's js folder
+     *
      * @param string $jsFile
      * @param int $position the position of the JavaScript code.
+     *
      * @see CClientScript::registerScriptFile
      * @return $this
      */
@@ -110,8 +116,10 @@ class YiiWheels extends CApplicationComponent
 
     /**
      * Registers a specific css in the asset's css folder
+     *
      * @param string $cssFile the css file name to register
      * @param string $media the media that the CSS file should be applied to. If empty, it means all media types.
+     *
      * @return $this
      */
     public function registerAssetCss($cssFile, $media = '')

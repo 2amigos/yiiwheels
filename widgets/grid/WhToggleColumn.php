@@ -1,17 +1,21 @@
 <?php
 /**
+ * @copyright Copyright (c) 2013 2amigOS! Consulting Group LLC
+ * @link http://2amigos.us
+ * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+ */
+
+Yii::import('bootstrap.helpers.TbHtml');
+Yii::import('bootstrap.widgets.TbDataColumn');
+
+/**
  * WhToggleColumn widget class
  * Renders a button to toggle values of a column
- * @author Antonio Ramirez <amigo.cobos@gmail.com>
- * @copyright Copyright &copy; 2amigos.us 2013-
- * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+* @author Antonio Ramirez <amigo.cobos@gmail.com>
  * @package YiiWheels.widgets.toggle
  * @uses YiiStrap.helpers.TbHtml
  * @uses YiiStrap.widgets.TbDataColumn
  */
-Yii::import('bootstrap.helpers.TbHtml');
-Yii::import('bootstrap.widgets.TbDataColumn');
-
 class WhToggleColumn extends TbDataColumn
 {
     /**
@@ -167,14 +171,14 @@ class WhToggleColumn extends TbDataColumn
         }
 
         $this->toggleOptions = array(
-            'url'         => 'Yii::app()->controller->createUrl("' . $this->toggleAction . '",array("id"=>$data->primaryKey,"attribute"=>"' . $this->name . '"))',
+            'url' => 'Yii::app()->controller->createUrl("' . $this->toggleAction . '",array("id"=>$data->primaryKey,"attribute"=>"' . $this->name . '"))',
             'htmlOptions' => array('class' => $this->name . '_toggle' . $this->uniqueClassSuffix),
         );
 
         if (Yii::app()->request->enableCsrfValidation) {
             $csrfTokenName = Yii::app()->request->csrfTokenName;
-            $csrfToken     = Yii::app()->request->csrfToken;
-            $csrf          = "\n\t\tdata:{ '$csrfTokenName':'$csrfToken' },";
+            $csrfToken = Yii::app()->request->csrfToken;
+            $csrf = "\n\t\tdata:{ '$csrfTokenName':'$csrfToken' },";
         } else {
             $csrf = '';
         }
@@ -205,13 +209,14 @@ function() {
     /**
      * Renders the data cell content.
      * This method renders the view, update and toggle buttons in the data cell.
+     *
      * @param integer $row the row number (zero-based)
      * @param mixed $data the data associated with the row
      */
     protected function renderDataCellContent($row, $data)
     {
-        $checked               = CHtml::value($data, $this->name);
-        $toggleOptions         = $this->toggleOptions;
+        $checked = CHtml::value($data, $this->name);
+        $toggleOptions = $this->toggleOptions;
         $toggleOptions['icon'] = $checked === null
             ? $this->emptyIcon
             : ($checked
@@ -223,9 +228,9 @@ function() {
             : '#';
 
         if (!$this->displayText) {
-            $htmlOptions          = TbArray::getValue('htmlOptions', $this->toggleOptions, array());
+            $htmlOptions = TbArray::getValue('htmlOptions', $this->toggleOptions, array());
             $htmlOptions['title'] = $this->getButtonLabel($checked);
-            $htmlOptions['rel']   = 'tooltip';
+            $htmlOptions['rel'] = 'tooltip';
             echo CHtml::link(TbHtml::icon($toggleOptions['icon']), $toggleOptions['url'], $htmlOptions);
         } else {
             echo TbHtml::button($this->getButtonLabel($checked), $toggleOptions);
@@ -242,14 +247,16 @@ function() {
         $function = CJavaScript::encode(TbArray::popValue('click', $this->toggleOptions, ''));
 
         $class = preg_replace('/\s+/', '.', $this->toggleOptions['htmlOptions']['class']);
-        $js[]  = "$(document).on('click','#{$this->grid->id} a.{$class}',$function);";
+        $js[] = "$(document).off('click').on('click','#{$this->grid->id} a.{$class}',$function);";
 
-        Yii::app()->getClientScript()->registerScript( $this->name. '#ReadyJS', implode("\n", $js));
+        Yii::app()->getClientScript()->registerScript($this->name . '#ReadyJS', implode("\n", $js));
     }
 
     /**
      * Returns the button label
+     *
      * @param $value
+     *
      * @return string
      */
     private function getButtonLabel($value)

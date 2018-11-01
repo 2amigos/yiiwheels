@@ -1,16 +1,19 @@
 <?php
 /**
+ * @copyright Copyright (c) 2013 2amigOS! Consulting Group LLC
+ * @link http://2amigos.us
+ * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+ */
+
+/**
  * WhToggleAction action class
  *
  * Works in conjunction with WhToggleColumn widget in order to ease the task of the developer to update the the attribute
  * displayed on the grid. Just attach to the controller you wish to make the calls to.
  *
- * @author Antonio Ramirez <amigo.cobos@gmail.com>
- * @copyright Copyright &copy; 2amigos.us 2013-
- * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+* @author Antonio Ramirez <amigo.cobos@gmail.com>
  * @package YiiWheels.widgets.toggle
  */
-
 class WhToggleAction extends CAction
 {
     /**
@@ -56,16 +59,18 @@ class WhToggleAction extends CAction
 
     /**
      * Widgets run function
+     *
      * @param integer $id
      * @param string $attribute
+     *
      * @throws CHttpException
      */
     public function run($id, $attribute)
     {
         if (Yii::app()->getRequest()->isPostRequest) {
-            $model             = $this->loadModel($id);
+            $model = $this->loadModel($id);
             $model->$attribute = ($model->$attribute == $this->noValue) ? $this->yesValue : $this->noValue;
-            $success           = $model->save(false, array($attribute));
+            $success = $model->save(false, array($attribute));
 
             if (Yii::app()->getRequest()->isAjaxRequest) {
                 echo $success ? $this->ajaxResponseOnSuccess : $this->ajaxResponseOnFailed;
@@ -81,7 +86,9 @@ class WhToggleAction extends CAction
 
     /**
      * Loads the requested data model.
+     *
      * @param integer $id the model ID
+     *
      * @return CActiveRecord the model instance.
      * @throws CHttpException if the model cannot be found
      */
@@ -91,11 +98,11 @@ class WhToggleAction extends CAction
             $model = CActiveRecord::model($this->modelName)->findByPk($id);
         } else {
             $finder = CActiveRecord::model($this->modelName);
-            $c      = new CDbCriteria($this->additionalCriteriaOnLoadModel);
+            $c = new CDbCriteria($this->additionalCriteriaOnLoadModel);
             $c->mergeWith(
                 array(
                     'condition' => $finder->tableSchema->primaryKey . '=:id',
-                    'params'    => array(':id' => $id),
+                    'params' => array(':id' => $id),
                 )
             );
             $model = $finder->find($c);

@@ -1,15 +1,19 @@
 <?php
 /**
+ * @copyright Copyright (c) 2013 2amigOS! Consulting Group LLC
+ * @link http://2amigos.us
+ * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+ */
+
+Yii::import('bootstrap.helpers.TbArray');
+
+/**
  * WhBasicFileUpload widget class
  *
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
- * @copyright Copyright &copy; 2amigos.us 2013-
- * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package YiiWheels.widgets.fileupload
  * @uses YiiStrap.helpers.TbArray
  */
-Yii::import('bootstrap.helpers.TbArray');
-
 class WhBasicFileUpload extends CInputWidget
 {
     /**
@@ -55,7 +59,7 @@ class WhBasicFileUpload extends CInputWidget
         TbArray::defaultValue('id', $id, $this->htmlOptions);
         TbArray::defaultValue('name', $name, $this->htmlOptions);
         $this->htmlOptions['data-url'] = $this->uploadAction;
-        $this->pluginOptions['url']    = $this->uploadAction;
+        $this->pluginOptions['url'] = $this->uploadAction;
         if ($this->hasModel()) {
             echo CHtml::activeFileField($this->model, $this->attribute, $this->htmlOptions);
 
@@ -70,7 +74,7 @@ class WhBasicFileUpload extends CInputWidget
     public function registerClientScript()
     {
         /* publish assets dir */
-        $path      = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'assets';
+        $path = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'assets';
         $assetsUrl = $this->getAssetsUrl($path);
 
         /* @var $cs CClientScript */
