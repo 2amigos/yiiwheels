@@ -62,7 +62,7 @@
 
                 base.$originalHeader.addClass('tableFloatingHeaderOriginal');
 
-                base.$originalHeader.after(base.$clonedHeader);
+                base.$originalHeader.before(base.$clonedHeader);
 
                 base.$printStyle = $('<style type="text/css" media="print">' +
                     '.tableFloatingHeader{display:none !important;}' +
