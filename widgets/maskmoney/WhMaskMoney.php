@@ -51,9 +51,9 @@ class WhMaskMoney extends CInputWidget
         TbArray::defaultValue('name', $name, $this->htmlOptions);
 
         if ($this->hasModel()) {
-            echo CHtml::activeTextField($this->model, $this->attribute, $this->htmlOptions);
+            echo TbHtml::activeTextField($this->model, $this->attribute, $this->htmlOptions);
         } else {
-            echo CHtml::textField($this->name, $this->value, $this->htmlOptions);
+            echo TbHtml::textField($this->name, $this->value, $this->htmlOptions);
         }
     }
 

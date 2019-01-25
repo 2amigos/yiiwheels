@@ -74,7 +74,7 @@ class WhSumOperation extends WhOperation
     public function processValue($value)
     {
         // remove html tags as we cannot access renderDataCellContent from the column
-        $clean = strip_tags($value);
+        $clean = preg_replace('/\s+/', '', strip_tags($value));
         $this->total += ((float)$this->extractNumber($clean));
     }
 
