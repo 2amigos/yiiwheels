@@ -12,7 +12,7 @@ window.WhEditableSetup = window.WhEditableSetup || {
 
         var targets = this._targets;
 
-        $('body').on('ajaxUpdate.editable', function(e) {
+        $('body').off('ajaxUpdate.editable').on('ajaxUpdate.editable', function(e) {
             for(var target in targets) {
                 if (!targets.hasOwnProperty(target)) {
                     continue;
