@@ -502,8 +502,8 @@ class WhEditable extends CWidget
 
         //wrap in anonymous function for live update
         if ($this->liveTarget) {
-            $script .= "\n $('body').on('ajaxUpdate.editable', function(e){ if(e.target.id == '" . $this->liveTarget . "'){yiiEditable();}});";
-            $script = "(function yiiEditable() {\n " . $script . "\n}());";
+            $id = $this->liveTarget . $this->getId();
+            $script .= "window.WhEditableSetup.set('{$id}', '{$this->liveTarget}', function() {\n {$script}\n});";
         }
 
         Yii::app()->getClientScript()->registerScript(__CLASS__ . '-' . $selector, $script);
@@ -522,6 +522,8 @@ class WhEditable extends CWidget
 
         $path = __DIR__ . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'bootstrap-editable';
         $assetsUrl = $this->getAssetsUrl($path);
+
+        $cs->registerScriptFile($assetsUrl . '/js/editable-setup.js', CClientScript::POS_BEGIN);
 
         //register assets
         $cs->registerCssFile($assetsUrl . '/css/bootstrap-editable.css');
